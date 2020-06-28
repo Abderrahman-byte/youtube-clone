@@ -1,13 +1,22 @@
 from django.db import models
-from django.contrib.auth.models import user
+from django.contrib.auth.models import User
 
 from .utils import *
 
+class ContentType(models.Model) :
+    name = models.CharField(max_length=100)
+
+    class Meta :
+        constraints = [
+            models.UniqueConstraint(fields=('name'), name='unique_content_name')        
+        ]
+
 class Video(models.Model) :
     id = models.TextField(primary_key=True, max_length=11, default=generateId, editable=False)
-    channel = models.Foreignkey(User, on_delete=models.CASCADE)
-    title = models.charField(max_length=200)
+    channel = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
     description = models.TextField(max_length=200, blank=True, null=True)
+    content_type = models.ForeignKey(ContentType, null=True, on_delete=models.SET_NULL, blank=True)
     allow_comments = models.BooleanField(default=True)
     views = models.IntegerField(default=0)
     # Dates 
@@ -19,7 +28,6 @@ class Video(models.Model) :
 
     class Meta :
         constraints = [
-            models.UniqueConstraint(fields=('channel', 'tilte'), 'unique_videos_per_channel')
+            models.UniqueConstraint(fields=('channel', 'tilte'), name='unique_videos_per_channel')
         ]
-
 
