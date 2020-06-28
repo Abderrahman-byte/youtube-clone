@@ -1,0 +1,6 @@
+env
+.vscode
+*.sqlite
+*.sqlite3
+*.env
+*.swp
