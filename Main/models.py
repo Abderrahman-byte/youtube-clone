@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from uuid import uuid4
+
 from .utils import *
 
 class ContentType(models.Model) :
@@ -51,4 +53,14 @@ class Playlist(models.Model) :
         ]
 
     def add_view(self) :
-        self.views = self.views + 1 
+        self.views = self.views + 1  
+
+class Comment(models.Model) :
+    id = models.UUIDField(primary_key=True, default=uuid4)
+    content = models.TextField(max_length=1500)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    video = models.ForeignKey(Video, on_delete=models.CASCADE)
+    # Dates 
+    created_date = models.DateTimeField(auto_now_add=True, editable=False)
+    updated_date = models.DateTimeField(auto_now=True) 
+
