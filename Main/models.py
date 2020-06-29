@@ -25,12 +25,14 @@ class Video(models.Model) :
     posted_date = models.DateTimeField(auto_now_add=True, editable=False)
     updated_date = models.DateTimeField(auto_now=True)
     # Media
-    ## content = 
-    ## Thumbnail = 
+    video_url = models.CharField(max_length=500)
+    thumbnail_url = models.CharField(max_length=500)
 
     class Meta :
         constraints = [
-            models.UniqueConstraint(fields=['channel', 'title'], name='unique_videos_per_channel')
+            models.UniqueConstraint(fields=['channel', 'title'], name='unique_videos_per_channel'),
+            models.UniqueConstraint(fields=['video_url'], name='unique_videos_url'),
+            models.UniqueConstraint(fields=['thumbnail_url'], name='unique_thumbnail_url'),
         ]
 
     def add_view(self) :
