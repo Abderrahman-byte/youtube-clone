@@ -6,6 +6,9 @@ from django.core.files.storage import FileSystemStorage
 from .utils import *
 from .models import *
 
+def indexView(request) :
+    return render(request, 'main/index.html')
+
 class UploadView(View) :
     def get(self, request) :
         return render(request, 'test/test.html')
