@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>youtube Clone</title>
+
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" integrity="sha384-REHJTs1r2ErKBuJB0fCK99gCYsVjwxHrSU0N7I1zl9vZbggVJXRMsv/sLlOAGb4M" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/switch.css' %}">
+</head>
+<body>
+    <header>
+        <button class="nav_bars" id="nav_bars">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="logo_div">
+            <a href="{% url 'main:index' %}">
+                <h1>YoutubeClone</h1>
+            </a>
+        </div>
+
+        <form class="search_form">
+            <input name="query" type="text" placeholder="Search" />
+            <button>
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+        </form>
+
+        <div class="utils-div">
+            <a href="{% url 'main:upload' %}">Upload</a>
+        {% if request.user.is_authenticated %}
+            <a href="#" class="btn">logout</a>
+        {% else %}
+        
+            <a href="#" class="btn">Sign In</a>
+        
+        {% endif %}
+
+            <label class="switch" id="theme_switch">
+                <input type="checkbox" />
+                <span class="slider round"></span>
+            </label>
+        </div>
+
+        <div class="backboard" id="backboard"></div>
+        <nav class="nav" id="nav">
+            <div class="nav_header">
+                <button id="hide_nav">
+                    <i class="fas fa-times"></i>
+                </button>
+                
+            </div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Channel</a></li>
+                <li><a href="#">Abonnements</a></li>
+                <li><a href="#">Vos videos</a></li>
+                <li><a href="#">Playlists</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <script src="{% static 'js/theme.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

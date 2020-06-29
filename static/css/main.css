@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+/* :root {
+    --background-a : #181818;
+    --background-b : #202020;
+    --background-c : #121212;
+    --background-d : #313131;
+    --variant-clr : #ffffff;
+    --icons-clr : #909090;
+    --borders-clr: #303030;
+} */
+
+:root {
+    --background-a : #F9F9F9;
+    --background-b : #FFFFFF;
+    --background-c : #FFFFFF;
+    --background-d : #F0F0F0;
+    --variant-clr : #606060;
+    --icons-clr : #606060;
+    --borders-clr: #d3d3d3;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.125rem;
+    background-color: var(--background-a);
+}
+
+/* Header Styling */
+
+header {
+    background-color: var(--background-b);
+    display : flex ;
+    justify-content: space-between ;
+    align-items: center;
+    padding: 1em;
+}
+
+.logo_div a {
+    text-decoration: none;
+    font-size: .8rem;
+    color: var(--variant-clr);
+}
+
+.search_form {
+    width: 60%;
+    max-width: 500px;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid var(--borders-clr);
+}
+
+.search_form input {
+    width: 85%;
+    height: 100%;
+    font-weight: 100;
+    font-size: 1.2rem;
+    background-color: var(--background-c);
+    padding: .5em .35em;
+    outline: none;
+    border: none;
+    border-right: 1px solid var(--borders-clr);
+}
+
+.search_form button {
+    width: 15%;
+    height: 100%;
+    border: 0;
+    background-color: var(--background-d);
+    color: var(--icons-clr);
+    cursor: pointer;
+    opacity: .8;
+}
+
+.search_form button:hover {
+    opacity: 1;
+}
+
+.utils-div {
+    width: 25%;
+    max-width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.utils-div a {
+    display: inline-block;
+    border: 2px solid var(--borders-clr);
+    padding: .5em .75em;
+    color: var(--variant-clr);
+    text-decoration: none;
+    background-color: var(--background-c);
+    font-weight: 500;
+    letter-spacing: 1px;
+    outline: none;
+    transition: .4s;
+}
+
+.utils-div a:hover, .utils-div a:focus {
+    background-color: var(--borders-clr);
+}
+
+.nav_bars {
+    font-size: 1.5rem;
+    cursor: pointer;
+    border: none;
+    color: var(--icons-clr);
+    background-color: transparent;
+    transition: .4s;
+
+    opacity: .8;
+    outline: none;
+}
+
+.nav_bars:hover, .nav_bars:focus {
+    opacity: 1;
+}
+
+.backboard {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+    top: 0;
+    left: 0;
+    z-index: 10;
+    display: none;
+}
+
+.nav {
+    position: fixed;
+    width: 20%;
+    min-width: 300px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 11;
+    background-color: var(--background-a);
+
+    transform: translateX(-100%);
+    transition: .5s;
+}
+
+.nav.show {
+    transform: translateX(0);
+}
+
+.nav .nav_header {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid var(--borders-clr);
+}
+
+.nav .nav_header button {
+    position: absolute;
+    top: 10px;
+    right: 5%;
+    font-size: 1.7rem;
+    background-color: transparent;
+    border: none;
+
+    color: var(--icons-clr);
+    cursor: pointer;
+
+    transition: .4s;
+    outline: none;
+}
+
+.nav .nav_header button:hover, .nav .nav_header button:focus {
+    color: var(--variant-clr); 
+}
+
+.nav ul {
+    width: 100%;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav ul li {
+    width: 100%;
+    border-bottom: 1px solid var(--borders-clr);
+}
+
+.nav ul li a {
+    display: inline-block;
+    width: 100%;
+    padding: .5em 1.5em;
+    text-decoration: none;
+    color: var(--icons-clr);
+
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    font-weight: 500;
+
+    transition: .4s;
+}
+
+.nav ul li a:hover, .nav ul li a:focus {
+    background-color: var(--variant-clr);
+    color: var(--background-b);
+}
