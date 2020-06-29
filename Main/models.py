@@ -77,3 +77,13 @@ class VideoImpression(models.Model) :
         constraints = [
             models.UniqueConstraint(fields=['video', 'user'], name='one_impression_foreach_user_on_a_video')
         ]
+
+class Subscription(models.Model) :
+    channel = models.ForeignKey(User, on_delete=models.CASCADE, related_name='channels')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='users')
+    notify = models.BooleanField(default=False)
+
+    class Meta :
+        constraints = [
+            models.UniqueConstraint(fields=['channel', 'user'], name='unique_subscription')
+        ]
