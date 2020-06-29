@@ -8,7 +8,7 @@ class ContentType(models.Model) :
 
     class Meta :
         constraints = [
-            models.UniqueConstraint(fields=('name'), name='unique_content_name')        
+            models.UniqueConstraint(fields=['name',], name='unique_content_name')        
         ]
 
 class Video(models.Model) :
@@ -28,6 +28,6 @@ class Video(models.Model) :
 
     class Meta :
         constraints = [
-            models.UniqueConstraint(fields=('channel', 'tilte'), name='unique_videos_per_channel')
+            models.UniqueConstraint(fields=['channel', 'title'], name='unique_videos_per_channel')
         ]
 
