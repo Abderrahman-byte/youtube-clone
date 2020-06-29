@@ -64,3 +64,16 @@ class Comment(models.Model) :
     created_date = models.DateTimeField(auto_now_add=True, editable=False)
     updated_date = models.DateTimeField(auto_now=True) 
 
+class VideoImpression(models.Model) :
+    class Kind(models.IntegerChoices) :
+        LIKE = 1
+        DISLIKE = -1
+
+    video = models.ForeignKey(Video, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    kind = models.IntegerField(choices=Kind.choices)
+
+    class Meta :
+        constraints = [
+            models.UniqueConstraint(fields=['video', 'user'], name='one_impression_foreach_user_on_a_video')
+        ]
