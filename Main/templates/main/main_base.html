@@ -11,6 +11,8 @@
 
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="{% static 'css/switch.css' %}">
+
+    {% styling block %}{% endblock %}
 </head>
 <body>
     <header>
@@ -71,5 +73,6 @@
 
     <script src="{% static 'js/theme.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+    {% script block %}{% endblock %}
 </body>
 </html>
