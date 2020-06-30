@@ -11,7 +11,8 @@ def indexView(request) :
 
 class UploadView(View) :
     def get(self, request) :
-        return render(request, 'test/test.html')
+        if request.user.is_authenticated :
+            return render(request, 'main/uplaod.html')
 
     def post(self, request) :
         if request.user.is_authenticated and request.FILES.get('video') is not None:
