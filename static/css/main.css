@@ -210,3 +210,9 @@ header {
     background-color: var(--variant-clr);
     color: var(--background-b);
 }
+
+/* Containers styling */
+
+.container {
+    padding: 1em;
+}
