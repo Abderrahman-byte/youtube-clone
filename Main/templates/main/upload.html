@@ -1,1 +1,16 @@
-{% extends 'main/upload.html' %}
+{% extends 'main/main_base.html' %}
+{% load static %}
+
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/upload.css' %}">
+{% endblock %}
+
+{% block content %}
+<div id="video_info"></div>
+<form class="upload_form" method="POST">
+    <label for="video_input"><i class="fas fa-file-video"></i> Choose a video file</label>
+    <input id="video_input" name="video" type="file" accept="video/*" required />
+    <button><i class="fas fa-cloud-upload-alt"></i>Upload</button>
+</form>
+{% endblock %}
