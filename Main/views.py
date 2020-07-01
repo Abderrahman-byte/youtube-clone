@@ -5,6 +5,8 @@ from django.conf.urls.static import serve
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 
+from uuid import uuid4
+
 from .utils import *
 from .models import *
 
@@ -21,12 +23,17 @@ class UploadView(View) :
             fs = FileSystemStorage()
             # Add Video to filesystem
             video_file = request.FILES.get('video')
+            video_duration = request.POST.get('duration')
             video_id = generateId(30)
             filename = fs.save(f'videos/{video_id}.mp4', video_file)
             video_url = fs.url(filename)
 
             # Make video image and thumbnail
-            thumbnail_url = generateThumbnail(filename)
+            thumbnail_url = generateThumbnail(filename, video_duration)
+
+            # Create Video Model
+            # v = Video(title=str(uuid4()), channel=request.user, video_url=video_url, thumbnail_url=thumbnail_url)
+            # v.save()
 
             return render(request, 'test/test.html', {'uploaded_file_url': video_url})
         else :
