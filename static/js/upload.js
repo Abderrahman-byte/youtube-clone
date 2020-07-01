@@ -2,6 +2,7 @@ const videoInput = document.getElementById('video_input')
 const videoLabel = document.querySelector('.upload_form > label')
 const submitBtn =  document.querySelector('.upload_form > button')
 const loadingBoard = document.getElementById('loading-board')
+const durationInput = document.getElementById('video_duration')
 
 const uplaodFile = e => {
     const file = e.target.files[0]
@@ -15,6 +16,7 @@ const uplaodFile = e => {
             video.setAttribute('src', data)
             videoContainer.classList.remove('hidden')
         }
+
         setTimeout(() => loadingBoard.classList.remove('show'), 5000)
     })
 
@@ -26,3 +28,6 @@ const uplaodFile = e => {
 }
 
 videoInput.addEventListener('change', uplaodFile)
+video.addEventListener('loadedmetadata', () => {
+    durationInput.value = video.duration
+})
