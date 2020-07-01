@@ -1,0 +1,220 @@
+.video_container {
+    max-width: 800px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1em;
+}
+
+.video_container.small {
+    max-width: 500px;
+}
+
+.video_container.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.video_controls.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.video_container > video {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+}
+
+/* Video Controls */
+.video_controls {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: .5em;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+}
+
+.video-progress {
+    position: relative;
+    width: 100%;
+    height: 8.4px;
+    margin-bottom: .4em;
+}
+
+/* Progress bar */
+.progress-bar {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    border-radius: 2px;
+    color: royalblue;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+.progress-bar::-moz-progress-bar { background: royalblue; }
+.progress-bar::-webkit-progress-value { background: royalblue; }
+
+/* Video seek */
+
+input[type=range] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: 100%;
+    background: transparent;
+    cursor: pointer;
+}
+
+.seek {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    cursor: pointer;
+    margin: 0;
+    outline: none;
+}
+
+.seek::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: royalblue;
+    cursor: pointer;
+}
+
+.seek::-moz-slider-thumb {
+    -webkit-appearance: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: royalblue;
+    cursor: pointer;
+}
+
+.seek::-ms-thumb {
+    -webkit-appearance: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: royalblue;
+    cursor: pointer;
+}
+
+.seek-tooltip {
+    display: none;
+    position: absolute;
+    top: -50px;
+    margin-left: -20px;
+    font-size: 12px;
+    padding: 3px;
+    content: attr(data-title);
+    font-weight: bold;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.seek:hover + .seek-tooltip {
+    display: block;
+}
+
+/* Bottons hover */
+button::before {
+    content: attr(data-title);
+    position: absolute;
+    display: none;
+    right: 0;
+    top: -50px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-weight: bold;
+    padding: 4px 6px;
+    word-break: keep-all;
+    white-space: pre;
+}
+
+button:hover::before {
+    display: inline-block;
+}
+
+/* Bottom controls */
+.bottom-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bottom-controls button {
+    cursor: pointer;
+    position: relative;
+    margin-right: 7px;
+    font-size: 12px;
+    padding: 3px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.bottom-controls svg {
+    width: 28px;
+    height: 28px;
+    fill: #fff;
+    stroke: #fff;
+    cursor: pointer;
+}
+
+.left-controls {
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+}
+
+/* Volume Controls */
+.volume-controls {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+input[type=range].volume {
+    height: 5px;
+    background-color: #fff;
+    outline: none;
+}
+
+input[type=range].volume::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+}
+
+input[type=range].volume::-moz-slider-thumb {
+    -webkit-appearance: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+}
+
+input[type=range].volume::-ms-thumb {
+    -webkit-appearance: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+}
