@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseForbidden, HttpResponse
 from django.views import View
+from django.conf.urls.static import serve
+from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 
 from .utils import *
@@ -29,3 +31,8 @@ class UploadView(View) :
             return render(request, 'test/test.html', {'uploaded_file_url': video_url})
         else :
             return HttpResponseForbidden()
+
+def staticView(request, path) :
+    response = serve(request, path, document_root=settings.MEDIA_ROOT)
+    response['Accept-Ranges'] = 'bytes'
+    return response
