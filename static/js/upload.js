@@ -13,6 +13,8 @@ const uplaodFile = e => {
         if(data !== null ) {
             videoLabel.style.display = 'none'
             submitBtn.style.display = 'block'
+            video.setAttribute('src', data)
+            videoContainer.classList.remove('hidden')
         }
     })
 

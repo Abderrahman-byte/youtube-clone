@@ -9,7 +9,7 @@
 
 {% block content %}
 <!-- Video Player -->
-<div class="video_container center" id="video-container">
+<div class="video_container center hidden" id="video-container">
     <video id="video" preload="metadata"  src="https://www.w3schools.com/tags/mov_bbb.mp4"></video>
     <!-- <video id="video" preload="metadata"  src="/media/videos/test.mp4"></video> -->
 
@@ -111,6 +111,7 @@
         </symbol>
     </defs>
 </svg>
+
 {% endblock %}
 
 {% block script %}
