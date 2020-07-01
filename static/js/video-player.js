@@ -37,7 +37,6 @@ const initializeVideo = () => {
     progressBar.setAttribute('max', duration)
     seek.setAttribute('max', duration)
     durationData.textContent = formatTime(duration)
-    console.log(duration)
 }
 
 const hideControls = () => {
@@ -114,7 +113,6 @@ const toggleVolume = () => {
 
 const setVolume = e => {
     const v = e.target.value
-    console.log(v)
     if(v <= 0) {
         video.muted = true
     } else {
