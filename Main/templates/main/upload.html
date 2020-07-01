@@ -83,6 +83,7 @@
 
 <!-- Upload Video Form -->
 <form class="upload_form" method="POST">
+    {% csf_token %}
     <label for="video_input"><i class="fas fa-file-video"></i> Choose a video file</label>
     <input id="video_input" name="video" type="file" accept="video/*" required />
     <button><i class="fas fa-cloud-upload-alt"></i>Upload</button>
