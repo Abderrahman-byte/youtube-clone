@@ -29,11 +29,15 @@ class UploadView(View) :
             video_url = fs.url(filename)
 
             # Make video image and thumbnail
-            thumbnail_url = generateThumbnail(filename, video_duration)
+            thumbnail_url = generateThumbnail(filename)
 
             # Create Video Model
-            # v = Video(title=str(uuid4()), channel=request.user, video_url=video_url, thumbnail_url=thumbnail_url)
-            # v.save()
+            v = Video(title=str(uuid4()), 
+                channel=request.user, 
+                video_url=video_url, 
+                thumbnail_url=thumbnail_url, 
+                duration=video_duration)
+            v.save()
 
             return render(request, 'test/test.html', {'uploaded_file_url': video_url})
         else :

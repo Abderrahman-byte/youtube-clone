@@ -18,6 +18,7 @@ class Video(models.Model) :
     channel = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.TextField(max_length=1500, blank=True, null=True)
+    duration = models.IntegerField(default=0)
     content_type = models.ForeignKey(ContentType, null=True, on_delete=models.SET_NULL, blank=True)
     allow_comments = models.BooleanField(default=True)
     views = models.IntegerField(default=0)
