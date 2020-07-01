@@ -15,7 +15,7 @@ const uplaodFile = e => {
             video.setAttribute('src', data)
             videoContainer.classList.remove('hidden')
         }
-        loadingBoard.classList.remove('show')
+        setTimeout(() => loadingBoard.classList.remove('show'), 3000)
     })
 
     reader.addEventListener('loadstart', () => {
