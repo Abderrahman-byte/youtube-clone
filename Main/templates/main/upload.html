@@ -11,8 +11,7 @@
 {% block content %}
 <!-- Video Player -->
 <div class="video_container center hidden" id="video-container">
-    <video id="video" preload="metadata"  src="https://www.w3schools.com/tags/mov_bbb.mp4"></video>
-    <!-- <video id="video" preload="metadata"  src="/media/videos/test.mp4"></video> -->
+    <video id="video" preload="metadata"  src="null"></video>
 
     <div class="video_controls" id="video_controls">
         <div class="video-progress">
@@ -83,7 +82,7 @@
 
 <!-- Upload Video Form -->
 <form class="upload_form" method="POST">
-    {% csf_token %}
+    {% csrf_token %}
     <label for="video_input"><i class="fas fa-file-video"></i> Choose a video file</label>
     <input id="video_input" name="video" type="file" accept="video/*" required />
     <button><i class="fas fa-cloud-upload-alt"></i>Upload</button>
