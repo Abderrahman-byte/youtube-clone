@@ -81,10 +81,11 @@
 </div>
 
 <!-- Upload Video Form -->
-<form class="upload_form" method="POST">
+<form class="upload_form" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <label for="video_input"><i class="fas fa-file-video"></i> Choose a video file</label>
     <input id="video_input" name="video" type="file" accept="video/*" required />
+    <input id="video_duration" name="duration" type="hidden" required />
     <button><i class="fas fa-cloud-upload-alt"></i>Upload</button>
 </form>
 
