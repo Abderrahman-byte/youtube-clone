@@ -1,8 +1,7 @@
 const videoInput = document.getElementById('video_input')
 const videoLabel = document.querySelector('.upload_form > label')
 const submitBtn =  document.querySelector('.upload_form > button')
-
-const reader = new FileReader()
+const loadingBoard = document.getElementById('loading-board')
 
 const uplaodFile = e => {
     const file = e.target.files[0]
@@ -16,6 +15,11 @@ const uplaodFile = e => {
             video.setAttribute('src', data)
             videoContainer.classList.remove('hidden')
         }
+        loadingBoard.classList.remove('show')
+    })
+
+    reader.addEventListener('loadstart', () => {
+        loadingBoard.classList.add('show')
     })
 
     reader.readAsDataURL(file)

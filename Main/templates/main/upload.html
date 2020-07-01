@@ -5,6 +5,7 @@
 {% block styles %}
 <link rel="stylesheet" href="{% static 'css/upload.css' %}">
 <link rel="stylesheet" href="{% static 'css/video-player.css' %}">
+<link rel="stylesheet" href="{% static 'css/loading.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -67,6 +68,18 @@
     </div>
 </div>
 
+<div class="loading-board" id="loading-board">
+    <div class="loading">
+        <div class="loading-bar bar-1"></div>
+        <div class="loading-bar bar-2"></div>
+        <div class="loading-bar bar-3"></div>
+        <div class="loading-bar bar-4"></div>
+        <div class="loading-bar bar-5"></div>
+    </div>
+    <div class="loading-text">
+        <p>Uploading your file it may take some time.</p>
+    </div>
+</div>
 
 <!-- Upload Video Form -->
 <form class="upload_form" method="POST">

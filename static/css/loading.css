@@ -1,0 +1,67 @@
+@keyframes loading-anime {
+
+    100% {
+        transform: scaleY(0.15);
+        border-radius: 50%;
+    }
+}
+
+.loading-board {
+    position: fixed;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(255, 255, 255, 0.5);
+    display: none;
+    padding: 10em 0;
+}
+
+.loading-board.show {
+    display: flex;
+}
+
+.loading-board .loading-text {
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: 3px;
+    color: var(--variant-clr, #121212);
+}
+
+.loading {
+    display: flex;
+}
+
+.loading-bar {
+    width: 30px;
+    height: 200px;
+    border-radius: 50px;
+    background-color: var(--variant-clr, #121212);
+    margin: .7em;
+
+    animation: loading-anime 1s ease-in-out infinite alternate;
+}
+
+.bar-1 {
+    animation-delay: 150ms;
+}
+
+.bar-2 {
+    animation-delay: 200ms;
+}
+
+.bar-3 {
+    animation-delay: 300ms;
+}
+
+.bar-4 {
+    animation-delay: 400ms;
+}
+
+.bar-5 {
+    animation-delay: 500ms;
+}
