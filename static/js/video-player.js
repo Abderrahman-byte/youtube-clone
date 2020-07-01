@@ -126,17 +126,21 @@ const setVolume = e => {
 const volumeUp = () => {
     if(video.volume < 1) {
         video.volume += 0.1
-        volumeRange.value = video.volume
-        updateVolumeIcon()
+    } else {
+        video.volume = 1
     }
+    volumeRange.value = video.volume
+    updateVolumeIcon()
 }
 
 const volumeDown = () => {
     if(video.volume > 0) {
         video.volume -= 0.1
-        volumeRange.value = video.volume
-        updateVolumeIcon()
+    } else {
+        video.volume = 0
     }
+    volumeRange.value = video.volume
+    updateVolumeIcon()
 }
 
 // Progress Control
@@ -195,7 +199,6 @@ const toggleFullscreen = async () => {
 const shortCuts = e => {
     const key = e.keyCode
     
-    console.log(key)
     switch(key) {
         case 75 :
         case 32 :

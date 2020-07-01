@@ -1,0 +1,7 @@
+asgiref==3.2.10
+Django==3.0.7
+numpy==1.19.0
+opencv-python==4.2.0.34
+psycopg2-binary==2.8.5
+pytz==2020.1
+sqlparse==0.3.1
