@@ -6,7 +6,8 @@ from uuid import uuid4
 from .utils import *
 
 class ContentType(models.Model) :
-    name = models.CharField(primary_key=True, max_length=100)
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100)
 
     class Meta :
         constraints = [
