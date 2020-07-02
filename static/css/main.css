@@ -32,6 +32,11 @@ body {
     background-color: var(--background-a);
 }
 
+img {
+    max-width: 100%;
+    display: block;
+}
+
 /* Header Styling */
 
 header {
