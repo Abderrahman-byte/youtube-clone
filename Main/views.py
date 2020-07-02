@@ -1,9 +1,10 @@
-from django.shortcuts import render
-from django.http import HttpResponseForbidden, HttpResponse
+from django.shortcuts import render, redirect
+from django.http import HttpResponseForbidden, HttpResponse, Http404
 from django.views import View
 from django.conf.urls.static import serve
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from django.urls import reverse
 
 from uuid import uuid4
 
@@ -12,6 +13,19 @@ from .models import *
 
 def indexView(request) :
     return render(request, 'main/index.html')
+
+class ModifieViewView(View) :
+    def get(self, request, id) :
+        try :
+            video = Video.objects.get(pk=id)
+        except Video.DoesNotExist :
+            raise Http404
+        
+        if video.channel == request.user :
+            return render(request, 'main/modifie.html', {'video': video})
+        else :
+            return HttpResponseForbidden()
+
 
 class UploadView(View) :
     def get(self, request) :
@@ -23,7 +37,7 @@ class UploadView(View) :
             fs = FileSystemStorage()
             # Add Video to filesystem
             video_file = request.FILES.get('video')
-            video_duration = request.POST.get('duration')
+            video_duration = round(float(request.POST.get('duration')))
             video_id = generateId(30)
             filename = fs.save(f'videos/{video_id}.mp4', video_file)
             video_url = fs.url(filename)
@@ -39,7 +53,7 @@ class UploadView(View) :
                 duration=video_duration)
             v.save()
 
-            return render(request, 'test/test.html', {'uploaded_file_url': video_url})
+            return redirect(reverse('main:modifie', args=(v.id,)))
         else :
             return HttpResponseForbidden()
 
