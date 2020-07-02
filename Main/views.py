@@ -57,7 +57,6 @@ class ModifieViewView(View) :
 
             video.title = title
             video.allow_comments = allow_comments
-            print(content_type_id)
             if content_type_id > 0 : video.content_type = ContentType.objects.get(pk=content_type_id)
             if description != '' : video.description = description
             video.save()
