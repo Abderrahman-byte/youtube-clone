@@ -6,6 +6,7 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.urls import reverse
 
+import os
 from uuid import uuid4
 
 from .utils import *
@@ -28,6 +29,43 @@ class ModifieViewView(View) :
         else :
             return HttpResponseForbidden()
 
+    def post(self, request) :
+        try :
+            id = request.POST.get('id')
+            video = Video.objects.get(pk=id)
+        except Video.DoesNotExist :
+            raise Http404
+
+        if video.channel == request.user :
+            # Get Post data
+            title = request.POST.get('title')
+            description = request.POST.get('description')
+            content_type_id = int(request.POST.get('content_type'))
+            allow_comments = True
+            poster_file = request.FILES.get('poster')
+
+            if request.POST.get('comments') == 'on' :
+                allow_comments = False
+
+            if poster_file is not None :
+                fn, ext = os.path.splitext(poster_file.name)
+                poster_name = f'images/thumbnails/{generateId(30)}{ext}'
+                fs = FileSystemStorage()
+                poster = fs.save(poster_name, poster_file)
+                poster_url = fs.url(poster)
+                video.thumbnail_url = poster_url
+
+            video.title = title
+            video.allow_comments = allow_comments
+            print(content_type_id)
+            if content_type_id > 0 : video.content_type = ContentType.objects.get(pk=content_type_id)
+            if description != '' : video.description = description
+            video.save()
+
+            return redirect(reverse('main:modifie') + f'?v={video.id}')
+        else :
+            return HttpResponseForbidden()
+        
 
 class UploadView(View) :
     def get(self, request) :

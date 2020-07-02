@@ -15,7 +15,7 @@
 
     <form class="modifie-form" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="hidden" value="{{ video.id }}">
+        <input type="hidden" value="{{ video.id }}" name="id">
         <input type="file" id="video-poster-input" name="poster" accept="image/*">
         <div class="form-group">
             <label for="video-title">Title :</label>
@@ -24,14 +24,14 @@
 
         <div class="form-group">
             <label for="video-description">Description :</label>
-            <textarea class="video-description" id="video-description" name="description" maxlength="1500" required
+            <textarea class="video-description" id="video-description" name="description" maxlength="1500"
             >{% if video.description %}{{ video.description }}{%endif%}</textarea>
         </div>
 
         <div class="form-group">
             <label for="video-content_type">Content Type :</label>
-            <select id="video-content_type" class="video-content_type" name="content_type" value="0" required>
-                <option value="0">Choose Content Type</option>
+            <select id="video-content_type" class="video-content_type" name="content_type" value="{% if video.content_type %}{{ video.content_type.id }}{% else %}0{% endif %}">
+                <option value="0">Choose Content Type...</option>
                 {% for type in types %}
                 <option value="{{ type.id }}">{{ type.name }}</option>
                 {% endfor %}
