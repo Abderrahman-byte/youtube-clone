@@ -15,14 +15,16 @@ def indexView(request) :
     return render(request, 'main/index.html')
 
 class ModifieViewView(View) :
-    def get(self, request, id) :
+    def get(self, request) :
         try :
+            id = request.GET.get('v')
             video = Video.objects.get(pk=id)
         except Video.DoesNotExist :
             raise Http404
         
         if video.channel == request.user :
-            return render(request, 'main/modifie.html', {'video': video})
+            types = ContentType.objects.all()
+            return render(request, 'main/modifie.html', {'video': video, 'types': types})
         else :
             return HttpResponseForbidden()
 
@@ -31,6 +33,8 @@ class UploadView(View) :
     def get(self, request) :
         if request.user.is_authenticated :
             return render(request, 'main/upload.html')
+        else :
+            return HttpResponseForbidden()
 
     def post(self, request) :
         if request.user.is_authenticated and request.FILES.get('video') is not None:
@@ -53,7 +57,7 @@ class UploadView(View) :
                 duration=video_duration)
             v.save()
 
-            return redirect(reverse('main:modifie', args=(v.id,)))
+            return redirect(reverse('main:modifie') + f'?v={v.id}')
         else :
             return HttpResponseForbidden()
 
