@@ -1,0 +1,85 @@
+.modifie-lab {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.poster-container {
+    width: 40%;
+}
+
+.modifie-form {
+    width: 50%;
+}
+
+.modifie-form button {
+    display: block;
+    background-color: var(--variant-clr);
+    color: var(--background-b);
+    padding: .6em 1.1em;
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: .4s;
+    border: none;
+    margin: 0 auto;
+}
+
+.modifie-form button:hover, .modifie-form button:focus {
+    background-color: var(--background-d);
+    color: var(--variant-clr);
+}
+
+.modifie-form button i {
+    font-size: 1.5rem;
+    margin-right: .4em;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: .5em;
+}
+
+.form-group label {
+    display: block;
+    letter-spacing: 1px;
+    margin-bottom: .5em;
+    color: var(--variant-clr, black);
+}
+
+.form-group input[type='text'], .form-group select, .form-group textarea {
+    width: 100%;
+    display: block;
+    padding: .375rem .5rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #ffffff;
+    background-clip: padding-box;
+    border: 1px solid var(--border-clr, #ced4da);
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.form-group input[type='text']:focus, .form-group select:focus, .form-group textarea:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: var(--variant-clr, black);
+    outline: 0;
+}
+
+.form-group select, .form-group input[type='text'] {
+    height: calc(1.5em + .75rem + 2px);
+}
+
+.form-group textarea {
+    height: 200px;
+    resize: none;
+}
+
+.form-group.check-group label {
+    margin-right: .5em;
+    display: inline;
+}
