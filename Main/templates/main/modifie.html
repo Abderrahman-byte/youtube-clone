@@ -9,30 +9,38 @@
 {% block content %}
 <div class="modifie-lab">
     <div class="poster-container">
-        <img src="{{ video.thumbnail_url }}" alt="video-poster" />
+        <img id="video-poster" src="{{ video.thumbnail_url }}" alt="video-poster" />
+        <label for="video-poster-input">Change Poster</label>
     </div>
 
     <form class="modifie-form" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
+        <input type="hidden" value="{{ video.id }}">
+        <input type="file" id="video-poster-input" name="poster" accept="image/*">
         <div class="form-group">
             <label for="video-title">Title :</label>
-            <input id="video-title" class="video-title" name="title" type="text" value="{{video.title}}" />
+            <input id="video-title" class="video-title" name="title" type="text" value="{{video.title}}" required />
         </div>
 
         <div class="form-group">
             <label for="video-description">Description :</label>
-            <textarea class="video-description" id="video-description" name="description" maxlength="1500"
+            <textarea class="video-description" id="video-description" name="description" maxlength="1500" required
             >{% if video.description %}{{ video.description }}{%endif%}</textarea>
         </div>
 
         <div class="form-group">
             <label for="video-content_type">Content Type :</label>
-            <select id="video-content_type" class="video-content_type" name="content_type"></select>
+            <select id="video-content_type" class="video-content_type" name="content_type" value="0" required>
+                <option value="0">Choose Content Type</option>
+                {% for type in types %}
+                <option value="{{ type.id }}">{{ type.name }}</option>
+                {% endfor %}
+            </select>
         </div>
         
         <div class="form-group check-group">
             <label for="video-disable_comments">Disable Comments :</label>
-            <input id="video-disable_comments" class="video-disable_comments" type="checkbox" 
+            <input id="video-disable_comments" class="video-disable_comments" type="checkbox" name="comments"
             {% if not video.allow_comments %}checked{% endif %} />
         </div>
 

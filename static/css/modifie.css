@@ -83,3 +83,38 @@
     margin-right: .5em;
     display: inline;
 }
+
+.video-content_type option {
+    text-transform: capitalize;
+}
+
+#video-poster-input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Poster Container */
+.poster-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.poster-container label {
+    background-color: var(--variant-clr);
+    color: var(--background-b);
+    padding: .6em 1.1em;
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: .4s;
+    border: none;
+    display: block;
+    margin: .5em auto;
+}
+
+.poster-container label:focus, .poster-container label:hover {
+    background-color: var(--background-d);
+    color: var(--variant-clr);
+}
