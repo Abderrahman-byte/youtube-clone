@@ -1,0 +1,8 @@
+{% extends 'main/main_base.html' %}
+
+{% block content %}
+<h1>{{ video.title}}</h1>
+<h2>{{ video.id}}</h2>
+<p>{{ video.description}}</p>
+<p>{{ video.content_type.name}}</p>
+{% endblock %}
