@@ -30,10 +30,10 @@
 
         <div class="form-group">
             <label for="video-content_type">Content Type :</label>
-            <select id="video-content_type" class="video-content_type" name="content_type" value="{% if video.content_type %}{{ video.content_type.id }}{% else %}0{% endif %}">
-                <option value="0">Choose Content Type...</option>
+            <select id="video-content_type" class="video-content_type" name="content_type" selected="{% if video.content_type %}{{ video.content_type.id }}{% else %}0{% endif %}">
+                <option value="0"{% if not video.content_type %}selected{% endif %} disabled hidden>Choose Content Type...</option>
                 {% for type in types %}
-                <option value="{{ type.id }}">{{ type.name }}</option>
+                <option value="{{ type.id }}" {% if video.content_type.id == type.id %}selected{% endif %} >{{ type.name }}</option>
                 {% endfor %}
             </select>
         </div>

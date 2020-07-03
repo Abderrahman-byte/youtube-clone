@@ -84,7 +84,7 @@
     display: inline;
 }
 
-.video-content_type option {
+.video-content_type, .video-content_type option {
     text-transform: capitalize;
 }
 
