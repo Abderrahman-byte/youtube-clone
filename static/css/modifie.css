@@ -101,8 +101,8 @@
 }
 
 .poster-container label {
-    background-color: var(--variant-clr);
-    color: var(--background-b);
+    background-color: var(--variant-clr, black);
+    color: var(--background-b, black);
     padding: .6em 1.1em;
     font-weight: 700;
     font-size: 1.3rem;
@@ -115,6 +115,6 @@
 }
 
 .poster-container label:focus, .poster-container label:hover {
-    background-color: var(--background-d);
-    color: var(--variant-clr);
+    background-color: var(--background-d, black);
+    color: var(--variant-clr, black);
 }
