@@ -15,6 +15,15 @@ from .models import *
 def indexView(request) :
     return render(request, 'main/index.html')
 
+def watchView(request) :
+    try :
+        id = request.GET.get('v')
+        video = Video.objects.get(pk=id)
+    except Video.DoesNotExist :
+        raise Http404
+
+    return render(request, 'main/watch.html', {'video': video})
+
 class ModifieViewView(View) :
     def get(self, request) :
         try :
