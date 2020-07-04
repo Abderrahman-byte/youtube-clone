@@ -40,6 +40,7 @@
     border-radius: 3px;
     display: none;
     padding-bottom: 1em;
+    overflow-y: scroll;
 }
 
 .playlist-form {

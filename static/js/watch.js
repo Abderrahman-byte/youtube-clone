@@ -6,7 +6,8 @@ const playlistsBlackBoard = document.getElementById('playlists-blackboard')
 const playlistsDisplay = document.getElementById('playlists-container')
 const playlistContainer = document.getElementById('playlists')
 const closePlaylistsBtn = document.getElementById('close-playlists')
-
+const createPlaylistBtn = document.getElementById('create-playlist')
+const createPlaylistForm = document.getElementById('playlist-form')
 
 const formatCount = count => {
     if (count < 0) {
@@ -148,13 +149,20 @@ const saveVideo = async () => {
 const closePlaylistsDisplay = () => {
     playlistsDisplay.style.display = 'none'
     playlistsBlackBoard.style.display = 'none'
+    createPlaylistForm.style.display = 'none'
+    createPlaylistBtn.style.display = 'block'
     playlistContainer.innerHTML = ''
 }
 
+const showPlaylistForm = () => {
+    createPlaylistForm.style.display = 'flex'
+    createPlaylistBtn.style.display = 'none'
+}
 
 saveBtn.addEventListener('click', saveVideo)
 closePlaylistsBtn.addEventListener('click', closePlaylistsDisplay)
 playlistsBlackBoard.addEventListener('click', closePlaylistsDisplay)
+createPlaylistBtn.addEventListener('click', showPlaylistForm)
 impressionBtns.forEach(btn => {
     btn.addEventListener('click', submitImpression)
 })
