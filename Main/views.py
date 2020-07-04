@@ -5,8 +5,9 @@ from django.conf.urls.static import serve
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.urls import reverse
+from django.middleware.csrf import get_token
 
-import os
+import os, json
 from uuid import uuid4
 
 from .utils import *
@@ -22,12 +23,15 @@ def watchView(request) :
         likes = video.videoimpression_set.filter(kind=1).count()
         dislikes = video.videoimpression_set.filter(kind=-1).count()
         user_impr = None
+        get_token(request)
     except Video.DoesNotExist :
         raise Http404
 
     if request.user.is_authenticated :
         try :
+            user = request.user
             user_impr = VideoImpression.objects.get(user=user, video=video)
+            user_impr = user_impr.kind
         except VideoImpression.DoesNotExist :
             user_impr = None
 
@@ -39,11 +43,12 @@ class submitImpressionView(View) :
             return HttpResponseForbidden()
         else:
             try :
-                id = request.POST.get('id')
-                kind = int(request.POST.get('kind'))
+                body = json.loads(request.body)
+                id = body.get('id')
+                kind = int(body.get('kind'))
                 video = Video.objects.get(pk=id)
                 user = request.user
-                impression = VideoImpression.objects.get_or_create(user=user, video=video)
+                impression, created = VideoImpression.objects.get_or_create(user=user, video=video)
                 impression.kind = kind
                 impression.save()
 
@@ -51,12 +56,13 @@ class submitImpressionView(View) :
             except Video.DoesNotExist:
                 raise Http404
 
-    def delete(self, request)
+    def delete(self, request) :
         if not request.user.is_authenticated :
             return HttpResponseForbidden()
         else:
             try :
-                id = request.POST.get('id')
+                body = json.loads(request.body)
+                id = body.get('id')
                 video = Video.objects.get(pk=id)
                 user = request.user
                 impression = VideoImpression.objects.get(user=user, video=video)
@@ -66,7 +72,7 @@ class submitImpressionView(View) :
             except Video.DoesNotExist or VideoImpression.DoesNotExist :
                 raise Http404
 
-class ModifieViewView(View) :
+class ModifieView(View) :
     def get(self, request) :
         try :
             id = request.GET.get('v')
