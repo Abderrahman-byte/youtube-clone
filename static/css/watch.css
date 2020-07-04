@@ -15,6 +15,119 @@
     border: 1px solid magenta;
 }
 
+/* Playlist */
+.playlists-blackboard {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 8;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.playlists-container {
+    position: fixed;
+    z-index: 9;
+    width: 20%;
+    min-width: 300px;
+    max-height: 70%;
+    background-color: var(--background-b, whitesmoke);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 3px;
+    display: none;
+}
+
+.playlists-container .header {
+    display: flex;
+    justify-content: flex-end;
+    padding: .4em .8em;
+}
+
+.playlists-container .header button{
+    font-size: 1.375rem;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    color: var(--icons-clr, whitesmoke);
+}
+
+.playlists .item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding-left: 3em;
+    padding-right: .7em;
+    margin: .6em 0;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: var(--variant-clr);
+}
+
+.playlists .item input[type='checkbox'] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.playlists .item .checkmark {
+    position: absolute;
+    top: 0;
+    left: 1em;
+    height: 25px;
+    width: 25px;
+    background-color: var(--borders-clr, #ccc);
+    border-radius: 3px;
+    transition: .4s;
+}
+
+.playlists .item:hover input[type='checkbox'] ~ .checkmark {
+    background-color: var(--variant-clr, #eee);
+}
+
+.playlists .item input[type='checkbox']:checked + .checkmark {
+    background-color: royalblue;
+}
+
+.playlists .item .checkmark::after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.playlists .item input[type='checkbox']:checked ~ .checkmark:after {
+    display: block;
+}
+
+.playlists .item .checkmark::after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.playlists .item i {
+    color: var(--icons-clr, whitesmoke);
+}
+
 /* Left container */
 .video-title {
     font-size: 1.25rem;
@@ -54,19 +167,21 @@
 }
 
 .video-actions button::before {
+    content: attr(data-title);
     position: absolute;
-    display: inline-block;
-    content: attr('data-title');
+    right: 0;
+    top: -30px;
+    font-size: .9rem;
     background-color: var(--variant-clr, black);
-    color: var(--background-b, whitesmoke);
-    cursor: auto;
-    font-size: .75rem;
-    top: -25px;
+    color: #fff;
+    font-weight: bold;
+    padding: 4px 6px;
+    word-break: keep-all;
+    white-space: pre;
     opacity: 0;
     transform: scale(0);
-    font-weight: 400;
-    border-radius: 2px;
     transition: .4s;
+    border-radius: 2px;
 }
 
 .video-actions button:hover::before {
