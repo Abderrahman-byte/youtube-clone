@@ -53,6 +53,7 @@
     background: transparent;
     cursor: pointer;
     color: var(--icons-clr, whitesmoke);
+    outline: none;
 }
 
 .playlists .item {
@@ -173,7 +174,7 @@
     top: -30px;
     font-size: .9rem;
     background-color: var(--variant-clr, black);
-    color: #fff;
+    color: var(--background-b, whitesmoke);
     font-weight: bold;
     padding: 4px 6px;
     word-break: keep-all;
