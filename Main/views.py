@@ -79,9 +79,28 @@ class ApiPlaylists(View) :
         else :
             user = request.user
             playlists = user.playlist_set.all()
-            playlists = [{'id': pl.id, 'title': pl.title, 'items': [v.id for v in pl.videos.all()]} for pl in playlists]
+            playlists = [{'id': pl.id, 'title': pl.title, 'is_public': pl.is_public, 'items': [v.id for v in pl.videos.all()]} for pl in playlists]
             body = {'playlists': playlists}
             return HttpResponse(json.dumps(body))
+
+    def put(self, request) :
+        user = request.user
+        try :
+            body = json.loads(request.body)
+            videoId = body.get('videoId')
+            playlistId = body.get('playlistId')
+            action = int(body.get('action'))
+            video = Video.objects.get(pk=videoId)
+            playlist = Playlist.objects.get(pk=playlistId)
+        except Playlist.DoesNotExist or Video.DoesNotExist :
+            raise Http404
+
+        if playlist.creator == user :
+            if action == 1 : playlist.videos.add(video)
+            if action == -1 : playlist.videos.remove(video)
+            return HttpResponse(status=201)
+        else :
+            return HttpResponseForbidden()
 
 class ModifieView(View) :
     def get(self, request) :
