@@ -54,7 +54,7 @@ const submitImpression = async e => {
 
     if(method === 'POST') {
         const data = {'id': id, 'kind': action}
-        const req = await fetch('/impression', {
+        const req = await fetch('/api/impression', {
             'method': 'POST',
             'body': JSON.stringify(data),
             'headers': {
@@ -78,7 +78,7 @@ const submitImpression = async e => {
         }
     } else if(method === 'DELETE') {
         const data = {'id': id}
-        const req = await fetch('/impression', {
+        const req = await fetch('/api/impression', {
             'method': 'DELETE',
             'body': JSON.stringify(data),
             'headers': {
