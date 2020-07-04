@@ -19,10 +19,12 @@ def watchView(request) :
     try :
         id = request.GET.get('v')
         video = Video.objects.get(pk=id)
+        likes = video.videoimpression_set.filter(kind=1).count()
+        dislikes = video.videoimpression_set.filter(kind=-1).count()
     except Video.DoesNotExist :
         raise Http404
 
-    return render(request, 'main/watch.html', {'video': video})
+    return render(request, 'main/watch.html', {'video': video, 'likes': likes, 'dislikes': dislikes})
 
 class ModifieViewView(View) :
     def get(self, request) :
