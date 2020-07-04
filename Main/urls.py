@@ -11,6 +11,7 @@ urlpatterns = [
     path('upload/', views.UploadView.as_view(), name='upload'),
     path('modifie/', views.ModifieViewView.as_view(), name='modifie'),
     path('watch/', views.watchView, name='watch'),
+    path('impression', views.submitImpressionView.as_view(), name='impressions'),
 ]
 
 if settings.DEBUG :
