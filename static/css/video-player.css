@@ -129,7 +129,7 @@ input[type=range] {
 }
 
 /* Bottons hover */
-button::before {
+.video_controls button::before {
     content: attr(data-title);
     position: absolute;
     display: none;
@@ -143,7 +143,7 @@ button::before {
     white-space: pre;
 }
 
-button:hover::before {
+.video_controls button:hover::before {
     display: inline-block;
 }
 
