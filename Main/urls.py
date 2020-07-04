@@ -9,7 +9,7 @@ app_name = 'main'
 urlpatterns = [
     path('', views.indexView, name='index'),
     path('upload/', views.UploadView.as_view(), name='upload'),
-    path('modifie/', views.ModifieViewView.as_view(), name='modifie'),
+    path('modifie/', views.ModifieView.as_view(), name='modifie'),
     path('watch/', views.watchView, name='watch'),
     path('impression', views.submitImpressionView.as_view(), name='impressions'),
 ]
