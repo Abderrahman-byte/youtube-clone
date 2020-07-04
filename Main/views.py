@@ -72,6 +72,16 @@ class submitImpressionView(View) :
             except Video.DoesNotExist or VideoImpression.DoesNotExist :
                 raise Http404
 
+class ApiPlaylists(View) :
+    def get(self, request) :
+        if not request.user.is_authenticated :
+            return HttpResponseForbidden()
+        else :
+            playlists = user.playlist_set.all()
+            playlists = [{'id': pl.id, 'title': pl.title, 'items': [v.id for v in pl.videos.all()]} for pl in playlists]
+            body = {'playlists': playlists}
+            return HttpResponse(json.dumps(body))
+
 class ModifieView(View) :
     def get(self, request) :
         try :
