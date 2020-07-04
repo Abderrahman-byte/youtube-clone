@@ -76,7 +76,7 @@ class VideoImpression(models.Model) :
 
     video = models.ForeignKey(Video, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    kind = models.IntegerField(choices=Kind.choices)
+    kind = models.IntegerField(choices=Kind.choices, default=1)
 
     class Meta :
         constraints = [
