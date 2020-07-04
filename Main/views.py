@@ -21,10 +21,50 @@ def watchView(request) :
         video = Video.objects.get(pk=id)
         likes = video.videoimpression_set.filter(kind=1).count()
         dislikes = video.videoimpression_set.filter(kind=-1).count()
+        user_impr = None
     except Video.DoesNotExist :
         raise Http404
 
-    return render(request, 'main/watch.html', {'video': video, 'likes': likes, 'dislikes': dislikes})
+    if request.user.is_authenticated :
+        try :
+            user_impr = VideoImpression.objects.get(user=user, video=video)
+        except VideoImpression.DoesNotExist :
+            user_impr = None
+
+    return render(request, 'main/watch.html', {'video': video, 'likes': likes, 'dislikes': dislikes, 'user_impr': user_impr})
+
+class submitImpressionView(View) :
+    def post(self, request) :
+        if not request.user.is_authenticated :
+            return HttpResponseForbidden()
+        else:
+            try :
+                id = request.POST.get('id')
+                kind = int(request.POST.get('kind'))
+                video = Video.objects.get(pk=id)
+                user = request.user
+                impression = VideoImpression.objects.get_or_create(user=user, video=video)
+                impression.kind = kind
+                impression.save()
+
+                return HttpResponse(status=201)
+            except Video.DoesNotExist:
+                raise Http404
+
+    def delete(self, request)
+        if not request.user.is_authenticated :
+            return HttpResponseForbidden()
+        else:
+            try :
+                id = request.POST.get('id')
+                video = Video.objects.get(pk=id)
+                user = request.user
+                impression = VideoImpression.objects.get(user=user, video=video)
+                impression.delete()
+                
+                return HttpResponse(status=202)
+            except Video.DoesNotExist or VideoImpression.DoesNotExist :
+                raise Http404
 
 class ModifieViewView(View) :
     def get(self, request) :
