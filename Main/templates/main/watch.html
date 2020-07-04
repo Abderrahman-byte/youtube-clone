@@ -1,11 +1,17 @@
 {% extends 'main/main_base.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/watch.css' %}">
+<link rel="stylesheet" href="{% static 'css/video-player.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="container-watch">
-    <div class="letf-container">
+    <div class="left-container">
         <!-- Video Player -->
         <div class="video_container" id="video-container">
-            <video id="video" preload="metadata"></video>
+            <video src="{{ video.video_url }}" id="video" preload="metadata" poster="{{ video.thumbnail_url }}"></video>
         
             <div class="video_controls" id="video_controls">
                 <div class="video-progress">
@@ -61,9 +67,22 @@
             </div>
         </div>
 
+        <h6 class="video-title">{{ video.title }}</h6>
 
+        <div class="row">
+            <p class="video-info">{{ video.views }} view{{ video.views|pluralize }} {{ video.posted_date|date:"y b. d"}}</p>
+            <div class="video-actions">
+                <div class="impressions">
+                    <button id="like-btn" data-title="Like" data-action="1"><i class="fas fa-thumbs-up"></i></button>
+                    <p id="likes-count" data-count="{{ likes }}">{{ likes }}</p>
+                    <button id="dislike-btn" data-title="Dislike"><i class="fas fa-thumbs-down"></i></button>
+                    <p id="dislikes-count" data-count="{{ dislikes }}" data-action="-1">{{ dislikes }}</p>
+                </div>
+                <button id="save-playlist" class="save-playlist" data-title="Add to playlist"><i class="fas fa-plus"></i>save</button>
+            </div>
+        </div>
     </div>
-    
+
     <div class="right-container"></div>
 </div>
 
@@ -103,4 +122,10 @@
         </symbol>
     </defs>
 </svg>
+{% endblock %}
+
+
+
+{% block script %}
+<script src="{% static 'js/video-player.js' %}"></script>
 {% endblock %}
