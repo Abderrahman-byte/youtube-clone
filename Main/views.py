@@ -77,6 +77,7 @@ class ApiPlaylists(View) :
         if not request.user.is_authenticated :
             return HttpResponseForbidden()
         else :
+            user = request.user
             playlists = user.playlist_set.all()
             playlists = [{'id': pl.id, 'title': pl.title, 'items': [v.id for v in pl.videos.all()]} for pl in playlists]
             body = {'playlists': playlists}
