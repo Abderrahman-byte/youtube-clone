@@ -37,6 +37,10 @@ img {
     display: block;
 }
 
+button, input {
+    outline: none;
+}
+
 /* Header Styling */
 
 header {
