@@ -11,7 +11,7 @@
     <div class="left-container">
         <!-- Video Player -->
         <div class="video_container" id="video-container">
-            <video src="{{ video.video_url }}" id="video" preload="metadata" poster="{{ video.thumbnail_url }}"></video>
+            <video data-id="{{ video.id }}" src="{{ video.video_url }}" id="video" preload="metadata" poster="{{ video.thumbnail_url }}"></video>
         
             <div class="video_controls" id="video_controls">
                 <div class="video-progress">
@@ -73,14 +73,21 @@
             <p class="video-info">{{ video.views }} view{{ video.views|pluralize }} {{ video.posted_date|date:"y b. d"}}</p>
             <div class="video-actions">
                 <div class="impressions">
-                    <button id="like-btn" data-title="Like" data-action="1"><i class="fas fa-thumbs-up"></i></button>
+                    <button id="like-btn" {% if user_impr == 1 %}class="active"{% endif %} data-title="Like" data-action="1">
+                        <i class="fas fa-thumbs-up"></i>
+                    </button>
                     <p id="likes-count" data-count="{{ likes }}">{{ likes }}</p>
-                    <button id="dislike-btn" data-title="Dislike"><i class="fas fa-thumbs-down"></i></button>
-                    <p id="dislikes-count" data-count="{{ dislikes }}" data-action="-1">{{ dislikes }}</p>
+                    <button id="dislike-btn" {% if user_impr == -1 %}class="active"{% endif %} data-title="Dislike" data-action="-1">
+                        <i class="fas fa-thumbs-down"></i>
+                    </button>
+                    <p id="dislikes-count" data-count="{{ dislikes }}">{{ dislikes }}</p>
                 </div>
-                <button id="save-playlist" class="save-playlist" data-title="Add to playlist"><i class="fas fa-plus"></i>save</button>
+                <button id="save-playlist" class="save-playlist" data-title="Add to playlist">
+                    <i class="fas fa-plus"></i>save
+                </button>
             </div>
         </div>
+
     </div>
 
     <div class="right-container"></div>
@@ -127,5 +134,6 @@
 
 
 {% block script %}
+<script src="{% static 'js/watch.js' %}"></script>
 <script src="{% static 'js/video-player.js' %}"></script>
 {% endblock %}
