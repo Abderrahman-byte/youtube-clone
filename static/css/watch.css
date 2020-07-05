@@ -99,6 +99,13 @@
     color: var(--variant-clr);
 }
 
+.playlist-form .error {
+    font-size: .8rem;
+    color: rgb(255, 67, 67);
+    margin: .5em .2em;
+    display: none;
+}
+
 .playlists-container .header {
     display: flex;
     justify-content: flex-end;
