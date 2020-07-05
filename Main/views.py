@@ -6,6 +6,7 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.urls import reverse
 from django.middleware.csrf import get_token
+from django.db import utils
 
 import os, json
 from uuid import uuid4
@@ -101,6 +102,25 @@ class ApiPlaylists(View) :
             return HttpResponse(status=201)
         else :
             return HttpResponseForbidden()
+
+    def post(self, request) :
+        user = request.user
+        if not user.is_authenticated :
+            return HttpResponseForbidden()
+        else :
+            try :
+                body = json.loads(request.body)
+                video = Video.objects.get(pk=body.get('videoId'))
+                playlist = Playlist(title=body.get('title'), creator=user)
+                if body.get('privacy') : playlist.is_public = False
+                playlist.save()
+                playlist.videos.add(video)
+                playlist.save()
+                return HttpResponse(json.dumps({'id': playlist.id}), status=201)
+            except Video.DoesNotExist :
+                return HttpResponse('Video Does Not Exist.', status=400)
+            except utils.IntegrityError :
+                return HttpResponse('Playlist name already exists.', status=400)
 
 class ModifieView(View) :
     def get(self, request) :
