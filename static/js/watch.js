@@ -8,6 +8,7 @@ const playlistContainer = document.getElementById('playlists')
 const closePlaylistsBtn = document.getElementById('close-playlists')
 const createPlaylistBtn = document.getElementById('create-playlist')
 const createPlaylistForm = document.getElementById('playlist-form')
+const playlistFormError = document.querySelector('.playlist-form .error')
 
 const formatCount = count => {
     if (count < 0) {
@@ -117,8 +118,6 @@ const editPlaylist = async e => {
             'X-CSRFToken': getCookie('csrftoken')
         }
     })
-
-    console.log(req.status)
 }
 
 const saveVideo = async () => {
@@ -150,6 +149,7 @@ const closePlaylistsDisplay = () => {
     playlistsDisplay.style.display = 'none'
     playlistsBlackBoard.style.display = 'none'
     createPlaylistForm.style.display = 'none'
+    playlistFormError.style.display = 'none'
     createPlaylistBtn.style.display = 'block'
     playlistContainer.innerHTML = ''
 }
@@ -159,10 +159,46 @@ const showPlaylistForm = () => {
     createPlaylistBtn.style.display = 'none'
 }
 
+const createPlaylist = async e => {
+    e.preventDefault()
+    const title = e.target.title.value
+    const privacy = e.target.privacy.checked
+    const videoId = video_.getAttribute('data-id')
+    const data = {title, privacy, videoId}
+
+    const req = await fetch('/api/playlists', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers : {
+            'X-CSRFToken': getCookie('csrftoken') 
+        }
+    })
+
+    if(req.status >= 200 && req.status < 300) {
+        const pl = await req.json()
+        const html = `<label class="item">${title}
+                <input class="playlist-checkbox" type="checkbox" data-id="${pl.id}" checked>
+                <span class="checkmark"></span>
+                ${privacy? '<i class="fas fa-lock"></i>': '<i class="fas fa-globe"></i>'}
+            </label>`
+        playlistContainer.innerHTML += html
+        createPlaylistForm.reset()
+        createPlaylistForm.style.display = 'none'
+        createPlaylistBtn.style.display = 'block'
+    } else {
+        const msg = await req.text()
+        playlistFormError.textContent = msg
+        playlistFormError.style.display = 'block'
+
+        setTimeout(() => playlistFormError.style.display = 'none', 3000)
+    }
+}
+
 saveBtn.addEventListener('click', saveVideo)
 closePlaylistsBtn.addEventListener('click', closePlaylistsDisplay)
 playlistsBlackBoard.addEventListener('click', closePlaylistsDisplay)
 createPlaylistBtn.addEventListener('click', showPlaylistForm)
+createPlaylistForm.addEventListener('submit', createPlaylist)
 impressionBtns.forEach(btn => {
     btn.addEventListener('click', submitImpression)
 })
