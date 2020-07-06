@@ -1,0 +1,19 @@
+{% extends 'accounts/main_base.html' %}
+
+{% block content %}
+<h2>Youtube clone Login</h2>
+<form>
+    <div class="form-group">
+        <label for="username-input">Username :</label>
+        <input id="username-input" type="text" placeholder="Enter your username" />
+        <p class="error">User nme is too sghort</p>
+    </div>
+    <div class="form-group">
+        <label for="password-input">password :</label>
+        <input id="password-input" type="password" placeholder="Enter your password" />
+        <p class="error">User nme is too sghort</p>
+    </div>
+
+    <button>Submit</button>
+</form>
+{% endblock %}
