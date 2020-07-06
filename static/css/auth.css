@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.125rem;
+    background-color: whitesmoke;
+}
+
+button, input {
+    outline: none;
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    margin: 3em auto;
+    background-color: white;
+    box-shadow: 4px 4px 10px -2px black;
+    border-radius: 5px;
+    padding: 1.4em 0;
+}
+
+.container h2 {
+    text-align: center;
+    text-transform: capitalize;
+    letter-spacing: 3px;
+    font-size: 1.4rem;
+    margin-bottom: .5em;
+}
+
+.container form {
+    padding: .75em 1.5em;
+}
+
+.form-group {
+    margin-bottom: .5em;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: .5em;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: capitalize;
+}
+
+.form-group input:not([type='checkbox']):not([type='radio']), .form-group select, .form-group textarea {
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    display: block;
+    padding: .375rem .5rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #ffffff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.form-group input:not([type='checkbox']):not([type='radio']):focus, .form-group select:focus, .form-group textarea:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: rgb(65, 105, 225);
+    outline: 0;
+}
+
+.container > form > button {
+    display: table;
+    font-size: 1.1rem;
+    margin: 1.1em auto;
+    padding: .5em 1.25em;
+    color: whitesmoke;
+    background-color: #606060;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: .4s;
+    border: 1px solid transparent;
+}
+
+.container > form > button:hover, .container > form > button:focus {
+    background-color: whitesmoke;
+    color: #606060;
+    border: 1px solid #d3d3d3;
+}
+
+.form-group > small {
+    margin: .25em .5em;
+    color: #606060;
+    font-size: .7em;
+    letter-spacing: .125em;
+}
+
+.form-group > .error {
+    margin: .125em .5em;
+    letter-spacing: .125em;
+    color: rgb(255, 60, 60);
+    display: none;
+}
+
+.form-group.error-field input {
+    border: 2px solid rgb(255, 60, 60) !important;
+} 
