@@ -16,4 +16,17 @@
 
     <button>Submit</button>
 </form>
+
+{% if messages %}
+{% for msg in messages %}
+<div class="message message-{{msg.tags}}">
+    <p>{{ msg}} </p>
+</div>
+{% endfor %}
+{% endif %}
+
+<div class="form-footer">
+    <p>Not a member? <a href="">Sign up now</a></p>
+</div>
+
 {% endblock %}
