@@ -39,7 +39,7 @@ button, input {
 }
 
 .form-group {
-    margin-bottom: .5em;
+    margin-bottom: 1.1em;
 }
 
 .form-group label {
@@ -115,7 +115,7 @@ button, input {
 
 .message {
     margin: 0 2em;
-    margin-bottom: .5em;
+    margin-bottom: 1.15em;
     padding: 1rem;
     border-radius: 0.25rem;
     color: whitesmoke;
@@ -136,7 +136,6 @@ button, input {
 }
 
 .form-footer {
-    margin-top: 1.5em;
     text-align: center;
     font-size: .9rem;
     letter-spacing: .2em;
