@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from django.urls import reverse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.utils.decorators import method_decorator
 
@@ -53,3 +53,13 @@ class RegisterView(View) :
             for error in form.errors :
                 messages.error(request, form.errors.get(error)[0])
                 return render(request, 'accounts/register.html', {'next': next})
+
+def logoutView(request) :
+    next = request.GET.get('next')
+    if request.user.is_authenticated :
+        logout(request)
+
+    if next is not None :
+        return redirect(next)
+    else :
+        return redirect(reverse('main:index'))
