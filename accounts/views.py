@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.utils.decorators import method_decorator
 
 from .decorators import *
+from .forms import *
 
 class LoginView(View) :
     @method_decorator(unauthenticated_only)
@@ -31,5 +32,24 @@ class LoginView(View) :
             return render(request, 'accounts/login.html', {'next': next})
 
 class RegisterView(View) :
+    @method_decorator(unauthenticated_only)
     def get(self, request) :
-        return render(request, 'accounts/register.html')
+        next = request.GET.get('next')
+        return render(request, 'accounts/register.html', {'next': next})
+
+    def post(self, request) :
+        next = request.POST.get('next')
+        form = CreateUserForm(request.POST)
+        
+        if form.is_valid() : 
+            user = form.save()
+            login(request, user)
+
+            if next is not None :
+                return redirect(next)
+            else :
+                return redirect(reverse('main:index'))
+        else :
+            for error in form.errors :
+                messages.error(request, form.errors.get(error)[0])
+                return render(request, 'accounts/register.html', {'next': next})
