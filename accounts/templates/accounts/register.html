@@ -4,25 +4,25 @@
 
 {% block content %}
 <h2>Youtube clone Register</h2>
-<form>
+<form method="POST">
     <div class="form-group">
         <label for="username-input">Username :</label>
-        <input id="username-input" type="text" placeholder="Enter your username" />
+        <input name="username" id="username-input" type="text" placeholder="Enter your username" required />
     </div>
 
     <div class="form-group">
         <label for="username-input">Email address :</label>
-        <input id="username-input" type="email" placeholder="Enter your email address" />
+        <input name="email" id="username-input" type="email" placeholder="Enter your email address" required />
     </div>
 
     <div class="form-group">
         <label for="password-input">password :</label>
-        <input id="password-input" type="password" placeholder="Enter your password" />
+        <input name="password1" id="password-input" type="password" placeholder="Enter your password" required />
     </div>
 
     <div class="form-group">
         <label for="password-input">confirme password :</label>
-        <input id="password-input" type="password" placeholder="Enter your password confirmation" />
+        <input name="password2" id="password-input" type="password" placeholder="Enter your password confirmation" required/>
     </div>
 
     <button>Create</button>

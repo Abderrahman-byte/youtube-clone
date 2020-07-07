@@ -109,6 +109,10 @@ button, input {
     display: none;
 }
 
+.error-field > .error  {
+    display: block;
+}
+
 .form-group.error-field input {
     border: 2px solid rgb(255, 60, 60) !important;
 }
