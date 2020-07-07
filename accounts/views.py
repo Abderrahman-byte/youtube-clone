@@ -3,8 +3,12 @@ from django.views.generic import View
 from django.urls import reverse
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from django.utils.decorators import method_decorator
+
+from .decorators import *
 
 class LoginView(View) :
+    @method_decorator(unauthenticated_only)
     def get(self, request) :
         next = request.GET.get('next')
         return render(request, 'accounts/login.html', {'next': next})
