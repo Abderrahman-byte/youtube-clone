@@ -7,11 +7,14 @@
     {% block title %}<title>Youtube Clone Authentication</title>{% endblock %}
 
     <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    {% block style %}{% endblock %}
 </head>
 <body>
     <div class="container">
     {% block content %}
     {% endblock %}
     </div>
+
+    {% block scripts %}{% endblock %}
 </body>
 </html>
