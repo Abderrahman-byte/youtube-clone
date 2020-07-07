@@ -7,6 +7,7 @@ from django.core.files.storage import FileSystemStorage
 from django.urls import reverse
 from django.middleware.csrf import get_token
 from django.db import utils
+from django.contrib import messages
 
 import os, json
 from uuid import uuid4
@@ -41,7 +42,7 @@ def watchView(request) :
 class submitImpressionView(View) :
     def post(self, request) :
         if not request.user.is_authenticated :
-            return HttpResponseForbidden()
+            return redirect(reverse('login'))
         else:
             try :
                 body = json.loads(request.body)
@@ -76,7 +77,7 @@ class submitImpressionView(View) :
 class ApiPlaylists(View) :
     def get(self, request) :
         if not request.user.is_authenticated :
-            return HttpResponseForbidden()
+            return redirect(reverse('login'))
         else :
             user = request.user
             playlists = user.playlist_set.all()
@@ -106,7 +107,7 @@ class ApiPlaylists(View) :
     def post(self, request) :
         user = request.user
         if not user.is_authenticated :
-            return HttpResponseForbidden()
+            return redirect(reverse('login'))
         else :
             try :
                 body = json.loads(request.body)
@@ -134,7 +135,7 @@ class ModifieView(View) :
             types = ContentType.objects.all()
             return render(request, 'main/modifie.html', {'video': video, 'types': types})
         else :
-            return HttpResponseForbidden()
+            return redirect(reverse('main:watch') + f'?v={video.id}')
 
     def post(self, request) :
         try :
@@ -178,7 +179,8 @@ class UploadView(View) :
         if request.user.is_authenticated :
             return render(request, 'main/upload.html')
         else :
-            return HttpResponseForbidden()
+            messages.info(request, 'The page you requested is members only.')
+            return redirect(reverse('login') + f'?next={request.path}')
 
     def post(self, request) :
         if request.user.is_authenticated and request.FILES.get('video') is not None:
