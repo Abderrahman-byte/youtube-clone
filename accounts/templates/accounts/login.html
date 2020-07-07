@@ -29,7 +29,7 @@
 {% endif %}
 
 <div class="form-footer">
-    <p>Not a member? <a href="">Sign up now</a></p>
+    <p>Not a member? <a href="{% url 'register' %}{% if next %}?next={{next}}{% endif %}">Sign up now</a></p>
 </div>
 
 {% endblock %}
