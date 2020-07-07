@@ -2,16 +2,21 @@
 
 {% block content %}
 <h2>Youtube clone Login</h2>
-<form>
+<form method="POST">
+    {% csrf_token %}
     <div class="form-group">
         <label for="username-input">Username :</label>
-        <input id="username-input" type="text" placeholder="Enter your username" />
+        <input id="username-input" name="username" type="text" placeholder="Enter your username" required />
     </div>
     <div class="form-group">
         <label for="password-input">password :</label>
-        <input id="password-input" type="password" placeholder="Enter your password" />
+        <input id="password-input" name="password" type="password" placeholder="Enter your password" required />
     </div>
 
+    {% if next %}
+    <input type="hidden" name="next" value="{{ next }}" />
+    {% endif %}
+    
     <button>Submit</button>
 </form>
 
