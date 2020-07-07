@@ -139,6 +139,12 @@ button, input {
     border-color: #c3e6cb;
 }
 
+.message.message-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}
+
 .form-footer {
     text-align: center;
     font-size: .9rem;
