@@ -5,6 +5,7 @@
 {% block content %}
 <h2>Youtube clone Register</h2>
 <form method="POST">
+    {% csrf_token %}
     <div class="form-group">
         <label for="username-input">Username :</label>
         <input name="username" id="username-input" type="text" placeholder="Enter your username" required />
@@ -25,6 +26,10 @@
         <input name="password2" id="password-input" type="password" placeholder="Enter your password confirmation" required/>
     </div>
 
+    {% if next %}
+    <input type="hidden" name="next" value="{{ next }}" />
+    {% endif %}
+    
     <button>Create</button>
 </form>
 
