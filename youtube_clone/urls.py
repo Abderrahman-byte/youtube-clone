@@ -18,8 +18,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static, serve
 
+from accounts.urls import urlpatterns as authUrlPatterns
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Main.urls')),
-    path('auth/', include('accounts.urls')),
-]
+] + authUrlPatterns
