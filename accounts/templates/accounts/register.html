@@ -29,7 +29,7 @@
     {% if next %}
     <input type="hidden" name="next" value="{{ next }}" />
     {% endif %}
-    
+
     <button>Create</button>
 </form>
 
@@ -42,7 +42,7 @@
 {% endif %}
 
 <div class="form-footer">
-    <p>Already have an account? <a href="">Login here</a></p>
+    <p>Already have an account? <a href="{% url 'login' %}{% if next %}?next={{next}}{% endif %}">Login here</a></p>
 </div>
 
 {% endblock %}
