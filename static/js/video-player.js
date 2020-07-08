@@ -32,11 +32,23 @@ const formatTime = time => {
     return Number(hours) > 0 ? `${hours}:${minutes}:${secondes}`:`${minutes}:${secondes}`
 } 
 
+const saveVolume = () => {
+    const volume = video.volume
+    localStorage.setItem('volume', volume)
+}
+
+const initVolume = () => {
+    const volume = localStorage.getItem('volume') || 1
+    video.volume = volume
+    volumeRange.value = volume
+}
+
 const initializeVideo = () => {
     const duration = Math.round(video.duration)
     progressBar.setAttribute('max', duration)
     seek.setAttribute('max', duration)
     durationData.textContent = formatTime(duration)
+    initVolume()
 }
 
 const hideControls = () => {
@@ -108,7 +120,7 @@ const toggleVolume = () => {
     } else {
         volumeRange.value = video.volume
     }
-    updateVolumeIcon()
+    // updateVolumeIcon()
 }
 
 const setVolume = e => {
@@ -120,7 +132,7 @@ const setVolume = e => {
         video.volume = v
     }
 
-    updateVolumeIcon()
+    // updateVolumeIcon()
 }
 
 const volumeUp = () => {
@@ -130,7 +142,7 @@ const volumeUp = () => {
         video.volume = 1
     }
     volumeRange.value = video.volume
-    updateVolumeIcon()
+    // updateVolumeIcon()
 }
 
 const volumeDown = () => {
@@ -140,7 +152,7 @@ const volumeDown = () => {
         video.volume = 0
     }
     volumeRange.value = video.volume
-    updateVolumeIcon()
+    // updateVolumeIcon()
 }
 
 // Progress Control
@@ -248,6 +260,8 @@ playBtn.addEventListener('click', togglePlay)
 video.addEventListener('click', togglePlay)
 video.addEventListener('timeupdate', setProgress)
 video.addEventListener('ended', setUpPlayPauseIcons)
+video.addEventListener('volumechange', updateVolumeIcon)
+video.addEventListener('volumechange', saveVolume)
 seek.addEventListener('mousemove', updateSeekTooltip)
 seek.addEventListener('input', updateProgress)
 volumeBtn.addEventListener('click', toggleVolume)
