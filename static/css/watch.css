@@ -299,3 +299,20 @@
 .save-playlist i {
     margin-right: .25em;
 }
+
+.edit-btn {
+    text-decoration: none;
+    padding: .25em .75em;
+    border-radius: 3px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: whitesmoke;
+}
+
+.edit-btn.delete {
+    background-color: red;
+}
+
+.edit-btn.modifie {
+    background-color: royalblue;
+}
