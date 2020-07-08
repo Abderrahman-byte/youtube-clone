@@ -235,6 +235,14 @@ const shortCuts = e => {
     }
 }
 
+const disableShortCuts = () => {
+    document.removeEventListener('keyup', shortCuts)
+}
+
+const enableShortCuts = () => {
+    document.addEventListener('keyup', shortCuts)
+}
+
 // Events  
 playBtn.addEventListener('click', togglePlay)
 video.addEventListener('click', togglePlay)
@@ -254,4 +262,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const src = video.currentSrc
     video.setAttribute('src', src)
     video.addEventListener('loadedmetadata', initializeVideo)
+})
+
+document.querySelectorAll('input, texterea').forEach(elt => {
+    elt.addEventListener('focus', disableShortCuts)
+    elt.addEventListener('blur', enableShortCuts)
 })
