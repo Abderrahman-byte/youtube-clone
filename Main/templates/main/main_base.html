@@ -71,6 +71,15 @@
         {% block content %}{% endblock %}
     </div>
 
+    <div class="auth-blackboard" id="auth-blackboard"></div>
+    <div class="auth-display" id="auth-display">
+        <button id="close-auth">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="{% url 'login' %}?next={{ request.get_full_path }}">Sign in</a>
+        <a href="{% url 'register' %}?next={{ request.get_full_path }}">New account</a>
+    </div>
+
     <script src="{% static 'js/theme.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
     
