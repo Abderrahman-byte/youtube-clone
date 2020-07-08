@@ -173,6 +173,14 @@ class ModifieView(View) :
         else :
             return HttpResponseForbidden()
         
+def deleteVideo(request) :
+    video_id = request.GET.get('v') or request.POST.get('v')
+    video = Video.objects.get(pk=video_id)
+    if video.channel == request.user :
+        video.delete() 
+        return redirect(reverse('main:index'))
+    else :
+        return HttpResponseForbidden()
 
 class UploadView(View) :
     def get(self, request) :
