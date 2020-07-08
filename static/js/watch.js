@@ -9,6 +9,38 @@ const closePlaylistsBtn = document.getElementById('close-playlists')
 const createPlaylistBtn = document.getElementById('create-playlist')
 const createPlaylistForm = document.getElementById('playlist-form')
 const playlistFormError = document.querySelector('.playlist-form .error')
+const authDisplay = document.getElementById('auth-display')
+const authBackboard = document.getElementById('auth-blackboard')
+const closeAuthDisplayBtn = document.getElementById('close-auth')
+
+////////////////////// Show and Close Displays //////////////////////
+
+const closePlaylistsDisplay = () => {
+    playlistsDisplay.style.display = 'none'
+    playlistsBlackBoard.style.display = 'none'
+    createPlaylistForm.style.display = 'none'
+    playlistFormError.style.display = 'none'
+    createPlaylistBtn.style.display = 'block'
+    createPlaylistForm.reset()
+    playlistContainer.innerHTML = ''
+}
+
+const showPlaylistForm = () => {
+    createPlaylistForm.style.display = 'flex'
+    createPlaylistBtn.style.display = 'none'
+}
+
+const closeAuthDisplay = () => {
+    authDisplay.style.display = 'none'
+    authBackboard.style.display =  'none'
+}
+
+const showAuthDisplay = () => {
+    authDisplay.style.display = 'flex'
+    authBackboard.style.display =  'block'
+}
+
+////////////////////// Utilities functions //////////////////////
 
 const formatCount = count => {
     if (count < 0) {
@@ -36,6 +68,7 @@ const updateImpressionsCount = () => {
         const count = parseInt(elt.dataset.count, 10) || 0
         elt.textContent = formatCount(count)
     })
+    console.log('impressions updated')
 }
 
 const getCookie = name => {
@@ -54,6 +87,8 @@ const getCookie = name => {
     return cookieValue;
 }
 
+////////////////////// HTTP Requests and ajax functions //////////////////////
+
 const submitImpression = async e => {
     const target = impressionBtns.includes(e.target) ? e.target : e.target.parentNode
     const method = target.classList.contains('active') ? 'DELETE' : 'POST'
@@ -67,10 +102,12 @@ const submitImpression = async e => {
             'body': JSON.stringify(data),
             'headers': {
                 'X-CSRFToken': getCookie('csrftoken')
-            }
+            },
         })
 
-        if (req.status >= 200 && req.status < 300) {
+        if(req.redirected && (req.url.indexOf('login') >= 0 || req.url.indexOf('register') >= 0)) {
+            showAuthDisplay()
+        } else if (req.status >= 200 && req.status < 300) {
             impressionBtns.forEach(btn => {
                 if (btn.classList.contains('active')) {
                     btn.nextElementSibling.setAttribute('data-count',
@@ -84,6 +121,7 @@ const submitImpression = async e => {
             target.classList.add('active')
             updateImpressionsCount()
         }
+
     } else if (method === 'DELETE') {
         const data = { 'id': id }
         const req = await fetch('/api/impression', {
@@ -123,7 +161,9 @@ const editPlaylist = async e => {
 const saveVideo = async () => {
     const req = await fetch('/api/playlists')
 
-    if (req.status >= 200 && req.status < 300) {
+    if(req.redirected && (req.url.indexOf('login') >= 0 || req.url.indexOf('register') >= 0)) {
+        showAuthDisplay()
+    } else if (req.status >= 200 && req.status < 300) {
         const videoId = video_.getAttribute('data-id')
         const res = await req.json()
         const playlists = res.playlists
@@ -145,21 +185,6 @@ const saveVideo = async () => {
     }
 }
 
-const closePlaylistsDisplay = () => {
-    playlistsDisplay.style.display = 'none'
-    playlistsBlackBoard.style.display = 'none'
-    createPlaylistForm.style.display = 'none'
-    playlistFormError.style.display = 'none'
-    createPlaylistBtn.style.display = 'block'
-    createPlaylistForm.reset()
-    playlistContainer.innerHTML = ''
-}
-
-const showPlaylistForm = () => {
-    createPlaylistForm.style.display = 'flex'
-    createPlaylistBtn.style.display = 'none'
-}
-
 const createPlaylist = async e => {
     e.preventDefault()
     const title = e.target.title.value
@@ -168,9 +193,9 @@ const createPlaylist = async e => {
     const data = {title, privacy, videoId}
 
     const req = await fetch('/api/playlists', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers : {
+        'method': 'POST',
+        'body': JSON.stringify(data),
+        'headers' : {
             'X-CSRFToken': getCookie('csrftoken') 
         }
     })
@@ -195,11 +220,15 @@ const createPlaylist = async e => {
     }
 }
 
+////////////////////// Events listeners //////////////////////
+
 saveBtn.addEventListener('click', saveVideo)
 closePlaylistsBtn.addEventListener('click', closePlaylistsDisplay)
 playlistsBlackBoard.addEventListener('click', closePlaylistsDisplay)
 createPlaylistBtn.addEventListener('click', showPlaylistForm)
 createPlaylistForm.addEventListener('submit', createPlaylist)
+closeAuthDisplayBtn.addEventListener('click', closeAuthDisplay)
+authBackboard.addEventListener('click', closeAuthDisplay)
 impressionBtns.forEach(btn => {
     btn.addEventListener('click', submitImpression)
 })
