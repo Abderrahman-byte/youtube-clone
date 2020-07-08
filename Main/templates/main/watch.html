@@ -90,8 +90,8 @@
 
         {% if request.user == video.channel %}
         <div class="row">
-            <a href="" class="edit-btn delete">Delete</a>
-            <a href="" class="edit-btn modifie">Modifie</a>
+            <a href="{% url 'main:delete' %}?v={{video.id}}" class="edit-btn delete">Delete</a>
+            <a href="{% url 'main:modifie' %}?v={{video.id}}" class="edit-btn modifie">Modifie</a>
         </div>
         {% endif %}
         
