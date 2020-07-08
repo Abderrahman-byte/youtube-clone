@@ -32,3 +32,8 @@ def generateThumbnail(video_name) :
         subprocess.call(['ffmpeg', '-i', video_path, '-r', '1/1440', image_path, "-y"])
 
     return f'/media/images/thumbnails/{image_id}.jpg'
+
+def randomFileName(instance, filename) :
+    id = generateId(30)
+    fp, ext = os.path.splitext(filename)
+    return f'images/users/{id}{ext}'
