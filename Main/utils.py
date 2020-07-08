@@ -11,6 +11,10 @@ def generetePlaylistId(length=35) :
     chars = string.ascii_letters + string.digits
     return ''.join([random.choice(chars) for _ in range(length)])
 
+def generateChannelId(length=24) :
+    chars = string.ascii_letters + string.digits
+    return ''.join([random.choice(chars) for _ in range(length)])
+
 def generateThumbnail(video_name) :
     MEDIA_ROOT = settings.MEDIA_ROOT
     video_path = os.path.join(MEDIA_ROOT, video_name)
