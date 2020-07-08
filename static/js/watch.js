@@ -151,6 +151,7 @@ const closePlaylistsDisplay = () => {
     createPlaylistForm.style.display = 'none'
     playlistFormError.style.display = 'none'
     createPlaylistBtn.style.display = 'block'
+    createPlaylistForm.reset()
     playlistContainer.innerHTML = ''
 }
 
