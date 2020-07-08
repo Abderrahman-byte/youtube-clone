@@ -107,7 +107,7 @@ class ApiPlaylists(View) :
     def post(self, request) :
         user = request.user
         if not user.is_authenticated :
-            return redirect(reverse('login'))
+            return HttpResponseForbidden()
         else :
             try :
                 body = json.loads(request.body)
