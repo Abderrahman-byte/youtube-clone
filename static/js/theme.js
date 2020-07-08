@@ -23,7 +23,7 @@ const themes = {
 }
 
 const init = () => {
-    const currentTheme = sessionStorage.getItem('theme') || 'light'
+    const currentTheme = localStorage.getItem('theme') || 'light'
 
     for(const clr in themes[currentTheme]) {
         root.style.setProperty(clr, themes[currentTheme][clr])
@@ -36,7 +36,7 @@ const init = () => {
 
 const changeTheme = e => {
     const currentTheme = e.target.checked?'dark':'light'
-    sessionStorage.setItem('theme', currentTheme)
+    localStorage.setItem('theme', currentTheme)
 
     for(const clr in themes[currentTheme]) {
         root.style.setProperty(clr, themes[currentTheme][clr])
