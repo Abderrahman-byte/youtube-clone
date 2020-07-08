@@ -88,6 +88,14 @@
             </div>
         </div>
 
+        {% if request.user == video.channel %}
+        <div class="row">
+            <a href="" class="edit-btn delete">Delete</a>
+            <a href="" class="edit-btn modifie">Modifie</a>
+        </div>
+        {% endif %}
+        
+        <hr>
     </div>
 
     <div class="right-container"></div>
