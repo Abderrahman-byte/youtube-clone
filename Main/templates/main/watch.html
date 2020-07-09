@@ -96,6 +96,24 @@
         {% endif %}
         
         <hr>
+
+        <div class="row">
+            <div class="channel-info">
+                <a href="{% url 'channel:index' video.channel.channel.id %}">
+                    <img src="{{video.channel.channel.profil_img.url}}" alt="" />
+                </a>
+                
+                <div class="right-side">
+                    <a href="{% url 'channel:index' video.channel.channel.id %}">
+                        <h6>{{ video.channel.channel.title }}</h6>
+                    </a>
+                    
+                    <p class="subscribers"> <span>{{ video.channel.users.all.count }}</span>
+                        <span> subscriber{{video.channel.users.all.count|pluralize}} </span></p>
+                </div>
+            </div>
+            <button class="subscribe-button" data-id="{{ video.channel.channel.id }}">subscribe</button>
+        </div>
     </div>
 
     <div class="right-container"></div>
