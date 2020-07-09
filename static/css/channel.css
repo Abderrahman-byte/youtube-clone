@@ -1,0 +1,105 @@
+.channel-header {
+    margin: -1.5em -1em;
+    background-color: var(--background-d, whitesmoke);
+    padding-bottom: 1em;
+}
+
+.channel-header .wallpaper {
+    width: 100%;
+    height: calc(100vw / 6.2 - 1px);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.channel-header .info {
+    padding: 1.2em 2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info .info-left {
+    width: 40%;
+    max-width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info .info-left img {
+    width: 50%;
+    max-width: 100px;
+    border-radius: 50%;
+}
+
+.info .info-left div {
+    height: 100%;
+    padding: 1em 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.info .info-left div h3 {
+    font-size: 1.25rem;
+    letter-spacing: 3px;
+    font-weight: 400;
+    color: var(--variant-clr, black);
+}
+
+.info .info-left div span {
+    color: var(--icons-clr, black);
+    letter-spacing: 1px;
+    font-size: .9rem;
+}
+
+.edit-btn {
+    text-decoration: none;
+    padding: .75em 1.25em;
+    border-radius: 3px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: whitesmoke;
+}
+
+.edit-btn.delete {
+    background-color: red;
+}
+
+.edit-btn.modifie {
+    background-color: royalblue;
+}
+
+.channel-nav {
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.channel-nav ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+}
+
+.channel-nav ul li a {
+    display: table;
+    padding: .2em .3em;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: var(--variant-clr, black);
+    transition: color .4s;
+}
+
+.channel-nav ul li a:hover {
+    font-weight: 900;
+    color: var(--icons-clr, black);
+}
+
+.channel-nav ul li a.active {
+    border-bottom: 3px solid var(--icons-clr, black);
+}
