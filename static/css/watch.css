@@ -316,3 +316,34 @@
 .edit-btn.modifie {
     background-color: royalblue;
 }
+
+.channel-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.channel-info img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: contain;
+}
+
+.channel-info .right-side {
+    margin-left: .9em;
+}
+
+.channel-info .right-side a {
+    display: table;
+    text-decoration: none;
+    letter-spacing: 2px;
+    font-size: 1.4rem;
+    color: var(--variant-clr, black);
+    margin-bottom: .3em;
+}
+
+.channel-info .right-side .subscribers {
+    font-size: .8rem;
+    color: var(--borders-clr, black);
+}
