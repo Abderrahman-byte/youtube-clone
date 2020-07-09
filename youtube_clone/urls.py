@@ -22,4 +22,5 @@ from accounts.urls import urlpatterns as authUrlPatterns
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Main.urls')),
+    path('channel/', include('channel.urls')),
 ] + authUrlPatterns
