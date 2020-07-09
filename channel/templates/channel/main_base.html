@@ -1,0 +1,23 @@
+{% extends 'main/main_base.html' %}
+
+{% block title %}
+    {% block title_channel %}<title>{{channel.title}} - Youtube Clone</title>{% endblock %}
+{% endblock %}
+
+{% block styles %}
+    {% block styles_channel %}{% endblock %}
+{% endblock %}
+
+{% block content %}
+<div class="channel-header">
+    <div class="wallpaper" style="background-image: url('{{channel.profil_background.url}}');"></div>
+    <div class="">{{ channel.title}} </div>
+</div>
+
+{% block content_channel %}{% endblock%}
+
+{% endblock %}
+
+{% block scripts %}
+    {% block scripts_channel %}{% endblock %}
+{% endblock %}
