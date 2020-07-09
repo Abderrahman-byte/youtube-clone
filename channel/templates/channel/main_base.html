@@ -1,6 +1,10 @@
 {% extends 'main/main_base.html' %}
 
+{% load static %}
+{% load humanize %}
+
 {% block title %}
+    <link rel="stylesheet" href="{% static 'css/channel.css' %}" />
     {% block title_channel %}<title>{{channel.title}} - Youtube Clone</title>{% endblock %}
 {% endblock %}
 
@@ -11,7 +15,38 @@
 {% block content %}
 <div class="channel-header">
     <div class="wallpaper" style="background-image: url('{{channel.profil_background.url}}');"></div>
-    <div class="">{{ channel.title}} </div>
+    <div class="info">
+        <div class="info-left">
+            <img src="{{channel.profil_img.url}}" alt="{{channel.title}}" />
+            <div class="">
+                <h3>{{channel.title}}</h3>
+                <span data-subscriptions="{{subs}}">{{subs|intword}} subscriber{{ subs|pluralize }}</span>
+            </div>
+        </div>
+        {% if request.user != channel.user %}
+        <button class="subscribe-button" data-id="{{channel.id}}" {% if is_subscribed %}data-subscribed{% endif %} >
+            {% if is_subscribed %}subscribed{% else %}subscribe{% endif %}</button>
+        {% else %}
+        <a href="" class="edit-btn modifie">modifie</a>
+        {% endif %}
+    </div>
+
+    <nav class="channel-nav">
+        <ul>
+            <li>
+                <a class="active" href="">Home</a>
+            </li>
+            <li>
+                <a href="">Videos</a>
+            </li>
+            <li>
+                <a href="">Playlists</a>
+            </li>
+            <li>
+                <a href="">About</a>
+            </li>
+        </ul>
+    </nav>
 </div>
 
 {% block content_channel %}{% endblock%}
