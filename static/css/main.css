@@ -230,6 +230,22 @@ header {
     padding: 1.5em 1em;
 }
 
+.subscribe-button {
+    padding: .75em 1.25em;
+    font-size: .95rem;
+    font-weight: 700;
+    letter-spacing: .15em;
+    background-color: royalblue;
+    border: none;
+    color: whitesmoke;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.subscribe-button[data-subscribed] {
+    background-color: gray !important;
+}
+
 /* Authentication pop up */
 .auth-blackboard {
     position: fixed;
