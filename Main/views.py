@@ -14,6 +14,7 @@ from uuid import uuid4
 
 from .utils import *
 from .models import *
+from channel.models import *
 
 def indexView(request) :
     return render(request, 'main/index.html')
@@ -34,10 +35,11 @@ def watchView(request) :
             user = request.user
             user_impr = VideoImpression.objects.get(user=user, video=video)
             user_impr = user_impr.kind
+            subscribed = user in [subs.user for subs in video.channel.users.all()]
         except VideoImpression.DoesNotExist :
             user_impr = None
 
-    return render(request, 'main/watch.html', {'video': video, 'likes': likes, 'dislikes': dislikes, 'user_impr': user_impr})
+    return render(request, 'main/watch.html', {'video': video, 'likes': likes, 'dislikes': dislikes, 'user_impr': user_impr, 'subscribed': subscribed})
 
 class submitImpressionView(View) :
     def post(self, request) :
@@ -212,6 +214,25 @@ class UploadView(View) :
             v.save()
 
             return redirect(reverse('main:modifie') + f'?v={v.id}')
+        else :
+            return HttpResponseForbidden()
+
+class SubscribeView(View) :
+    def post(self, request) :
+        if request.user.is_authenticated :
+            body = json.loads(request.body)
+            channelId = body.get('channelId')
+            try : 
+                channel = Channel.objects.get(pk=channelId)
+            except Channel.DoesNotExist :
+                return Http404
+
+            if channel.user == request.user :
+                return HttpResponseForbidden()
+            else :
+                s = Subscription(channel=channel.user, user=request.user)
+                s.save()
+                return HttpResponse(status=201)
         else :
             return HttpResponseForbidden()
 
