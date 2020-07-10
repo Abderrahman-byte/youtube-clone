@@ -1,6 +1,7 @@
 const video_ = document.getElementById('video')
 const impressionBtns = [document.getElementById('like-btn'), document.getElementById('dislike-btn')]
 const impressionCounts = [document.getElementById('likes-count'), document.getElementById('dislikes-count')]
+const subscount = document.getElementById('subs-count')
 const saveBtn = document.getElementById('save-playlist')
 const playlistsBlackBoard = document.getElementById('playlists-blackboard')
 const playlistsDisplay = document.getElementById('playlists-container')
@@ -68,7 +69,11 @@ const updateImpressionsCount = () => {
         const count = parseInt(elt.dataset.count, 10) || 0
         elt.textContent = formatCount(count)
     })
-    console.log('impressions updated')
+}
+
+const updateSuscriptionsCount = () => {
+    const count = parseInt(subscount.getAttribute('data-count'), 10) || 0
+    subscount.textContent = formatCount(count)
 }
 
 const getCookie = name => {
@@ -235,4 +240,5 @@ impressionBtns.forEach(btn => {
 
 addEventListener('DOMContentLoaded', () => {
     updateImpressionsCount()
+    updateSuscriptionsCount()
 })
