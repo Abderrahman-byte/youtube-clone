@@ -229,11 +229,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: .5em 0;
+    margin: .7em 0;
 }
 
 .video-info {
-    font-size: 1rem;
+    font-size: .8rem;
     font-weight: 400;
     letter-spacing: 2px;
 }
@@ -346,4 +346,17 @@
 .channel-info .right-side .subscribers {
     font-size: .8rem;
     color: var(--icons-clr, black);
+}
+
+.video-description {
+    margin: 0 4em;
+    line-height: 20px;
+    font-size: .95rem;
+    letter-spacing: .1em;
+    overflow-y: hidden;
+    height: 50px;
+}
+
+.video-description.show {
+    height: 100%;
 }
