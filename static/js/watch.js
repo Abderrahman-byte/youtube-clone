@@ -225,6 +225,24 @@ const createPlaylist = async e => {
     }
 }
 
+const submitView =  e => {
+    const time = video_.currentTime
+    const id = e.target.getAttribute('data-id')
+
+    if(time >= 6 ) {
+        fetch('/api/submitview', {
+            'method': 'POST',
+            'body': JSON.stringify({'id': id}),
+            'headers' : {
+                'X-CSRFToken': getCookie('csrftoken') 
+            }
+        })
+        
+        e.target.removeEventListener('timeupdate', submitView)
+    }
+
+}
+
 ////////////////////// Events listeners //////////////////////
 
 saveBtn.addEventListener('click', saveVideo)
@@ -234,6 +252,7 @@ createPlaylistBtn.addEventListener('click', showPlaylistForm)
 createPlaylistForm.addEventListener('submit', createPlaylist)
 closeAuthDisplayBtn.addEventListener('click', closeAuthDisplay)
 authBackboard.addEventListener('click', closeAuthDisplay)
+video_.addEventListener('timeupdate', submitView)
 impressionBtns.forEach(btn => {
     btn.addEventListener('click', submitImpression)
 })
