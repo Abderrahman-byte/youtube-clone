@@ -226,7 +226,7 @@ class SubscribeView(View) :
             try : 
                 channel = Channel.objects.get(pk=channelId)
             except Channel.DoesNotExist :
-                return Http404
+                raise Http404
 
             if channel.user == request.user :
                 return HttpResponseForbidden()
@@ -251,6 +251,16 @@ class SubscribeView(View) :
 
         else :
             return HttpResponseForbidden()
+
+def submitViews(request) :
+    body = json.loads(request.body)
+    id = body.get('id')
+    try :
+        video = Video.objects.get(pk=id)
+        video.add_view()
+        return HttpResponse(status=201)
+    except Video.DoesNotExist :
+        raise Http404
 
 def staticView(request, path) :
     response = serve(request, path, document_root=settings.MEDIA_ROOT)
