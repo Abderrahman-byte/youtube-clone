@@ -39,6 +39,7 @@ class Video(models.Model) :
 
     def add_view(self) :
         self.views = self.views + 1 
+        self.save()
 
 class Playlist(models.Model) :
     id = models.TextField(primary_key=True, max_length=35, default=generetePlaylistId, editable=False)
