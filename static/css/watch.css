@@ -349,14 +349,36 @@
 }
 
 .video-description {
-    margin: 0 4em;
+    margin: 0 5em;
     line-height: 20px;
     font-size: .95rem;
     letter-spacing: .1em;
-    overflow-y: hidden;
-    height: 50px;
 }
 
-.video-description.show {
-    height: 100%;
+.video-description > p {
+    overflow-y: hidden;
+    max-height: 20px;
+}
+
+.video-description > p.show {
+    max-height: 100%;
+}
+
+.video-description > .none {
+    text-align: center;
+    letter-spacing: 3px;
+    text-transform: capitalize;
+    font-size: 1.3rem;
+    font-weight: 300;
+    margin-bottom: .5em;
+}
+
+.show-decription-btn {
+    margin: .5em 0;
+    color: var(--variant-clr, black);
+    font-size: 1.3rem;
+    background-color: transparent;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
 }
