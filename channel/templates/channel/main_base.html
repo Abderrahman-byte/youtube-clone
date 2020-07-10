@@ -24,7 +24,7 @@
             </div>
         </div>
         {% if request.user != channel.user %}
-        <button class="subscribe-button" data-id="{{channel.id}}" {% if is_subscribed %}data-subscribed{% endif %} >
+        <button class="subscribe-button" id="subscribe-button" data-id="{{channel.id}}" {% if is_subscribed %}data-subscribed{% endif %} >
             {% if is_subscribed %}subscribed{% else %}subscribe{% endif %}</button>
         {% else %}
         <a href="" class="edit-btn modifie">modifie</a>
@@ -53,6 +53,8 @@
 
 {% endblock %}
 
-{% block scripts %}
+{% block script %}
+    <script src="{% static 'js/channel.js' %}"></script>
+    <script src="{% static 'js/subscribe.js' %}"></script>
     {% block scripts_channel %}{% endblock %}
 {% endblock %}
