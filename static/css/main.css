@@ -233,15 +233,16 @@ header {
 }
 
 .subscribe-button {
-    padding: .75em 1.25em;
-    font-size: .95rem;
+    padding: .8em 1.25em;
+    font-size: .7rem;
     font-weight: 700;
-    letter-spacing: .15em;
+    letter-spacing: 3px;
     background-color: royalblue;
     border: none;
     color: whitesmoke;
     cursor: pointer;
     transition: .4s;
+    text-transform: uppercase;
 }
 
 .subscribe-button[data-subscribed] {
