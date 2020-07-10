@@ -13,6 +13,8 @@ const playlistFormError = document.querySelector('.playlist-form .error')
 const authDisplay = document.getElementById('auth-display')
 const authBackboard = document.getElementById('auth-blackboard')
 const closeAuthDisplayBtn = document.getElementById('close-auth')
+const descritpionDiv = document.getElementById('video-description')
+const toggleDescriptionBtn = document.getElementById('show-decription-btn')
 
 ////////////////////// Show and Close Displays //////////////////////
 
@@ -39,6 +41,10 @@ const closeAuthDisplay = () => {
 const showAuthDisplay = () => {
     authDisplay.style.display = 'flex'
     authBackboard.style.display =  'block'
+}
+
+const toggleDescription = () => {
+    descritpionDiv.classList.toggle('show')
 }
 
 ////////////////////// Utilities functions //////////////////////
@@ -90,6 +96,13 @@ const getCookie = name => {
         }
     }
     return cookieValue;
+}
+
+const renderDescription = () => {
+    if (descritpionDiv !== null ) {
+        const decsriptionHtml = descritpionDiv.textContent.split('\n').join('<br/>')
+        descritpionDiv.innerHTML = decsriptionHtml       
+    }
 }
 
 ////////////////////// HTTP Requests and ajax functions //////////////////////
@@ -237,7 +250,7 @@ const submitView =  e => {
                 'X-CSRFToken': getCookie('csrftoken') 
             }
         })
-        
+
         e.target.removeEventListener('timeupdate', submitView)
     }
 
@@ -253,6 +266,16 @@ createPlaylistForm.addEventListener('submit', createPlaylist)
 closeAuthDisplayBtn.addEventListener('click', closeAuthDisplay)
 authBackboard.addEventListener('click', closeAuthDisplay)
 video_.addEventListener('timeupdate', submitView)
+
+if(toggleDescriptionBtn !== null ){
+    toggleDescriptionBtn.addEventListener('click', e => {
+        toggleDescription()
+        const btnText = descritpionDiv.classList.contains('show') ? 'Less' :'More'
+        e.target.textContent = btnText
+    })
+}
+
+
 impressionBtns.forEach(btn => {
     btn.addEventListener('click', submitImpression)
 })
@@ -260,4 +283,5 @@ impressionBtns.forEach(btn => {
 addEventListener('DOMContentLoaded', () => {
     updateImpressionsCount()
     updateSuscriptionsCount()
+    renderDescription()
 })
