@@ -3,6 +3,7 @@ const subscribeBtn = document.getElementById('subscribe-button')
 const subscribe = async e => {
     const method = e.target.hasAttribute('data-subscribed') ? 'DELETE': 'POST'
     const channelId = e.target.getAttribute('data-id')
+    const btnText = method === 'POST' ? 'Subscribed' : 'Subscribe'
 
     const req = await fetch('/api/subscribe', {
         'method': method,
@@ -12,7 +13,12 @@ const subscribe = async e => {
         }
     })
 
-    console.log(req)
+    if (req.status >= 200 && req.status < 300) {
+        e.target.toggleAttribute('data-subscribed')
+        e.target.textContent = btnText
+    } else {
+        showAuthDisplay()
+    }
 }
 
 if(subscribeBtn !== null) {
