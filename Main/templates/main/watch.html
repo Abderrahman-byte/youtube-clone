@@ -120,9 +120,18 @@
             {% endif %}
         </div>
 
+        {% if video.description is not None and video.description != '' %}
         <div class="video-description">
-            <p>{{ video.description }} </p>
+            <p id="video-description">{{ video.description }} </p>
+            <button class="show-decription-btn" id="show-decription-btn">More</button>
         </div>
+        {% else %}
+        <div class="video-description">
+            <p class="none">No description provided</p>
+        </div>
+        {% endif %}
+
+        <hr>
     </div>
 
     <div class="right-container"></div>
