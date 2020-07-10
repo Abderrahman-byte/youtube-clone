@@ -84,8 +84,8 @@ class VideoImpression(models.Model) :
         ]
 
 class Subscription(models.Model) :
-    channel = models.ForeignKey(User, on_delete=models.CASCADE, related_name='channels')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='users')
+    channel = models.ForeignKey(User, on_delete=models.CASCADE, related_name='users')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='channels')
     notify = models.BooleanField(default=False)
 
     class Meta :
