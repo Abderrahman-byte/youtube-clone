@@ -183,7 +183,6 @@ const updateProgress = e => {
     video.currentTime = parseInt(skipTo)
     progressBar.value = skipTo
     seek.value = skipTo
-    console.log(skipTo)
 }
 
 // Full screen control
