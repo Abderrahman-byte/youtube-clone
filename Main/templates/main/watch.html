@@ -70,7 +70,7 @@
         <h6 class="video-title">{{ video.title }}</h6>
 
         <div class="row">
-            <p class="video-info">{{ video.views }} view{{ video.views|pluralize }} {{ video.posted_date|date:"y b. d"}}</p>
+            <p class="video-info">{{ video.views }} view{{ video.views|pluralize }} {{ video.posted_date|date:"d b. Y"}}</p>
             <div class="video-actions">
                 <div class="impressions">
                     <button id="like-btn" {% if user_impr == 1 %}class="active"{% endif %} data-title="Like" data-action="1">
