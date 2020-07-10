@@ -345,5 +345,5 @@
 
 .channel-info .right-side .subscribers {
     font-size: .8rem;
-    color: var(--borders-clr, black);
+    color: var(--icons-clr, black);
 }
