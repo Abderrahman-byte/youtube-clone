@@ -15,6 +15,7 @@ urlpatterns = [
     path('api/impression', views.submitImpressionView.as_view(), name='impressions'),
     path('api/playlists', views.ApiPlaylists.as_view(), name='playlists_api'),
     path('api/subscribe', views.SubscribeView.as_view(), name='subscribe'),
+    path('api/submitview', views.submitViews, name='submit_view'),
 ]
 
 if settings.DEBUG :
