@@ -26,6 +26,7 @@ def watchView(request) :
         likes = video.videoimpression_set.filter(kind=1).count()
         dislikes = video.videoimpression_set.filter(kind=-1).count()
         user_impr = None
+        subscribed = False
         get_token(request)
     except Video.DoesNotExist :
         raise Http404
@@ -233,6 +234,21 @@ class SubscribeView(View) :
                 s = Subscription(channel=channel.user, user=request.user)
                 s.save()
                 return HttpResponse(status=201)
+        else :
+            return HttpResponseForbidden()
+
+    def delete(self, request):
+        if request.user.is_authenticated :
+            body = json.loads(request.body)
+            channelId = body.get('channelId')
+            try : 
+                channel = Channel.objects.get(pk=channelId)
+                s = Subscription.objects.get(channel=channel.user, user=request.user)
+                s.delete()
+                return HttpResponse(status=201)
+            except Channel.DoesNotExist or Subscription.DoesNotExist :
+                return Http404
+
         else :
             return HttpResponseForbidden()
 
