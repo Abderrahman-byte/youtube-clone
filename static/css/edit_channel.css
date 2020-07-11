@@ -1,0 +1,196 @@
+.channel-header {
+    margin: -1.5em -1em;
+    background-color: var(--background-d, whitesmoke);
+    padding-bottom: 1em;
+}
+
+.hidden {
+    display: none;
+}
+
+.channel-header .wallpaper {
+    width: 100%;
+    display: block;
+    height: calc(100vw / 6.2 - 1px);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    cursor: pointer;
+    font-size: 3rem;
+}
+
+.channel-header .info {
+    padding: .75em 3em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-left {
+    display: flex;
+    width: 50%;
+    max-width: 500px;
+    justify-content: space-between;
+}
+
+.info-left .profil-img {
+    width: 100px;
+    height: 100px;
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+    overflow: hidden;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.info-left form {
+    padding: .5em 0;
+    display: flex;
+    align-items: center;
+}
+
+.info-left form .channel-title {
+    width: 100%;
+    display: block;
+    padding: .2rem .5rem;
+    font-size: 1.7rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-clip: padding-box;
+    border: 1px solid var(--border-clr, #ced4da);
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    background-color: transparent;
+    border-width: 0;
+    transition: .4s;
+}
+
+.info-left form .channel-title:focus {
+    background-color: #ffffff;
+    border-width: 1px;
+}
+
+.channel-header label > div {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.26);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: whitesmoke;
+    opacity: .5;
+    transition: .4s;
+}
+
+.channel-header label:hover div {
+    opacity: 1;
+}
+
+/* Alert Pop Up */
+.alert-backboard {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 8;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;    
+}
+
+.alert-display {
+    position: fixed;
+    z-index: 9;
+    width: 90%;
+    max-width: 500px;
+    max-height: 70%;
+    background-color: var(--background-b, whitesmoke);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 3px;
+    padding: 2em 1.1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.4rem;
+    color: var(--variant-clr, black);
+    letter-spacing: 3px;
+    display: none;
+}
+
+.alert-display #close-alert{
+    position: absolute;
+    top: 5px;
+    right: 7px;
+    font-size: 1.375rem;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    color: var(--icons-clr, whitesmoke);
+    outline: none;
+}
+
+/* About Form */
+.about-form {
+    margin-top: 1.5em;
+    padding: 1em 3em;
+    color: var(--icons-clr, whitesmoke);
+}
+
+.about-form label {
+    display: block;
+    margin-bottom: .5em;
+}
+
+.about-form .about-area {
+    width: 100%;
+    display: block;
+    padding: .375rem .5rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #ffffff;
+    background-clip: padding-box;
+    border: 1px solid var(--border-clr, #ced4da);
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    height: 200px;
+    resize: none;
+}
+
+.about-form .about-area:focus, .about-form .about-area:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: var(--variant-clr, black);
+    outline: 0;
+}
+
+.about-form .about-label {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+
+.submit-btn {
+    display: table !important;
+    margin: .5em auto;
+    background-color: var(--variant-clr);
+    color: var(--background-b);
+    padding: .6em 1.4em;
+    font-weight: 500;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: .4s;
+    border: none;
+    border-radius: 2px;
+}
+
+.submit-btn:hover, .submit-btn:focus {
+    background-color: var(--background-d);
+    color: var(--variant-clr);
+}
