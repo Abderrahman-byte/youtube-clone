@@ -4,11 +4,11 @@
 {% load humanize %}
 
 {% block title %}
-    <link rel="stylesheet" href="{% static 'css/channel.css' %}" />
     {% block title_channel %}<title>{{channel.title}} - Youtube Clone</title>{% endblock %}
 {% endblock %}
 
 {% block styles %}
+    <link rel="stylesheet" href="{% static 'css/channel.css' %}" />
     {% block styles_channel %}{% endblock %}
 {% endblock %}
 
