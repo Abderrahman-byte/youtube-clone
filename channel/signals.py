@@ -34,4 +34,11 @@ def removeUnusedImages(sender, instance, *args, **kwargs) :
         old_bg_path = old_bg.lstrip('/').lstrip('media').lstrip('/')
         old_bg_path = os.path.join(settings.MEDIA_ROOT, old_bg_path)
         os.remove(old_bg_path)
-        
+
+def removeMedia(sender, instance, *args, **kwargs) :
+    profil_path = instance.profil_img.lstrip('/').lstrip('media').lstrip('/')
+    bg_path = instance.profil_background.lstrip('/').lstrip('media').lstrip('/')
+    profil_path = os.path.join(settings.MEDIA_ROOT, profil_path)
+    bg_path = os.path.join(settings.MEDIA_ROOT, bg_path)
+    os.remove(profil_path)
+    os.remove(bg_path)
