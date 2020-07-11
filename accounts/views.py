@@ -63,3 +63,11 @@ def logoutView(request) :
         return redirect(next)
     else :
         return redirect(reverse('main:index'))
+
+
+def UserView(request) :
+    if request.user.is_authenticated :
+        channel = request.user.channel
+        return redirect(reverse('channel:index', args=(channel.id,)))
+    else :
+        return redirect(reverse('main:index'))
