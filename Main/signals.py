@@ -5,6 +5,7 @@ from django.conf import settings
 import os
 
 from Main.models import Video
+from .utils import *
 
 @receiver(pre_save, sender=Video)
 def deletePrevPoster(sender, instance, *args, **kwargs) :
@@ -20,7 +21,8 @@ def deletePrevPoster(sender, instance, *args, **kwargs) :
     if old_poster != new_poster :
         poster_path = old_poster.lstrip('/').lstrip('media').lstrip('/')
         poster_path = os.path.join(settings.MEDIA_ROOT, poster_path)
-        print(poster_path, 'deleted')
+        new_poster_path = os.path.join(settings.MEDIA_ROOT, new_poster.lstrip('/').lstrip('media').lstrip('/'))
+        adjustImage(new_poster_path, 1280, 720)
         os.remove(poster_path)
 
 @receiver(pre_delete, sender=Video)
