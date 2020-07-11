@@ -6,6 +6,8 @@ const alertBackboard = document.getElementById('alert-backboard')
 const alertDisplay = document.getElementById('alert-display')
 const closeAlertBtn = document.getElementById('close-alert')
 const alertText = document.getElementById('alert-text')
+const aboutArea = document.getElementById('about-area')
+const aboutInput = document.getElementById('about')
 
 const closeAlert = () => {
     alertBackboard.style.display = 'none'
@@ -43,7 +45,7 @@ const changeImg = (e, target, minWidth, minHeight, d) => {
 }
 
 backgroundImg.addEventListener('change', e => {
-    changeImg(e, wallpaper, 1600, 260)
+    changeImg(e, wallpaper, 1200, 200)
 })
 
 profilImg.addEventListener('change', e => {
@@ -52,3 +54,4 @@ profilImg.addEventListener('change', e => {
 
 alertBackboard.addEventListener('click', closeAlert)
 closeAlertBtn.addEventListener('click', closeAlert)
+aboutArea.addEventListener('input', (e) => aboutInput.value= e.target.value)
