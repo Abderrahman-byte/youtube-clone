@@ -20,7 +20,7 @@
 </div>
 
 <div class="channel-header">
-    <label for="background-img" id="wallpaper" class="wallpaper" data-default="{{ channel.profil_background.url }}" style="background-image: url('{{ channel.profil_background.url }}');">
+    <label for="background-img" id="wallpaper" class="wallpaper" data-default="{{ channel.profil_background }}" style="background-image: url('{{ channel.profil_background }}');">
         <div>
             <i class="fas fa-edit"></i>
         </div>
@@ -28,7 +28,7 @@
 
     <div class="info">
         <div class="info-left">
-            <label for="profil-img" id="profil" class="profil-img" data-default="{{ channel.profil_img.url }}" style="background-image: url('{{ channel.profil_img.url }}');">
+            <label for="profil-img" id="profil" class="profil-img" data-default="{{ channel.profil_img }}" style="background-image: url('{{ channel.profil_img }}');">
                 <div>
                     <i class="fas fa-edit"></i>
                 </div>
@@ -39,7 +39,7 @@
                 <input class="channel-title" type="text" name="title" value="{{ channel.title }}" maxlength="50" />
                 <input class="hidden" type="file" id="profil-img" name="profil-img" accept="image/*" />
                 <input class="hidden" type="file" id="background-img" name="background-img" accept="image/*" />
-                <input class="hidden" type="text" id="about" name="about" maxlength="1500" />
+                <textarea name="about" class="hidden" id="about"></textarea>
                 <input class="hidden" type="submit" id="submit-form" />
             </form>
         </div>
@@ -48,7 +48,7 @@
 
 <div class="about-form">
     <label class="about-label">Describe your channel in few lines :</label>
-    <textarea class="about-area" id="about-area" maxlength="1500">{% if channel.about %} {{ channel.about }} {% endif %} </textarea>
+    <textarea class="about-area" id="about-area" maxlength="1500">{% if channel.about %}{{ channel.about }}{% endif %}</textarea>
     <label for="submit-form" class="submit-btn">Save</label>
 </div>
 {% endblock %}
