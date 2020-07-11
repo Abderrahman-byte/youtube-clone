@@ -1,4 +1,4 @@
-from django.db.models.signals import post_save, pre_save, post_save
+from django.db.models.signals import post_save, pre_save, post_delete
 from django.dispatch import receiver
 from django.contrib.auth.models import User
 from django.conf import settings
@@ -6,6 +6,7 @@ from django.conf import settings
 import os
 
 from .models import *
+from Main.utils import *
 
 @receiver(post_save, sender=User)
 def createChannel(sender, instance, created, *args, **kwargs) :
@@ -14,7 +15,7 @@ def createChannel(sender, instance, created, *args, **kwargs) :
         channel.save()
 
 @receiver(pre_save, sender=Channel)
-def removeUnusedImages(sender, instance, *args, **kwargs) :
+def updateImages(sender, instance, *args, **kwargs) :
     try :
         channel = Channel.objects.get(pk=instance.id)
     except Channel.DoesNotExist :
@@ -35,11 +36,30 @@ def removeUnusedImages(sender, instance, *args, **kwargs) :
         old_bg_path = os.path.join(settings.MEDIA_ROOT, old_bg_path)
         os.remove(old_bg_path)
 
-@receiver(post_save, sender=Channel)
+@receiver(post_delete, sender=Channel)
 def removeMedia(sender, instance, *args, **kwargs) :
-    profil_path = instance.profil_img.lstrip('/').lstrip('media').lstrip('/')
-    bg_path = instance.profil_background.lstrip('/').lstrip('media').lstrip('/')
-    profil_path = os.path.join(settings.MEDIA_ROOT, profil_path)
-    bg_path = os.path.join(settings.MEDIA_ROOT, bg_path)
-    os.remove(profil_path)
-    os.remove(bg_path)
+    if instance.profil_img != '/media/images/users/default.png' :
+        profil_path = instance.profil_img.lstrip('/').lstrip('media').lstrip('/')
+        profil_path = os.path.join(settings.MEDIA_ROOT, profil_path)
+        os.remove(profil_path)
+    
+    if instance.profil_background != '/media/images/users/default_background.jpeg' :
+        bg_path = instance.profil_background.lstrip('/').lstrip('media').lstrip('/')
+        bg_path = os.path.join(settings.MEDIA_ROOT, bg_path)
+        os.remove(bg_path)
+
+@receiver(post_save, sender=Channel)
+def resizeImages(sender, instance, created, *args, **kwargs) :
+    if created :
+        return
+    
+    profil = instance.profil_img
+    background = instance.profil_background
+    
+    if profil != '/media/images/users/default.png' :
+        profil_path = os.path.join(settings.MEDIA_ROOT, profil.lstrip('/').lstrip('media').lstrip('/'))
+        adjustImage(profil_path, 100, 100)
+
+    if background != '/media/images/users/default_background.jpeg' :
+        background_path = os.path.join(settings.MEDIA_ROOT, background.lstrip('/').lstrip('media').lstrip('/'))
+        adjustImage(background_path, 1600, 280)
