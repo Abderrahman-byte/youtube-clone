@@ -1,4 +1,4 @@
-from django.db.models.signals import post_save, pre_save
+from django.db.models.signals import post_save, pre_save, post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
 from django.conf import settings
@@ -35,6 +35,7 @@ def removeUnusedImages(sender, instance, *args, **kwargs) :
         old_bg_path = os.path.join(settings.MEDIA_ROOT, old_bg_path)
         os.remove(old_bg_path)
 
+@receiver(post_save, sender=Channel)
 def removeMedia(sender, instance, *args, **kwargs) :
     profil_path = instance.profil_img.lstrip('/').lstrip('media').lstrip('/')
     bg_path = instance.profil_background.lstrip('/').lstrip('media').lstrip('/')
