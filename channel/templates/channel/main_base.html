@@ -27,7 +27,7 @@
         <button class="subscribe-button" id="subscribe-button" data-id="{{channel.id}}" {% if is_subscribed %}data-subscribed{% endif %} >
             {% if is_subscribed %}subscribed{% else %}subscribe{% endif %}</button>
         {% else %}
-        <a href="" class="edit-btn modifie">modifie</a>
+        <a href="{% url 'channel:modifie' channel.id %}" class="edit-btn modifie">modifie</a>
         {% endif %}
     </div>
 
