@@ -33,14 +33,14 @@ class Channel(models.Model) :
         if str(self.profil_background) != 'images/users/default_background.jpeg' :
             bg_w, bg_h = bg.size
 
-            if bg_w / 3.2 < bg_h and bg_h * 3.2 > bg_w :
+            if bg_w / 6.2 < bg_h and bg_h * 6.2 > bg_w :
                 box = (0, (bg_h - bg_w) / 2, bg_w, (bg_h + bg_w) / 2)
                 bg = bg.crop(box)
-            elif bg_w / 3.2 > bg_h and bg_h * 3.2 < bg_w :
+            elif bg_w / 6.2 > bg_h and bg_h * 6.2 < bg_w :
                 box = ((bg_w - bg_h) / 2, 0, (bg_w + bg_h) / 2, bg_h)
                 bg = bg.crop(box)
 
-            bg = bg.resize((1600, 500))
+            bg = bg.resize((1600, 1600 / 6.2))
             bg.save(self.profil_background.path)
 
         super(Channel, self).save()
