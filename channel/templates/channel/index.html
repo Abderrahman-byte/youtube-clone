@@ -20,10 +20,18 @@
             <a class="title" href="{% url 'main:watch' %}?v={{video.id}}">
                 <h6>{{ video.title }}</h6>
             </a>
-            <span class="info">{{ video.views|intword }} view{{ video.views|pluralize }} • {{ video.posted_date|naturaltime }}</span>
+            <span class="info">{{ video.views|intword }} view{{ video.views|pluralize }} •
+                {{ video.posted_date|naturaltime }}</span>
         </div>
     </div>
     {% endfor %}
 </div>
-{% else %}{% endif %}
+{% else %}
+<div class="message">
+    <p>No Videos in This channel</p>
+    {% if request.user == channel.user %}
+    <a href="{% url 'main:upload' %}">upload</a>
+    {% endif %}
+</div>
+{% endif %}
 {% endblock%}
