@@ -5,6 +5,8 @@ from django.views.generic import View
 from django.core.files.images import ImageFile
 from django.core.files.storage import FileSystemStorage
 
+from datetime import timedelta, time, datetime
+
 from .models import *
 from Main.utils import *
 
@@ -13,7 +15,12 @@ def index(request, id) :
         channel = Channel.objects.get(pk=id)
         subs = channel.user.users.all().count()
         is_subscribed = request.user in [sub.user for sub in channel.user.users.all()]
-        return render(request, 'channel/index.html', {'channel': channel, 'subs': subs, 'is_subscribed': is_subscribed})
+        videos = channel.user.video_set.all().order_by('-posted_date')[:4]
+        for video in videos :
+            t = timedelta(seconds=video.duration)
+            video.duration = str(t)
+        context = {'channel': channel, 'subs': subs, 'is_subscribed': is_subscribed, 'videos': videos}
+        return render(request, 'channel/index.html', context)
     except Channel.DoesNotExist :
         raise Http404
 
