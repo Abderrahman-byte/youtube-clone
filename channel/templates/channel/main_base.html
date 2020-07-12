@@ -34,10 +34,10 @@
     <nav class="channel-nav">
         <ul>
             <li>
-                <a class="active" href="">Home</a>
+                <a class="{{ channel_index_classes }}" href="{% url 'channel:index' channel.id %}">Home</a>
             </li>
             <li>
-                <a href="">Videos</a>
+                <a class="{{ channel_videos_classes }}" href="{% url 'channel:videos' channel.id %}">Videos</a>
             </li>
             <li>
                 <a href="">Playlists</a>
