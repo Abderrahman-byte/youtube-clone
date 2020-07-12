@@ -10,11 +10,14 @@
 {% block content_channel %}
 {% if videos.count > 0 %}
 <div class="videos-container-control">
-    <section>
-        <a href="{{ request.get_absolute_path }}?order=0">Latest video</a>
-        <a href="{{ request.get_absolute_path }}?order=1">Older video</a>
-        <a href="{{ request.get_absolute_path }}?order=2">Most popular</a>
-    </section>
+    <div class="dropdown-menu" id="dropdown-menu">
+        <button id="order-by">Order By</button>
+        <div class="dropdown-list" id="dropdown-list">
+            <a href="{{ request.get_absolute_url }}?order=0">Recent Posted</a>
+            <a href="{{ request.get_absolute_url }}?order=1">Older Posted</a>
+            <a href="{{ request.get_absolute_url }}?order=2">Most Popular</a>
+        </div>
+    </div>
 </div>
 <div class="videos-container">
     {% for video in videos %}
@@ -41,3 +44,8 @@
 </div>
 {% endif %}
 {% endblock%}
+
+
+{% block scripts_channel %}
+<script src="{% static 'js/videos_channel.js' %}"></script>
+{% endblock %}
