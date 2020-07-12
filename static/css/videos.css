@@ -67,3 +67,56 @@
 .videos-container .video .img-a:hover::before {
     opacity: 1;
 }
+
+.videos-container-control {
+    padding: 0 .5em 1em 0;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.dropdown-menu {
+    position: relative;
+}
+
+.dropdown-menu button {
+    background-color: transparent;
+    color: var(--icons-clr);
+    border: none;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: 700;
+    padding: .5em 0;
+}
+
+.dropdown-list {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    background-color: var(--background-d);
+    width: 100%;
+    min-width: 200px;
+    border: 1px var(--borders-clr) solid;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: .2s;
+}
+
+.dropdown-list.show {
+    transform: scaleY(1);
+}
+
+.dropdown-list a {
+    display: table;
+    padding: .5em .75em;
+    font-size: 1.2rem;
+    color: var(--variant-clr);
+    text-decoration: none;
+}
+
+.dropdown-list a:hover, .dropdown-list a:focus {
+    background-color: var(--background-a);
+}
