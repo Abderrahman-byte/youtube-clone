@@ -103,3 +103,8 @@
 .channel-nav ul li a.active {
     border-bottom: 3px solid var(--icons-clr, black);
 }
+
+.channel-container {
+    margin: 1.5em 0;
+    padding: 2em 0;
+}
