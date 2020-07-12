@@ -1,0 +1,43 @@
+{% extends 'channel/main_base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block styles_channel %}
+<link rel="stylesheet" href="{% static 'css/videos.css' %}" />
+{% endblock %}
+
+{% block content_channel %}
+{% if videos.count > 0 %}
+<div class="videos-container-control">
+    <section>
+        <a href="{{ request.get_absolute_path }}?order=0">Latest video</a>
+        <a href="{{ request.get_absolute_path }}?order=1">Older video</a>
+        <a href="{{ request.get_absolute_path }}?order=2">Most popular</a>
+    </section>
+</div>
+<div class="videos-container">
+    {% for video in videos %}
+    <div class="video">
+        <a class="img-a" data-duration="{{ video.duration }}" href="{% url 'main:watch' %}?v={{video.id}}">
+            <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}" />
+        </a>
+        <div class="video-body">
+            <a class="title" href="{% url 'main:watch' %}?v={{video.id}}">
+                <h6>{{ video.title }}</h6>
+            </a>
+            <span class="info">{{ video.views|intword }} view{{ video.views|pluralize }} •
+                {{ video.posted_date|naturaltime }}</span>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="message">
+    <p>No Videos in This channel</p>
+    {% if request.user == channel.user %}
+    <a href="{% url 'main:upload' %}">upload</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock%}
