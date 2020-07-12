@@ -66,3 +66,29 @@ class ModifieChannel(View):
             return redirect(reverse('channel:modifie', args=(channel.id,)))
         else :
             return HttpResponseForbidden()
+
+def videosView(request, id) :
+    try :
+        channel = Channel.objects.get(pk=id)
+        order = int(request.GET.get('order', 0))
+        subs = channel.user.users.all().count()
+        is_subscribed = request.user in [sub.user for sub in channel.user.users.all()]
+        videos = channel.user.video_set.all()
+
+        if order == 0 :
+            videos = videos.order_by('-posted_date')
+        elif order == 1 :
+            videos = videos.order_by('posted_date')
+        elif order == 2:
+            videos = videos.order_by('-views')
+        else :
+            videos = videos.order_by('-posted_date')
+
+        for video in videos :
+            t = timedelta(seconds=video.duration)
+            video.duration = str(t)
+
+        context = {'channel': channel, 'subs': subs, 'is_subscribed': is_subscribed, 'videos': videos}
+        return render(request, 'channel/videos.html', context)
+    except Channel.DoesNotExist :
+        raise Http404
