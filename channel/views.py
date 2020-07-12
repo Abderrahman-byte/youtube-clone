@@ -16,10 +16,18 @@ def index(request, id) :
         subs = channel.user.users.all().count()
         is_subscribed = request.user in [sub.user for sub in channel.user.users.all()]
         videos = channel.user.video_set.all().order_by('-posted_date')[:4]
+
         for video in videos :
             t = timedelta(seconds=video.duration)
             video.duration = str(t)
-        context = {'channel': channel, 'subs': subs, 'is_subscribed': is_subscribed, 'videos': videos}
+
+        context = {
+            'channel': channel, 
+            'subs': subs, 
+            'is_subscribed': is_subscribed, 
+            'videos': videos, 
+            'channel_index_classes': 'active'
+        }
         return render(request, 'channel/index.html', context)
     except Channel.DoesNotExist :
         raise Http404
@@ -88,7 +96,14 @@ def videosView(request, id) :
             t = timedelta(seconds=video.duration)
             video.duration = str(t)
 
-        context = {'channel': channel, 'subs': subs, 'is_subscribed': is_subscribed, 'videos': videos}
+        context = {
+            'channel': channel, 
+            'subs': subs, 
+            'is_subscribed': is_subscribed, 
+            'videos': videos,
+            'channel_videos_classes': 'active'
+        }
+
         return render(request, 'channel/videos.html', context)
     except Channel.DoesNotExist :
         raise Http404
