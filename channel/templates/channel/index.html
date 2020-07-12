@@ -1,3 +1,29 @@
 {% extends 'channel/main_base.html' %}
 
-{% block content_channel %}{% endblock%}
+{% load static %}
+{% load humanize %}
+
+{% block styles_channel %}
+<link rel="stylesheet" href="{% static 'css/index_channel.css' %}" />
+{% endblock %}
+
+{% block content_channel %}
+{% if videos.count > 0 %}
+<h3 class="section-title">Latest Videos</h3>
+<div class="latest-list">
+    {% for video in videos %}
+    <div class="video">
+        <a class="img-a" data-duration="{{ video.duration }}" href="{% url 'main:watch' %}?v={{video.id}}">
+            <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}" />
+        </a>
+        <div class="video-body">
+            <a class="title" href="{% url 'main:watch' %}?v={{video.id}}">
+                <h6>{{ video.title }}</h6>
+            </a>
+            <span class="info">{{ video.views|intword }} view{{ video.views|pluralize }} • {{ video.posted_date|naturaltime }}</span>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}{% endif %}
+{% endblock%}
