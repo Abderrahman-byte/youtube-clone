@@ -288,13 +288,31 @@ class ApiComments(View) :
     def delete(self, request) :
         body = json.loads(request.body)
         id = body.get('id')
-        print(id)
 
         if request.user.is_authenticated :
             try :
                 comment = Comment.objects.get(pk=id)
                 if comment.user == request.user :
                     comment.delete()
+                    return HttpResponse(status=201)
+                else :
+                    return HttpResponseForbidden()
+            except Comment.DoesNotExist :
+                raise Http404
+        else :
+            return HttpResponseForbidden()
+
+    def put(self, request) :
+        body = json.loads(request.body)
+        id = body.get('id')
+        content = body.get('content', '')
+
+        if request.user.is_authenticated :
+            try :
+                comment = Comment.objects.get(pk=id)
+                if comment.user == request.user :
+                    comment.content = content
+                    comment.save()
                     return HttpResponse(status=201)
                 else :
                     return HttpResponseForbidden()
