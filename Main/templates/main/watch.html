@@ -137,7 +137,7 @@
 
         {% if video.allow_comments %}
         <div class="comments-container">
-            <p>{{ comments.count }} comment{{ comments.count|pluralize }} </p>
+            <p><span id="comments-count">{{ comments.count }}</span> comment{{ comments.count|pluralize }} </p>
 
             <div class="new-comment">
                 <img {% if request.user.is_authenticated %}
@@ -146,14 +146,14 @@
                 src="/media/images/users/default.png"
                 {% endif %}>
                 <form class="comment-form" id="comment-form">
-                    <textarea {% if request.user.is_authenticated %}data-user{% endif %} class="content" placeholder="Add a public comment ..." name="content"></textarea>
+                    <textarea maxlength="1500" {% if request.user.is_authenticated %}data-user{% endif %} class="content" placeholder="Add a public comment ..." name="content"></textarea>
                     {% if request.user.is_authenticated %}
                     <button>Add Comment</button>
                     {% endif %}
                 </form>
             </div>
             
-            <div class="comments-list">
+            <div class="comments-list" id="comments-list">
                 {% for comment in comments %}
                 <div class="comment" id="{{ comment.id }}">
                     <a href="{% url 'channel:index' comment.user.channel.id %}">
@@ -162,7 +162,7 @@
                     <div class="body">
                         <p class="header"><a href="{% url 'channel:index' comment.user.channel.id %}" class="channel-title">{{ comment.user.channel.title }}</a>
                             <span class="date">{{ comment.created_date|naturaltime }}</span></p>
-                        <p class="content"> {{ comment.content }} </p>
+                        <p class="content" data-content="{{ comment.content }}"> {{ comment.content }} </p>
                     </div>
                     
                     {% if request.user == comment.user %}
