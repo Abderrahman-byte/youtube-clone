@@ -16,6 +16,7 @@ urlpatterns = [
     path('api/playlists', views.ApiPlaylists.as_view(), name='playlists_api'),
     path('api/subscribe', views.SubscribeView.as_view(), name='subscribe'),
     path('api/submitview', views.submitViews, name='submit_view'),
+    path('api/comment', views.ApiComments.as_view(), name='comments_api'),
 ]
 
 if settings.DEBUG :
