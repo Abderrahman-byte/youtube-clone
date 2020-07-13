@@ -284,6 +284,25 @@ class ApiComments(View) :
         else :
             return HttpResponseForbidden()
 
+
+    def delete(self, request) :
+        body = json.loads(request.body)
+        id = body.get('id')
+        print(id)
+
+        if request.user.is_authenticated :
+            try :
+                comment = Comment.objects.get(pk=id)
+                if comment.user == request.user :
+                    comment.delete()
+                    return HttpResponse(status=201)
+                else :
+                    return HttpResponseForbidden()
+            except Comment.DoesNotExist :
+                raise Http404
+        else :
+            return HttpResponseForbidden()
+
 def staticView(request, path) :
     response = serve(request, path, document_root=settings.MEDIA_ROOT)
     response['Accept-Ranges'] = 'bytes'
