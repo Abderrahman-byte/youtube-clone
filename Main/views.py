@@ -25,6 +25,7 @@ def watchView(request) :
         video = Video.objects.get(pk=id)
         likes = video.videoimpression_set.filter(kind=1).count()
         dislikes = video.videoimpression_set.filter(kind=-1).count()
+        comments = video.comment_set.all().order_by('-created_date')
         user_impr = None
         subscribed = False
         get_token(request)
@@ -40,7 +41,7 @@ def watchView(request) :
         except VideoImpression.DoesNotExist :
             user_impr = None
 
-    return render(request, 'main/watch.html', {'video': video, 'likes': likes, 'dislikes': dislikes, 'user_impr': user_impr, 'subscribed': subscribed})
+    return render(request, 'main/watch.html', {'video': video, 'likes': likes, 'dislikes': dislikes, 'user_impr': user_impr, 'subscribed': subscribed, 'comments': comments})
 
 class submitImpressionView(View) :
     def post(self, request) :
