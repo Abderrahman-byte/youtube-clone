@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseForbidden, HttpResponse, Http404
+from django.http import HttpResponseForbidden, HttpResponse, Http404, JsonResponse
 from django.views import View
 from django.conf.urls.static import serve
 from django.conf import settings
@@ -262,6 +262,27 @@ def submitViews(request) :
         return HttpResponse(status=201)
     except Video.DoesNotExist :
         raise Http404
+
+class ApiComments(View) :
+    def post(self, request) :
+        body = json.loads(request.body)
+        id = body.get('id')
+        content = body.get('content')
+
+        if request.user.is_authenticated :
+            try :
+                video = Video.objects.get(pk=id)
+                if video.allow_comments :
+                    c = video.comment_set.create(user=request.user, content=content)
+                    c.save()
+                    data = {'id': c.id, 'content': c.content, 'user': c.user.channel.title, 'profil': c.user.channel.profil_img}
+                    return JsonResponse(data)
+                else :
+                    return HttpResponseForbidden()
+            except Video.DoesNotExist :
+                raise Http404
+        else :
+            return HttpResponseForbidden()
 
 def staticView(request, path) :
     response = serve(request, path, document_root=settings.MEDIA_ROOT)
