@@ -1,5 +1,7 @@
 {% extends 'main/main_base.html' %}
+
 {% load static %}
+{% load humanize %}
 
 {% block styles %}
 <link rel="stylesheet" href="{% static 'css/watch.css' %}">
@@ -132,6 +134,49 @@
         {% endif %}
 
         <hr>
+
+        {% if video.allow_comments %}
+        <div class="comments-container">
+            <p>{{ comments.count }} comment{{ comments.count|pluralize }} </p>
+
+            <div class="new-comment">
+                <img {% if request.user.is_authenticated %}
+                src="{{ request.user.channel.profil_img }}"
+                {% else %}
+                src="/media/images/users/default.png"
+                {% endif %}>
+                <form class="comment-form" id="comment-form">
+                    <textarea {% if request.user.is_authenticated %}data-user{% endif %} class="content" placeholder="Add a public comment ..." name="content"></textarea>
+                    {% if request.user.is_authenticated %}
+                    <button>Add Comment</button>
+                    {% endif %}
+                </form>
+            </div>
+            
+            <div class="comments-list">
+                {% for comment in comments %}
+                <div class="comment" id="{{ comment.id }}">
+                    <a href="{% url 'channel:index' comment.user.channel.id %}">
+                        <img src="{{ comment.user.channel.profil_img }}"/>
+                    </a>
+                    <div class="body">
+                        <p class="header"><a href="{% url 'channel:index' comment.user.channel.id %}" class="channel-title">{{ comment.user.channel.title }}</a>
+                            <span class="date">{{ comment.created_date|naturaltime }}</span></p>
+                        <p class="content"> {{ comment.content }} </p>
+                    </div>
+                    
+                    {% if request.user == comment.user %}
+                    <div class="control">
+                        <button data-id="{{ comment.id }}" class="edit-comment"><i class="fas fa-pen"></i></button>
+                        <button data-id="{{ comment.id }}" class="delete-comment"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
     </div>
 
     <div class="right-container"></div>
@@ -210,4 +255,5 @@
 <script src="{% static 'js/watch.js' %}"></script>
 <script src="{% static 'js/subscribe.js' %}"></script>
 <script src="{% static 'js/video-player.js' %}"></script>
+{% if video.allow_comments%}<script src="{% static 'js/comments.js' %}"></script>{% endif %}
 {% endblock %}
