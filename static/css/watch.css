@@ -407,6 +407,11 @@
     border: 1px solid var(--borders-clr);
 }
 
+.comments-list .comment .body {
+    width: 80%;
+    min-width: 300px;
+}
+
 .comments-list .comment .body .header {
     margin-bottom: .3em;
 }
@@ -510,4 +515,42 @@
 .comment-form button:hover, .comment-form button:focus {
     background-color: var(--background-d, black);
     color: var(--variant-clr, black);
+}
+
+.content-form {
+    width: 100%;
+    display: block;
+}
+
+.content-form textarea {
+    width: 100%;
+    display: block;
+    resize: none;
+    overflow: hidden;
+    padding: .375rem .5rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: transparent;
+    background-clip: padding-box;
+    border: 1px solid var(--border-clr, #ced4da);
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    outline: none;
+    margin-bottom: .5em;;
+}
+
+.content-form button {
+    background-color: var(--variant-clr, black);
+    color: var(--background-b, black);
+    padding: .6em 1.1em;
+    font-weight: 700;
+    font-size: .75rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: .2s;
+    border: none;
+    margin: .5em 0 .5em auto;
+    border-radius: 3px;
 }
