@@ -25,6 +25,10 @@ def deletePrevPoster(sender, instance, *args, **kwargs) :
         adjustImage(new_poster_path, 1280, 720)
         os.remove(poster_path)
 
+    if old.allow_comments and not instance.allow_comments :
+        comments = old.comment_set.all()
+        [c.delete() for c in comments]
+
 @receiver(pre_delete, sender=Video)
 def deleteMediaOfDeletedVideo(sender, instance, *args, **kwargs) :
     poster_url = instance.thumbnail_url
