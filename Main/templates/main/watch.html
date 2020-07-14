@@ -183,7 +183,25 @@
 
     </div>
 
-    <div class="right-container"></div>
+    <div class="right-container">
+
+        <div class="related">
+            {% for v in related %}
+            <div class="video">
+                <a class="poster" href="{% url 'main:watch'%}?v={{v.id}} ">
+                    <img src="{{ v.thumbnail_url }}" alt="{{ video.title}}" />
+                </a>
+                <div class="info">
+                    <a class="title" href="{% url 'main:watch'%}?v={{v.id}} ">
+                        <h6>{{ v.title }}</h6>
+                    </a>
+                    <a class="channel" href="{% url 'channel:index' v.channel.channel.id %} ">{{ v.channel.channel.title }} </a>
+                    <p class="bottom"><span class="views" data-views="{{ v.views }}">{{ v.views }}</span> view{{ v.views|pluralize }} • {{ v.posted_date|naturaltime}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 
 <!-- Playlists Display -->
