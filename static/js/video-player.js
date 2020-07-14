@@ -32,6 +32,19 @@ const formatTime = time => {
     return Number(hours) > 0 ? `${hours}:${minutes}:${secondes}`:`${minutes}:${secondes}`
 } 
 
+const preventDefaultForScrollKeys = (e) => {
+    const keys = {37: 1, 38: 1, 39: 1, 40: 1, 32: 1}
+
+    if(keys[e.keyCode]) {
+        e.preventDefault()
+        return false
+    }
+}
+
+const disableScroll = () => {
+    window.addEventListener('keydown', preventDefaultForScrollKeys, false);
+}
+
 const saveVolume = () => {
     const volume = video.volume
     localStorage.setItem('volume', volume)
@@ -136,7 +149,7 @@ const setVolume = e => {
 }
 
 const volumeUp = () => {
-    if(video.volume < 1) {
+    if(video.volume <= 0.9) {
         video.volume += 0.1
     } else {
         video.volume = 1
@@ -146,7 +159,7 @@ const volumeUp = () => {
 }
 
 const volumeDown = () => {
-    if(video.volume > 0) {
+    if(video.volume >= 0.1) {
         video.volume -= 0.1
     } else {
         video.volume = 0
@@ -275,6 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const src = video.currentSrc
     video.setAttribute('src', src)
     video.addEventListener('loadedmetadata', initializeVideo)
+    disableScroll()
 })
 
 document.querySelectorAll('input, texterea').forEach(elt => {
