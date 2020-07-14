@@ -26,6 +26,7 @@ def watchView(request) :
         likes = video.videoimpression_set.filter(kind=1).count()
         dislikes = video.videoimpression_set.filter(kind=-1).count()
         comments = video.comment_set.all().order_by('-created_date')
+        related = getRelatedVideos(video)
         user_impr = None
         subscribed = False
         get_token(request)
@@ -40,8 +41,17 @@ def watchView(request) :
             subscribed = user in [subs.user for subs in video.channel.users.all()]
         except VideoImpression.DoesNotExist :
             user_impr = None
+            
+    context = {
+        'video': video, 
+        'likes': likes, 
+        'dislikes': dislikes, 
+        'user_impr': user_impr, 
+        'subscribed': subscribed, 
+        'comments': comments
+    }
 
-    return render(request, 'main/watch.html', {'video': video, 'likes': likes, 'dislikes': dislikes, 'user_impr': user_impr, 'subscribed': subscribed, 'comments': comments})
+    return render(request, 'main/watch.html', context)
 
 class submitImpressionView(View) :
     def post(self, request) :
