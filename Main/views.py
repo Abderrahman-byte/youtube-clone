@@ -41,14 +41,15 @@ def watchView(request) :
             subscribed = user in [subs.user for subs in video.channel.users.all()]
         except VideoImpression.DoesNotExist :
             user_impr = None
-            
+
     context = {
         'video': video, 
         'likes': likes, 
         'dislikes': dislikes, 
         'user_impr': user_impr, 
         'subscribed': subscribed, 
-        'comments': comments
+        'comments': comments,
+        'related': related
     }
 
     return render(request, 'main/watch.html', context)
