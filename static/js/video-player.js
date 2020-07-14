@@ -274,6 +274,7 @@ video.addEventListener('timeupdate', setProgress)
 video.addEventListener('ended', setUpPlayPauseIcons)
 video.addEventListener('volumechange', updateVolumeIcon)
 video.addEventListener('volumechange', saveVolume)
+video.addEventListener('dblclick', toggleFullscreen)
 seek.addEventListener('mousemove', updateSeekTooltip)
 seek.addEventListener('input', updateProgress)
 volumeBtn.addEventListener('click', toggleVolume)
@@ -291,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
     disableScroll()
 })
 
-document.querySelectorAll('input, texterea').forEach(elt => {
+document.querySelectorAll('input[type=text], input[type=password], texterea').forEach(elt => {
     elt.addEventListener('focus', disableShortCuts)
     elt.addEventListener('blur', enableShortCuts)
 })
