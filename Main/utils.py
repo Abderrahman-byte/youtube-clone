@@ -96,6 +96,7 @@ def getRelatedVideos(video, size=10) :
         query |= content_query 
 
     others = Video.objects.filter(query).exclude(id__in=related_ids)
+    others = others[:int(size - len(related))]
     related += list(others)
     related_ids += [o.id for o in others]
 
