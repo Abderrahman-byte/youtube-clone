@@ -5,13 +5,12 @@
 }
 
 .container-watch .left-container {
-    width: 70%;
+    width: 65%;
     max-width: 800px;
 }
 
 .container-watch .right-container {
-    width: 30%;
-    border: 1px solid magenta;
+    width: 32%;
 }
 
 /* Playlist */
@@ -566,4 +565,59 @@
     font-size: 1.3rem;
     font-weight: 300;
     margin-bottom: .5em;
+}
+
+/* Right Container */
+
+.related .video {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.75em;
+}
+
+.related .video .poster {
+    width: 45%;
+}
+
+.related .video .poster img {
+    border-radius: 2px;
+    opacity: .9;
+    border: 1px solid var(--border-clr);
+    transition: .2s;
+}
+
+.related .video .poster img:hover {
+    opacity: 1;
+}
+
+.related .video .info {
+    width: 53%;
+}
+
+.related .video .info  .bottom {
+    font-size: .75rem;
+    color: var(--icons-clr);
+}
+
+.related .video .info  .title {
+    font-size: 1.2rem;
+    color: var(--variant-clr);
+    text-decoration: none;
+    margin-bottom: .4em;
+    display: block;
+    font-weight: 900;
+    letter-spacing: .05em;
+}
+
+.related .video .info  .channel {
+    color: var(--variant-clr);
+    text-decoration: none;
+    margin-bottom: .3em;
+    display: block;
+}
+
+.related .video .info  .channel h6 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: .05em;
 }
