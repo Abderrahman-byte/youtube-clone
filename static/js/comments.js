@@ -151,6 +151,7 @@ const addComment = (e) => {
 }
 
 commentField.addEventListener('focus', checkAuth)
+commentField.addEventListener('focus', replaceAllForms)
 commentField.addEventListener('blur', enableShortCuts)
 commentForm.addEventListener('submit', addComment)
 deleteBtns.forEach(btn => btn.addEventListener('click', deleteComment))
