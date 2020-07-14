@@ -98,6 +98,14 @@ const getCookie = name => {
     return cookieValue;
 }
 
+const updateViews = () => {
+    const views = document.querySelectorAll('.related .video .views')
+    views.forEach(viewSpan => {
+        const viewsCount = Number(viewSpan.getAttribute('data-views')) || 0
+        viewSpan.textContent = formatCount(viewsCount)
+    })
+}
+
 const renderDescription = () => {
     if (descritpionDiv !== null ) {
         const decsriptionHtml = descritpionDiv.textContent.split('\n').join('<br/>')
@@ -284,4 +292,5 @@ addEventListener('DOMContentLoaded', () => {
     updateImpressionsCount()
     updateSuscriptionsCount()
     renderDescription()
+    updateViews()
 })
