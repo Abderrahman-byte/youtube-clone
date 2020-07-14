@@ -7,7 +7,6 @@
 .container-watch .left-container {
     width: 70%;
     max-width: 800px;
-    border: 1px solid magenta;
 }
 
 .container-watch .right-container {
@@ -553,4 +552,18 @@
     border: none;
     margin: .5em 0 .5em auto;
     border-radius: 3px;
+}
+
+.message {
+    padding: 1em 0;
+    text-align: center;
+}
+
+.message p {
+    text-align: center;
+    letter-spacing: 3px;
+    text-transform: capitalize;
+    font-size: 1.3rem;
+    font-weight: 300;
+    margin-bottom: .5em;
 }
