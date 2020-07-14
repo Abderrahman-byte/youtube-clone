@@ -24,6 +24,7 @@
     transition: .4s;
     border: none;
     margin: 0 auto;
+    margin-top: 1.5em;
 }
 
 .modifie-form button:hover, .modifie-form button:focus {
