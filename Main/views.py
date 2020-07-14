@@ -22,6 +22,7 @@ def indexView(request) :
 def watchView(request) :
     try :
         id = request.GET.get('v')
+        pl_id = request.GET.get('list')
         video = Video.objects.get(pk=id)
         likes = video.videoimpression_set.filter(kind=1).count()
         dislikes = video.videoimpression_set.filter(kind=-1).count()
@@ -29,9 +30,24 @@ def watchView(request) :
         related = getRelatedVideos(video)
         user_impr = None
         subscribed = False
+        playlist = None
         get_token(request)
     except Video.DoesNotExist :
         raise Http404
+
+    if pl_id is not None :
+        try :
+            pl = Playlist.objects.get(pk=pl_id)
+            
+            if video not in pl.videos.all() :
+                return redirect(reverse('main:watch') + f'?v={id}')
+
+            if pl.is_public or pl.creator == request.user :
+                playlist = pl
+            else :
+                return redirect(reverse('main:watch') + f'?v={id}')
+        except Playlist.DoesNotExist :
+            return redirect(reverse('main:watch') + f'?v={id}')
 
     if request.user.is_authenticated :
         try :
@@ -49,7 +65,8 @@ def watchView(request) :
         'user_impr': user_impr, 
         'subscribed': subscribed, 
         'comments': comments,
-        'related': related
+        'related': related,
+        'playlist': playlist
     }
 
     return render(request, 'main/watch.html', context)
