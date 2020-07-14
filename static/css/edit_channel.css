@@ -60,7 +60,7 @@
     line-height: 1.5;
     color: #495057;
     background-clip: padding-box;
-    border: 1px solid var(--border-clr, #ced4da);
+    border: 1px solid var(--borders-clr, #ced4da);
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     background-color: transparent;
@@ -156,7 +156,7 @@
     color: #495057;
     background-color: #ffffff;
     background-clip: padding-box;
-    border: 1px solid var(--border-clr, #ced4da);
+    border: 1px solid var(--borders-clr, #ced4da);
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     height: 200px;
