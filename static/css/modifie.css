@@ -84,6 +84,14 @@
     display: inline;
 }
 
+.form-group small {
+    color: var(--icons-clr);
+    display: block;
+    margin-top: .25em;
+    font-size: .75rem;
+    letter-spacing: .1em;
+}
+
 .video-content_type, .video-content_type option {
     text-transform: capitalize;
 }
