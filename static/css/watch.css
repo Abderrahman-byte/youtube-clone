@@ -71,7 +71,7 @@
     color: #495057;
     background-color: #ffffff;
     background-clip: padding-box;
-    border: 1px solid var(--border-clr, #ced4da);
+    border: 1px solid var(--borders-clr, #ced4da);
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     outline: none;
@@ -482,7 +482,7 @@
     color: #495057;
     background-color: #ffffff;
     background-clip: padding-box;
-    border: 1px solid var(--border-clr, #ced4da);
+    border: 1px solid var(--borders-clr, #ced4da);
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     outline: none;
@@ -532,7 +532,7 @@
     color: #495057;
     background-color: transparent;
     background-clip: padding-box;
-    border: 1px solid var(--border-clr, #ced4da);
+    border: 1px solid var(--borders-clr, #ced4da);
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     outline: none;
@@ -582,7 +582,7 @@
 .related .video .poster img {
     border-radius: 2px;
     opacity: .9;
-    border: 1px solid var(--border-clr);
+    border: 1px solid var(--borders-clr);
     transition: .2s;
 }
 
@@ -620,4 +620,38 @@
     font-size: 1.2rem;
     font-weight: 700;
     letter-spacing: .05em;
+}
+
+.playlist {
+    border: 1px solid var(--borders-clr);
+}
+
+.playlist .header {
+    background-color: var(--background-b);
+    padding: 1em .75em;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.playlist .header a {
+    display: block;
+    color: var(--variant-clr);
+    text-decoration: none;
+    margin-bottom: .4em;
+}
+
+.playlist .header .title {
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: .1em;
+}
+
+.playlist .header .creator {
+    font-size: 1.1rem;
+    letter-spacing: .2em;
+}
+
+.playlist .header small {
+    color: var(--variant-clr);
+    font-size: .75rem;
 }
