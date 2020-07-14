@@ -42,6 +42,8 @@
             <label for="video-disable_comments">Disable Comments :</label>
             <input id="video-disable_comments" class="video-disable_comments" type="checkbox" name="comments"
             {% if not video.allow_comments %}checked{% endif %} />
+
+            <small>Disabling comments will delete all previous comments immediately</small>
         </div>
 
         <button><i class="fas fa-cloud-upload-alt"></i>Save</button>
