@@ -99,11 +99,12 @@ def getRelatedVideos(video, size=10) :
     others = others[:int(size - len(related))]
     related += list(others)
     related_ids += [o.id for o in others]
-
+    
+    random.shuffle(related)
     if len(others) < size - len(related) :
         this_week = datetime.now() - timedelta(days=7)
         all_video = Video.objects.filter(posted_date__date__gte=this_week).exclude(id__in=related_ids).order_by('-views')
         complite = all_video[: int(size - len(related) - len(others))]
         related += list(complite)
-        
+    
     return related
