@@ -113,6 +113,20 @@ const renderDescription = () => {
     }
 }
 
+const fixPlaylistHeight = () => {
+    const plHeader = document.querySelector('.playlist .header')
+    const plBody = document.querySelector('.playlist .body')
+
+    if(plHeader && plBody) {
+        const headerHeigth = parseFloat(getComputedStyle(plHeader).height)
+        const videoHeigth = parseFloat(getComputedStyle(video_).height)
+        console.log(headerHeigth)
+        console.log(videoHeigth)
+
+        plBody.style.height = (videoHeigth - headerHeigth) + 'px'
+    }
+}
+
 ////////////////////// HTTP Requests and ajax functions //////////////////////
 
 const submitImpression = async e => {
@@ -302,4 +316,8 @@ addEventListener('DOMContentLoaded', () => {
     updateSuscriptionsCount()
     renderDescription()
     updateViews()
+})
+
+video_.addEventListener('loadedmetadata', () => {
+    fixPlaylistHeight()
 })
