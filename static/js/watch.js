@@ -120,8 +120,6 @@ const fixPlaylistHeight = () => {
     if(plHeader && plBody) {
         const headerHeigth = parseFloat(getComputedStyle(plHeader).height)
         const videoHeigth = parseFloat(getComputedStyle(video_).height)
-        console.log(headerHeigth)
-        console.log(videoHeigth)
 
         plBody.style.height = (videoHeigth - headerHeigth) + 'px'
     }
