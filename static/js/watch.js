@@ -173,6 +173,7 @@ const editPlaylist = async e => {
     const action = e.target.checked ? 1 : -1
     const videoId = video_.getAttribute('data-id')
     const playlistId = e.target.getAttribute('data-id')
+    const playlistElt = document.querySelector('.playlist')
 
     const data = {'videoId': videoId, 'playlistId': playlistId, 'action': action}
     const req = await fetch('/api/playlists', {
@@ -182,6 +183,14 @@ const editPlaylist = async e => {
             'X-CSRFToken': getCookie('csrftoken')
         }
     })
+
+    if(playlistElt && 
+        req.status >= 200 && 
+        req.status < 300 && 
+        action === -1 && 
+        playlistId == playlistElt.getAttribute('data-id')) {
+        playlistElt.parentNode.removeChild(playlistElt)
+    }
 }
 
 const saveVideo = async () => {
