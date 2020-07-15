@@ -624,11 +624,12 @@
 
 .playlist {
     border: 1px solid var(--borders-clr);
+    margin-bottom: .75em;
 }
 
 .playlist .header {
     background-color: var(--background-b);
-    padding: 1em .75em;
+    padding: .5em .75em;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
@@ -654,4 +655,79 @@
 .playlist .header small {
     color: var(--variant-clr);
     font-size: .75rem;
+}
+
+.playlist.hide .body {
+    height: 0 !important;
+}
+
+.playlist .body {
+    background-color: var(--background-d);
+    overflow-y: scroll;
+    height: 300px;
+}
+
+.playlist .body .video {
+    padding: .3em .75em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.playlist .body .video.current {
+    background-color: var(--background-a);
+    border-top: 1px solid var(--borders-clr);
+    border-bottom: 1px solid var(--borders-clr);
+}
+
+.playlist .body .video .poster {
+    width: 30%;
+    display: block;
+}
+
+.playlist .body .video .poster img {
+    border: 1px solid var(--borders-clr);
+    border-radius: 2px;
+}
+
+.playlist .body .video .info {
+    width: 55%;
+}
+
+.playlist .body .video .info a {
+    display: block;
+    text-decoration: none;
+}
+
+.playlist .body .video .info .title {
+    font-size: .9rem;
+    color: var(--variant-clr);
+    font-weight: 700;
+}
+
+.playlist .body .video .info .channel {
+    font-size: .75rem;
+    color: var(--icons-clr);
+    margin-top: .5em;
+}
+
+.playlist .body .video .holder {
+    width: 8%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+}
+
+.playlist .body .video .holder button {
+    border: 0;
+    background-color: transparent;
+    color: var(--icons-clr);
+    cursor: pointer;
+    margin-left: 1em;
+    font-size: 1.2rem;
+}
+
+.playlist .body .video:hover {
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
+    background-color: var(--background-c);
 }
