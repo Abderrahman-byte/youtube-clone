@@ -190,7 +190,7 @@
 
     <div class="right-container">
         {% if playlist and playlist.videos.count > 0 %}
-        <div class="playlist">
+        <div class="playlist" data-id="{{ playlist.id }}">
             <div class="header">
                 <a href="" class="title">{{ playlist.title }}</a>
                 <a href="{% url 'channel:index' playlist.creator.channel.id %}" class="creator">{{ playlist.creator.channel.title }}</a>
@@ -198,12 +198,23 @@
             </div>
             <div class="body">
                 {% for item in playlist.videos.all %}
-                <div class="video{% if item == video %} current{% endif %}">
+                <div id="{{ item.id }}" class="video{% if item == video %} current{% endif %}">
                     <a class="poster" href="{% url 'main:watch' %}?v={{ item.id }}&list={{ playlist.id }}">
                         <img src="{{ item.thumbnail_url }}">
                     </a>
 
-                    <div></div>
+                    <div class="info">
+                        <a class="title" href="{% url 'main:watch' %}?v={{ item.id }}&list={{ playlist.id }}">{{ item.title|make_list|slice:'0:40'|join:'' }}{% if item.title|length > 40 %}...{% endif %}</a>
+                        <a class="channel" href="{% url 'channel:index' item.channel.channel.id %}">{{ item.channel.channel.title }}</a>
+                    </div>
+
+                    <div class="holder">
+                        {% if playlist.creator == request.user %}
+                        <button class="delete-from-playlist" data-id="{{ item.id }}" data-playlist="{{ playlist.id }}">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                        {% endif %}
+                    </div>
                 </div>
                 {% endfor %}
             </div>
