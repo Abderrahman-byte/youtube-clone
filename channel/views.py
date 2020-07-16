@@ -107,3 +107,27 @@ def videosView(request, id) :
         return render(request, 'channel/videos.html', context)
     except Channel.DoesNotExist :
         raise Http404
+
+def playlistsView(request, id) :
+    try :
+        channel = Channel.objects.get(pk=id)
+        order = int(request.GET.get('order', 0))
+        subs = channel.user.users.all().count()
+        is_subscribed = request.user in [sub.user for sub in channel.user.users.all()]
+
+        if channel.user == request.user :
+            playlists = channel.user.playlist_set.all 
+        else :
+            playlists = channel.user.playlist_set.filter(is_public=True) 
+
+        context = {
+            'channel': channel, 
+            'subs': subs, 
+            'is_subscribed': is_subscribed,
+            'channel_playlists_classes': 'active',
+            'playlists': playlists
+        }
+
+        return render(request, 'channel/playlists.html', context)
+    except Channel.DoesNotExist :
+        raise Http404
