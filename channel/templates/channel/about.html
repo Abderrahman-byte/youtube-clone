@@ -1,0 +1,25 @@
+{% extends 'channel/main_base.html' %}
+
+{% load static %}
+
+{% block styles_channel %}
+<link rel="stylesheet" href="{% static 'css/about_channel.css' %}">
+{% endblock %}
+
+{% block content_channel %}
+<div class="about-container">
+    <div class="description">
+        <h6>Description</h6>
+        <p class="text-block">{{ channel.about }}</p>
+        <hr>
+    </div>
+    <div class="statistics">
+        <h6>Statistics</h6>
+        <hr>
+        <p>Active sence {{ channel.user.date_joined|date:'d b. Y' }}</p>
+        <hr>
+        <p>{{ views }} view{{ views|pluralize }} </p>
+        <hr>
+    </div>
+</div>
+{% endblock%}
