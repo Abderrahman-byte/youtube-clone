@@ -23,6 +23,7 @@
     padding: .75em 3em;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .info-left {
@@ -193,4 +194,14 @@
 .submit-btn:hover, .submit-btn:focus {
     background-color: var(--background-d);
     color: var(--variant-clr);
+}
+
+.return-btn {
+    text-decoration: none;
+    padding: .75em 1.25em;
+    border-radius: 3px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: whitesmoke;
+    background-color: royalblue;
 }
