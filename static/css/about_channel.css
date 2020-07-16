@@ -1,0 +1,25 @@
+.about-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.about-container .description {
+    width: 55%;
+}
+
+.about-container .statistics {
+    width: 30%;
+}
+
+.about-container h6 {
+    color: var(--variant-clr);
+    font-size: 1.5rem;
+    letter-spacing: .15em;
+    margin-bottom: .5em;
+}
+
+.about-container p {
+    color: var(--icons-clr);
+    font-size: .8em;
+    letter-spacing: .1em;
+}
