@@ -40,7 +40,7 @@
                 <a class="{{ channel_videos_classes }}" href="{% url 'channel:videos' channel.id %}">Videos</a>
             </li>
             <li>
-                <a href="">Playlists</a>
+                <a href="{% url 'channel:playlists' channel.id %}" class="{{channel_playlists_classes }}" >Playlists</a>
             </li>
             <li>
                 <a href="">About</a>
