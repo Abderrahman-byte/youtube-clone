@@ -68,6 +68,7 @@ def filterWords(alist) :
     forbidden = ['and', 'or', 'the', '']
     allowed = string.ascii_letters + '\'\"@é'
     for item in alist :
+        if item == '' : continue
         f = item[0].lower()
         if f in allowed and item.lower() not in forbidden :
             result.append(item)
