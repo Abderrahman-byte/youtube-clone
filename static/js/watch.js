@@ -15,6 +15,8 @@ const authBackboard = document.getElementById('auth-blackboard')
 const closeAuthDisplayBtn = document.getElementById('close-auth')
 const descritpionDiv = document.getElementById('video-description')
 const toggleDescriptionBtn = document.getElementById('show-decription-btn')
+const togglePlaylistBtn = document.getElementById('toggle-playlist')
+const playlistElt = document.querySelector('.playlist')
 
 ////////////////////// Show and Close Displays //////////////////////
 
@@ -45,6 +47,12 @@ const showAuthDisplay = () => {
 
 const toggleDescription = () => {
     descritpionDiv.classList.toggle('show')
+}
+
+const togglePlaylist = () => {
+    if(playlistElt) {
+        playlistElt.classList.toggle('hide')
+    }
 }
 
 ////////////////////// Utilities functions //////////////////////
@@ -314,6 +322,10 @@ addEventListener('DOMContentLoaded', () => {
     updateSuscriptionsCount()
     renderDescription()
     updateViews()
+
+    if(togglePlaylistBtn) {
+        togglePlaylistBtn.addEventListener('click', togglePlaylist)
+    }
 })
 
 video_.addEventListener('loadedmetadata', () => {
