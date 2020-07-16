@@ -308,7 +308,9 @@ const removeItemFromPlaylist = async e => {
         }
     })
 
-    if(req.status >= 200 && req.status < 300) {
+    if(req.status >= 200 && req.status < 300 && videoId === video_.getAttribute('data-id')) {
+        playlistElt.parentNode.removeChild(playlistElt)
+    } else if(req.status >= 200 && req.status < 300) {
         const target = document.getElementById(videoId)
         target.parentNode.removeChild(target)
     }
