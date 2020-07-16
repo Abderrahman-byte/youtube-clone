@@ -195,6 +195,11 @@
                 <a href="" class="title">{{ playlist.title }}</a>
                 <a href="{% url 'channel:index' playlist.creator.channel.id %}" class="creator">{{ playlist.creator.channel.title }}</a>
                 <small>{{ playlist.videos.count }} item{{ playlist.videos.count|pluralize }}</small>
+
+                <button id="toggle-playlist">
+                    <i class="top fas fa-angle-up"></i>
+                    <i class="bottom fas fa-angle-down"></i>
+                </button>
             </div>
             <div class="body">
                 {% for item in playlist.videos.all %}
