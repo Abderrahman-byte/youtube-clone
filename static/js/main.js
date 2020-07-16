@@ -3,6 +3,15 @@ const navCloser = document.getElementById('hide_nav')
 const nav = document.getElementById('nav')
 const navBars = document.getElementById('nav_bars')
 
+const renderTextProperly = () => {
+    const textBlock = document.querySelectorAll('.text-block')
+
+    textBlock.forEach(blk => {
+        const content = blk.textContent.split('\n').join('<br/>')
+        blk.innerHTML = content
+    })
+}
+
 const hideNav = () => {
     nav.classList.remove('show')
     backboard.style.display = 'none'
@@ -16,3 +25,7 @@ const showNav = () => {
 navCloser.addEventListener('click', hideNav)
 backboard.addEventListener('click', hideNav)
 navBars.addEventListener('click', showNav)
+
+addEventListener('DOMContentLoaded', () => {
+    renderTextProperly()
+})
