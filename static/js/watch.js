@@ -17,6 +17,7 @@ const descritpionDiv = document.getElementById('video-description')
 const toggleDescriptionBtn = document.getElementById('show-decription-btn')
 const togglePlaylistBtn = document.getElementById('toggle-playlist')
 const playlistElt = document.querySelector('.playlist')
+const removeVideoBtns = document.querySelectorAll('.playlist .video .delete-from-playlist')
 
 ////////////////////// Show and Close Displays //////////////////////
 
@@ -293,6 +294,26 @@ const submitView =  e => {
 
 }
 
+const removeItemFromPlaylist = async e => {
+    const videoId = e.target.getAttribute('data-id') || e.target.parentNode.getAttribute('data-id')
+    const playlistId = e.target.getAttribute('data-playlist') || e.target.parentNode.getAttribute('data-playlist')
+    const action = -1
+
+    const data = {'videoId': videoId, 'playlistId': playlistId, 'action': action}
+    const req = await fetch('/api/playlists', {
+        'method': 'PUT',
+        'body': JSON.stringify(data),
+        'headers': {
+            'X-CSRFToken': getCookie('csrftoken')
+        }
+    })
+
+    if(req.status >= 200 && req.status < 300) {
+        const target = document.getElementById(videoId)
+        target.parentNode.removeChild(target)
+    }
+}
+
 ////////////////////// Events listeners //////////////////////
 
 saveBtn.addEventListener('click', saveVideo)
@@ -312,20 +333,23 @@ if(toggleDescriptionBtn !== null ){
     })
 }
 
+if(togglePlaylistBtn) {
+    togglePlaylistBtn.addEventListener('click', togglePlaylist)
+}
 
 impressionBtns.forEach(btn => {
     btn.addEventListener('click', submitImpression)
+})
+
+removeVideoBtns.forEach(btn => {
+    btn.addEventListener('click', removeItemFromPlaylist)
 })
 
 addEventListener('DOMContentLoaded', () => {
     updateImpressionsCount()
     updateSuscriptionsCount()
     renderDescription()
-    updateViews()
-
-    if(togglePlaylistBtn) {
-        togglePlaylistBtn.addEventListener('click', togglePlaylist)
-    }
+    updateViews() 
 })
 
 video_.addEventListener('loadedmetadata', () => {
