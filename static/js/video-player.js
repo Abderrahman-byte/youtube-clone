@@ -33,7 +33,7 @@ const formatTime = time => {
 } 
 
 const preventDefaultForScrollKeys = (e) => {
-    const keys = {37: 1, 38: 1, 39: 1, 40: 1, 32: 1}
+    const keys = {37: 1, 38: 1, 39: 1, 40: 1}
 
     if(keys[e.keyCode]) {
         e.preventDefault()
