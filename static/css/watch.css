@@ -572,7 +572,7 @@
 .related .video {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 1.75em;
+    margin-bottom: .75em;
 }
 
 .related .video .poster {
@@ -624,10 +624,11 @@
 
 .playlist {
     border: 1px solid var(--borders-clr);
-    margin-bottom: .75em;
+    margin-bottom: 1.25em;
 }
 
 .playlist .header {
+    position: relative;
     background-color: var(--background-b);
     padding: .5em .75em;
     border-top-left-radius: 3px;
@@ -730,4 +731,32 @@
 .playlist .body .video:hover {
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.4);
     background-color: var(--background-c);
+}
+
+.playlist .header #toggle-playlist {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    border: 0;
+    background-color: transparent;
+    color: var(--icons-clr);
+    cursor: pointer;
+    margin-left: 1em;
+    font-size: 1.5rem;
+}
+
+.playlist .header #toggle-playlist .top {
+    display: block;
+}
+
+.playlist .header #toggle-playlist .bottom {
+    display: none;
+}
+
+.playlist.hide .header #toggle-playlist .top {
+    display: none;
+}
+
+.playlist.hide .header #toggle-playlist .bottom {
+    display: block;
 }
