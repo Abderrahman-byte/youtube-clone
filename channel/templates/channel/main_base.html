@@ -43,7 +43,7 @@
                 <a href="{% url 'channel:playlists' channel.id %}" class="{{channel_playlists_classes }}" >Playlists</a>
             </li>
             <li>
-                <a href="">About</a>
+                <a href="{% url 'channel:about' channel.id %}" class="{{channel_about_classes }}">About</a>
             </li>
         </ul>
     </nav>
