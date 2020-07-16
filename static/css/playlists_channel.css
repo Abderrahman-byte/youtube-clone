@@ -15,6 +15,8 @@
     border: 1px solid var(--borders-clr);
     border-radius: 3px;
     position: relative;
+    height: calc((100vw - 5%) / 5 * 0.5625) ;
+    min-height: calc(200px * 0.5625);
 }
 
 .playlists-container .playlist .poster img {
