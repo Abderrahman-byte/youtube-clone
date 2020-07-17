@@ -35,7 +35,7 @@
             <label>private :</label>
             <input data-id="{{ playlist.id }}" id="privacy-input" type="checkbox" {% if not playlist.is_public %}checked{% endif %} />
         </div>
-        <a href="" class="delete">delete</a>
+        <a href="{% url 'main:delete_playlist' playlist.id  %} " class="delete">delete</a>
         {% endif %}
     </div>
     <div class="playlist-items">
