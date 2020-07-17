@@ -382,7 +382,7 @@ class PlaylistView(View) :
 
             if playlist.creator == request.user :
                 if title is not None : playlist.title = title
-                if privacy is not None : playlist.title = not privacy
+                if privacy is not None : playlist.is_public = not privacy
                 playlist.save()
                 return HttpResponse(status=201)
             else :
