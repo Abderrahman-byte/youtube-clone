@@ -1,0 +1,67 @@
+{% extends 'main/main_base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/playlist.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="playlist-container">
+    <div class="playlist-info">
+        <div class="poster">
+            <img src="{{ playlist.videos.first.thumbnail_url }} ">
+            <a class="watch" href="{% url 'main:watch' %}?v={{playlist.videos.first.id}}&list={{playlist.id}}">watch</a>
+        </div>
+
+        <div class="title" id="playlist-title">
+            <h6>{{ playlist.title }}</h6>
+            {% if playlist.creator == request.user %}
+            <button data-id="{{ playlist.id }}" id="edit-title" >
+                <i class="fas fa-pen"></i>
+            </button>
+            {% endif %}
+        </div>
+
+        <p class="channel">Created by <a href="{% url 'channel:index' playlist.creator.channel.id %}">{{playlist.creator.channel.title }}</a></p>
+        <p class="items-count">{{ playlist.videos.all.count }} video{{ playlist.videos.count|pluralize }}</p>
+        
+        {% if playlist.creator == request.user %}
+        <div class="privacy-div">
+            <label>private :</label>
+            <input type="checkbox" {% if not playlist.is_public %}checked{% endif %} />
+        </div>
+        <a href="" class="delete">delete</a>
+        {% endif %}
+    </div>
+    <div class="playlist-items">
+        {% for video in playlist.videos.all %}
+        <div class="video" id="{{ video.id }}">
+            <a data-duration="{{video.get_duration}}" class="poster" href="{% url 'main:watch' %}?v={{video.id}}&list={{playlist.id}}">
+                <img src="{{ video.thumbnail_url }}" />
+            </a>
+
+            <div class="info">
+                <a class="title" href="{% url 'main:watch' %}?v={{video.id}}&list={{playlist.id}}">{{ video.title }} </a>
+                <a class="channel" href="{% url 'channel:index' video.channel.channel.id %}">{{ video.channel.channel.title }} </a>
+            </div>
+            
+            <div class="holder">
+                {% if playlist.creator == request.user %}
+                <button data-id="{{ video.id }}" data-playlist="{{ playlist.id }}">
+                    <i class="fas fa-trash"></i>
+                </button>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+
+
+{% block script %}
+<script src="{% static 'js/playlist.js' %}"></script>
+{% endblock %}
