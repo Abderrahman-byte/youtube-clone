@@ -30,7 +30,7 @@
         {% if playlist.creator == request.user %}
         <div class="privacy-div">
             <label>private :</label>
-            <input type="checkbox" {% if not playlist.is_public %}checked{% endif %} />
+            <input data-id="{{ playlist.id }}" id="privacy-input" type="checkbox" {% if not playlist.is_public %}checked{% endif %} />
         </div>
         <a href="" class="delete">delete</a>
         {% endif %}
