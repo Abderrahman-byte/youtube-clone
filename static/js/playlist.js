@@ -1,5 +1,6 @@
 const editTitleBtn = document.getElementById('edit-title')
 const playlistTitleDiv = document.getElementById('playlist-title')
+const privacyInput = document.getElementById('privacy-input')
 
 const savePlaylistTitle = async (e) => {
     const playlistId = e.target.getAttribute('data-id')
@@ -22,6 +23,22 @@ const savePlaylistTitle = async (e) => {
     }
 } 
 
+const setPrivacy = async  (e) => {
+    const is_private = e.target.checked
+    const id = e.target.getAttribute('data-id')
+    const data = {'id': id, 'privacy': is_private}
+
+    const req = await fetch('/playlist', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+    })
+
+    console.log(req)
+}
+
 const editTitle = (e) => {
     const playlistId = e.target.getAttribute('data-id') || e.target.parentNode.getAttribute('data-id') 
     const playlistTitle = playlistTitleDiv.querySelector('h6').textContent 
@@ -40,4 +57,8 @@ const editTitle = (e) => {
 
 if (editTitleBtn) {
     editTitleBtn.addEventListener('click', editTitle)
+}
+
+if(privacyInput) {
+    privacyInput.addEventListener('change', setPrivacy)
 }
