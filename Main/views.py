@@ -370,3 +370,22 @@ class PlaylistView(View) :
                 raise Http404
         except Playlist.DoesNotExist :
             raise Http404
+
+    def post(self, request) :
+        body = json.loads(request.body)
+        id = body.get('id')
+        title = body.get('title')
+        privacy = body.get('privacy')
+
+        try :
+            playlist = Playlist.objects.get(pk=id)
+
+            if playlist.creator == request.user :
+                if title is not None : playlist.title = title
+                if privacy is not None : playlist.title = not privacy
+                playlist.save()
+                return HttpResponse(status=201)
+            else :
+                return HttpResponseForbidden()
+        except Playlist.DoesNotExist :
+            raise Http404
