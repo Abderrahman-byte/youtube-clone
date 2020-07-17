@@ -12,6 +12,7 @@ urlpatterns = [
     path('modifie', views.ModifieView.as_view(), name='modifie'),
     path('delete', views.deleteVideo, name='delete'),
     path('watch', views.watchView, name='watch'),
+    path('playlist', views.PlaylistView.as_view(), name='playlist'),
     path('api/impression', views.submitImpressionView.as_view(), name='impressions'),
     path('api/playlists', views.ApiPlaylists.as_view(), name='playlists_api'),
     path('api/subscribe', views.SubscribeView.as_view(), name='subscribe'),
