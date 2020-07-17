@@ -353,3 +353,20 @@ def staticView(request, path) :
     response = serve(request, path, document_root=settings.MEDIA_ROOT)
     response['Accept-Ranges'] = 'bytes'
     return response
+
+class PlaylistView(View) :
+    def get(self, request) :
+        id = request.GET.get('id')
+        try :
+            playlist = Playlist.objects.get(pk=id)
+
+            if playlist.is_public or playlist.creator == request.user :
+                context = {
+                    'playlist': playlist
+                }
+
+                return render(request, 'main/playlist.html', context)
+            else :
+                raise Http404
+        except Playlist.DoesNotExist :
+            raise Http404
