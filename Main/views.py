@@ -389,3 +389,16 @@ class PlaylistView(View) :
                 return HttpResponseForbidden()
         except Playlist.DoesNotExist :
             raise Http404
+
+def deletePlaylistView(request, id) :
+    try :
+        playlist = Playlist.objects.get(pk=id)
+
+        if playlist.creator == request.user :
+            playlist.delete()
+
+            return redirect(reverse('channel:playlists', args=(playlist.creator.channel.id,)))
+        else :
+            return HttpResponseForbidden()
+    except Playlist.DoesNotExist :
+        raise Http404
