@@ -52,7 +52,7 @@
             
             <div class="holder">
                 {% if playlist.creator == request.user %}
-                <button data-id="{{ video.id }}" data-playlist="{{ playlist.id }}">
+                <button class="remove-video" data-id="{{ video.id }}" data-playlist="{{ playlist.id }}">
                     <i class="fas fa-trash"></i>
                 </button>
                 {% endif %}
