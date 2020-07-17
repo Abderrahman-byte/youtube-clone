@@ -11,7 +11,10 @@
 <div class="playlist-container">
     <div class="playlist-info">
         <div class="poster">
-            <img src="{{ playlist.videos.first.thumbnail_url }} ">
+            <img src="{% if playlist.videos.all.count > 0 %}
+            {{ playlist.videos.first.thumbnail_url }}{% else %}
+            /media/images/thumbnails/default.jpeg        
+            {% endif %}">
             <a class="watch" href="{% url 'main:watch' %}?v={{playlist.videos.first.id}}&list={{playlist.id}}">watch</a>
         </div>
 
