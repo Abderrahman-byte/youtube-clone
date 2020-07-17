@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 from uuid import uuid4
+from datetime import timedelta
 
 from .utils import *
 
@@ -40,6 +41,9 @@ class Video(models.Model) :
     def add_view(self) :
         self.views = self.views + 1 
         self.save()
+
+    def get_duration(self) :
+        return str(timedelta(seconds=self.duration))
 
 class Playlist(models.Model) :
     id = models.TextField(primary_key=True, max_length=35, default=generetePlaylistId, editable=False)
