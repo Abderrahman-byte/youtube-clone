@@ -1,6 +1,7 @@
 const editTitleBtn = document.getElementById('edit-title')
 const playlistTitleDiv = document.getElementById('playlist-title')
 const privacyInput = document.getElementById('privacy-input')
+const removeBtns = document.querySelectorAll('.playlist-items .video .remove-video')
 
 const savePlaylistTitle = async (e) => {
     const playlistId = e.target.getAttribute('data-id')
@@ -35,8 +36,6 @@ const setPrivacy = async  (e) => {
             'X-CSRFToken': getCookie('csrftoken')
         },
     })
-
-    console.log(req)
 }
 
 const editTitle = (e) => {
@@ -55,6 +54,26 @@ const editTitle = (e) => {
     else  e.target.parentNode.classList.add('hide')
 }
 
+const removePlaylist = async e => {
+    const id = e.target.getAttribute('data-id') || e.target.parentNode.getAttribute('data-id')
+    const playlistId = e.target.getAttribute('data-playlist') || e.target.parentNode.getAttribute('data-playlist')
+    const action = -1
+    const data = {'videoId': id, 'playlistId': playlistId, 'action': action}
+
+    const req = await fetch('/api/playlists', {
+        method: 'PUT',
+        body: JSON.stringify(data),
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+    })
+
+    if(req.status >= 200 && req.status < 300) {
+        const target = document.getElementById(id)
+        target.parentNode.removeChild(target)
+    }
+}
+
 if (editTitleBtn) {
     editTitleBtn.addEventListener('click', editTitle)
 }
@@ -62,3 +81,5 @@ if (editTitleBtn) {
 if(privacyInput) {
     privacyInput.addEventListener('change', setPrivacy)
 }
+
+removeBtns.forEach(btn =>  btn.addEventListener('click', removePlaylist))
