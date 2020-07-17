@@ -1,0 +1,202 @@
+.playlist-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.playlist-container .playlist-info {
+    width: 30%;
+}
+
+.playlist-container .playlist-info .poster {
+    position: relative;
+    border-radius: 3px;
+    border: 1px solid var(--borders-clr);
+    overflow: hidden; 
+}
+
+.playlist-container .playlist-info .poster .watch {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: .5em 0;
+    background-color: var(--background-d, black);
+    text-decoration: none;
+    font-size: 1.3rem;
+    color: var(--variant-clr);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    opacity: .75;
+    transition: .4s;
+}
+
+.playlist-container .playlist-info .poster .watch:hover, .playlist-container .playlist-info .poster .watch:focus  {
+    opacity: 1;
+}
+
+.playlist-info .title {
+    display: flex;
+    justify-content: space-between;
+    margin: .75em 0;
+}
+
+.playlist-info .title h6, .playlist-info .title input[type=text] {
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: .1em;
+    color: var(--variant-clr);
+}
+
+.playlist-info .title input[type=text] {
+    background-color: transparent;
+    border: 1px solid var(--borders-clr);
+    border-radius: 3px;
+    padding: .1em .2em;
+}
+
+.playlist-info .title button {
+    font-size: 1.2rem;
+    color: var(--icons-clr);
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.playlist-info .title button.hide {
+    display: none;
+}
+
+.playlist-info .channel {
+    display: block;
+    color: var(--variant-clr);
+    margin-bottom: .5em;
+    font-size: 1.1em;
+    letter-spacing: .1em;
+}
+
+.playlist-info .channel a {
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--variant-clr);
+}
+
+.playlist-info .items-count {
+    color: var(--icons-clr);
+    font-size: 1.1em;
+    letter-spacing: .1em;
+}
+
+.playlist-info .privacy-div {
+    color: var(--icons-clr);
+    margin: .5em 0;
+    text-transform: capitalize;
+    letter-spacing: .1em;
+    font-weight: 500;
+}
+
+.playlist-info .delete {
+    display: table;
+    padding: .2em .75em;
+    background-color: rgb(255, 34, 34);
+    color: whitesmoke;
+    text-decoration: none;
+    margin-top: 1em;
+    font-size: 1.3rem;
+    border-radius: 5px;
+}
+
+.playlist-container .playlist-items {
+    width: 60%;
+}
+
+.playlist-container .playlist-items .video {
+    display: flex;
+    justify-content: space-between;
+    padding: .75em 1em;
+    border-bottom: 1px solid var(--borders-clr);
+    transition: .2s;
+}
+
+.playlist-container .playlist-items .video:hover {
+    background-color: var(--background-d);
+}
+
+.playlist-container .playlist-items .video .poster {
+    position: relative;
+    width: 20%;
+    border-radius: 3px;
+    border: 1px solid var(--borders-clr);
+}
+
+.playlist-container .playlist-items .video .poster::before {
+    z-index: 2;
+    position: absolute;
+    display: block;
+    right: .1em;
+    bottom: .1em;
+    content: attr(data-duration);
+    padding: .3em .5em;
+    font-size: .8rem;
+    color: rgb(230, 230, 230);
+    background-color: rgb(34, 34, 34);
+    border-radius: 2px;
+    opacity: .8;
+    transition: .4s;
+}
+
+.playlist-container .playlist-items .video .poster:hover::before {
+    opacity: 1;
+}
+
+.playlist-container .playlist-items .video .poster img {
+    opacity: .8;
+    transition: .2s;
+}
+
+.playlist-container .playlist-items .video .poster img:hover {
+    opacity: 1;
+}
+
+.playlist-container .playlist-items .video .info {
+    width: 58%;
+}
+
+.playlist-container .playlist-items .video .info a {
+    display: block;
+    text-decoration: none;
+}
+
+.playlist-container .playlist-items .video .info .title {
+    margin-bottom: .5em;
+    font-size: 1.2rem;
+    color: var(--variant-clr);
+    font-weight: 700;
+}
+
+.playlist-container .playlist-items .video .info .channel {
+    font-size: .9rem;
+    color: var(--icons-clr);
+}
+
+.playlist-container .playlist-items .video .holder {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+.playlist-container .playlist-items .video .holder button {
+    font-size: 1.8rem;
+    color: var(--icons-clr);
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+    opacity: .7;
+    transition: .4s;
+}
+
+.playlist-container .playlist-items .video .holder button:hover {
+    opacity: 1;
+}
