@@ -14,6 +14,12 @@
     overflow: hidden; 
 }
 
+.playlist-container .playlist-info .poster img {
+    width: 100%;
+    max-height: calc((100vw - 2em) * 0.3 / 1250 * 720 );
+    object-fit: cover;
+}
+
 .playlist-container .playlist-info .poster .watch {
     display: block;
     position: absolute;
