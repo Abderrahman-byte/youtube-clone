@@ -204,7 +204,7 @@
             <div class="body">
                 {% for item in playlist.videos.all %}
                 <div id="{{ item.id }}" class="video{% if item == video %} current{% endif %}">
-                    <a class="poster" href="{% url 'main:watch' %}?v={{ item.id }}&list={{ playlist.id }}">
+                    <a data-duration="{{ item.get_duration }}" class="poster" href="{% url 'main:watch' %}?v={{ item.id }}&list={{ playlist.id }}">
                         <img src="{{ item.thumbnail_url }}">
                     </a>
 
@@ -229,7 +229,7 @@
         <div class="related">
             {% for v in related %}
             <div class="video">
-                <a class="poster" href="{% url 'main:watch'%}?v={{v.id}} ">
+                <a data-duration="{{ video.get_duration }}" class="poster" href="{% url 'main:watch'%}?v={{v.id}} ">
                     <img src="{{ v.thumbnail_url }}" alt="{{ video.title}}" />
                 </a>
                 <div class="info">

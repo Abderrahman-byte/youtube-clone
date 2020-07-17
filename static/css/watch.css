@@ -577,6 +577,7 @@
 
 .related .video .poster {
     width: 45%;
+    position: relative;
 }
 
 .related .video .poster img {
@@ -683,6 +684,7 @@
 .playlist .body .video .poster {
     width: 30%;
     display: block;
+    position: relative;
 }
 
 .playlist .body .video .poster img {
@@ -759,4 +761,24 @@
 
 .playlist.hide .header #toggle-playlist .bottom {
     display: block;
+}
+
+.playlist .body .video .poster::before, .related .video .poster::before {
+    z-index: 2;
+    position: absolute;
+    display: block;
+    right: .1em;
+    bottom: .1em;
+    content: attr(data-duration);
+    padding: .3em .5em;
+    font-size: .8rem;
+    color: rgb(230, 230, 230);
+    background-color: rgb(34, 34, 34);
+    border-radius: 2px;
+    opacity: .8;
+    transition: .4s;
+}
+
+.playlist .body .video .poster:hover::before, .related .video .poster:hover::before {
+    opacity: 1;
 }
