@@ -13,7 +13,7 @@
 <div class="playlist">
     <a class="poster" href="{% if playlist.videos.all.count > 0 %}
         {% url 'main:watch' %}?v={{playlist.videos.first.id}}&list={{playlist.id}}
-        {% else %}None{% endif %}">
+        {% else %}{% url 'main:playlist' %}?id={{playlist.id}}{% endif %}">
         <img src="{% if playlist.videos.all.count > 0 %}
         {{ playlist.videos.first.thumbnail_url }}{% else %}
         /media/images/thumbnails/default.jpeg        
@@ -24,7 +24,7 @@
     </a>
     <a class="title" href="{% if playlist.videos.all.count > 0 %}
     {% url 'main:watch' %}?v={{playlist.videos.first.id}}&list={{playlist.id}}
-    {% else %}None{% endif %}">{{playlist.title}} 
+    {% else %}{% url 'main:playlist' %}?id={{playlist.id}}{% endif %}">{{playlist.title}} 
     {% if playlist.videos.all.count > 0 %}
     ({{ playlist.videos.count }} video{{ playlist.videos.count|pluralize }}) {% else %} (Empty) {% endif %}</a>
 </div>
