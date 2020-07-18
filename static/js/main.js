@@ -2,6 +2,7 @@ const backboard = document.getElementById('backboard')
 const navCloser = document.getElementById('hide_nav')
 const nav = document.getElementById('nav')
 const navBars = document.getElementById('nav_bars')
+const navPlaylist = document.getElementById('nav_bar_playlists')
 
 const getCookie = name => {
     let cookieValue = null;
@@ -28,6 +29,27 @@ const renderTextProperly = () => {
     })
 }
 
+const renderPlaylists = async () => {
+    const req = await fetch('/api/playlists', {
+        'redirect': 'manual'
+    })
+
+    if(req.status >= 200 && req.status < 300) {
+        const response = await req.json()
+        const playlists = response.playlists
+        navPlaylist.innerHTML = ''
+
+        playlists.forEach(pl => {
+            const item = document.createElement('li')
+            const pLink = document.createElement('a')
+            pLink.textContent = pl.title
+            pLink.href = `/playlist?id=${pl.id}`
+            item.appendChild(pLink)
+            navPlaylist.appendChild(item)
+        })
+    }
+}
+
 const hideNav = () => {
     nav.classList.remove('show')
     backboard.style.display = 'none'
@@ -44,4 +66,5 @@ navBars.addEventListener('click', showNav)
 
 addEventListener('DOMContentLoaded', () => {
     renderTextProperly()
+    renderPlaylists()
 })
