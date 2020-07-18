@@ -58,12 +58,18 @@
                 
             </div>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Channel</a></li>
+                <li><a href="{% url 'main:index' %}">Home</a></li>
+                <li><a href="{% url 'user' %}">Channel</a></li>
                 <li><a href="#">Abonnements</a></li>
-                <li><a href="#">Vos videos</a></li>
-                <li><a href="#">Playlists</a></li>
+                {% if request.user.is_authenticated %}
+                <li><a href="{% url 'channel:videos' request.user.channel.id %}">Vos videos</a></li>
+                <li><a href="{% url 'channel:playlists' request.user.channel.id %}">Playlists</a></li>
+                {% else %}
+                <li><a href="{% url 'user' %}">Vos videos</a></li>
+                <li><a href="{% url 'user' %}">Playlists</a></li>
+                {% endif %}
             </ul>
+            <ul class="playlists" id="nav_bar_playlists"></ul>
         </nav>
     </header>
 
