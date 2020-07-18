@@ -22,6 +22,12 @@
 <div class="videos-container">
     {% for video in videos %}
     <div class="video">
+        {% if request.user == channel.user %}
+        <button class="set-favorite{% if channel.favorite_video == video %} favorite{% endif %}" data-id="{{ video.id }}" data-channel="{{ channel.id }}">
+            <i class="fas fa-star filled"></i>
+            <i class="far fa-star empty"></i>
+        </button>
+        {% endif %}
         <a class="img-a" data-duration="{{ video.duration }}" href="{% url 'main:watch' %}?v={{video.id}}">
             <img src="{{ video.thumbnail_url }}" alt="{{ video.title }}" />
         </a>
