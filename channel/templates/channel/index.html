@@ -73,7 +73,12 @@
        <h6>{{ f_video.title }}</h6>
        <p class="bottom"><span class="views" data-views="{{ v.views }}">{{ f_video.views }}</span>
         view{{ f_video.views|pluralize }} • {{ f_video.posted_date|naturaltime}}</p>
+
+        {% if f_video.description %}
         <p class="text-block description">{{ f_video.description|make_list|slice:'0:150'|join:'' }}...</p>
+        {% else %}
+        <p class="description"></p>
+        {% endif %}
         <a href="{% url 'main:watch' %}?v={{f_video.id}}" class="more_btn">More</a>
    </div>
 </div> 
