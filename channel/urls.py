@@ -10,4 +10,5 @@ urlpatterns = [
     path('<str:id>/videos', views.videosView, name='videos'),
     path('<str:id>/playlists', views.playlistsView, name='playlists'),
     path('<str:id>/about', views.aboutChannel, name='about'),
+    path('<str:id>/subscriptions', views.subscriptionsChannel, name='subscriptions'),
 ]
