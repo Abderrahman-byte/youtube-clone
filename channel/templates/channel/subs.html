@@ -1,0 +1,24 @@
+{% extends 'main/main_base.html' %}
+
+{% load humanize %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/subscriptions.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="channels-container">
+    {% for channel in subs_channels %}
+    <div class="channel">
+        <a class="poster" href="{% url 'channel:index' channel.id %}">
+            <img src="{{ channel.profil_img }}">
+        </a>
+        <a class="title" href="{% url 'channel:index' channel.id %}">{{ channel.title }}</a>
+        <p class="views">{{ channel.user.users.count|intword }} subscriber{{ channel.user.users.count|pluralize }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block script %}{% endblock %}
