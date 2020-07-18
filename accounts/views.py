@@ -70,4 +70,4 @@ def UserView(request) :
         channel = request.user.channel
         return redirect(reverse('channel:index', args=(channel.id,)))
     else :
-        return redirect(reverse('main:index'))
+        return redirect(reverse('login'))
