@@ -203,6 +203,8 @@ class ModifieView(View) :
                 video.save()
             except utils.IntegrityError :
                 messages.error(request, 'Each video in your channel should have a unique title')
+            except Exception as ex:
+                messages.error(request, ex)
 
             return redirect(reverse('main:modifie') + f'?v={video.id}')
         else :

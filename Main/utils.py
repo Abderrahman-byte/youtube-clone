@@ -61,7 +61,10 @@ def adjustImage(path, w, h) :
         im = im.crop(box)
     
     im = im.resize((w, h))
-    im.save(path, quality=1000, subsampling=0)
+    try :
+        im.save(path, quality=1000, subsampling=0)
+    except :
+        im.save(path)
 
 def filterWords(alist) :
     result = []
