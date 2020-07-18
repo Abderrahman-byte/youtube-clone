@@ -1,0 +1,43 @@
+.channels-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.channels-container .channel {
+    margin: 0 1%;
+    margin-bottom: 1.5em;
+    width: calc((100% - (1% * 8 * 2)) / 8 );
+}
+
+.channels-container .channel .poster {
+    display: block;
+    margin-bottom: .5em;
+}
+
+.channels-container .channel .poster img {
+    width: 100%;
+    border-radius: 50%;
+    border: 1px solid var(--borders-clr);
+    transition: .4s;
+    opacity: .8;
+}
+
+.channels-container .channel .poster img:hover {
+    opacity: 1;
+}
+
+.channels-container .channel .title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--variant-clr);
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: .1em;
+}
+
+.channels-container .channel .views {
+    text-align: center;
+    color: var(--icons-clr);
+    font-size: .75rem;
+}
