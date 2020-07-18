@@ -199,7 +199,10 @@ class ModifieView(View) :
             video.allow_comments = allow_comments
             if content_type_id > 0 : video.content_type = ContentType.objects.get(pk=content_type_id)
             if description != '' : video.description = description
-            video.save()
+            try :
+                video.save()
+            except utils.IntegrityError :
+                messages.error(request, 'Each video in your channel should have a unique title')
 
             return redirect(reverse('main:modifie') + f'?v={video.id}')
         else :

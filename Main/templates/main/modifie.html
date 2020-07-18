@@ -46,6 +46,14 @@
             <small>Disabling comments will delete all previous comments immediately</small>
         </div>
 
+        {% if messages %}
+        {% for msg in messages%}
+        <div class="message message-{{msg.tags}}">
+            <p>{{ msg }}</p>
+        </div>
+        {% endfor %}
+        {% endif %}
+
         <button><i class="fas fa-cloud-upload-alt"></i>Save</button>
     </form>
 </div>
