@@ -21,12 +21,24 @@ def index(request, id) :
             t = timedelta(seconds=video.duration)
             video.duration = str(t)
 
+        if channel.favorite_video is not None :
+            f_video = channel.favorite_video
+        elif channel.user.video_set.count() < 1 :
+            f_video = None
+        else :
+            av_views = 0
+            total = channel.user.video_set.count()
+            for v in channel.user.video_set.all() : av_views += v.views
+            av_views = av_views / total
+            f_video = channel.user.video_set.filter(views__gt=av_views).order_by('-posted_date')[0]
+
         context = {
             'channel': channel, 
             'subs': subs, 
             'is_subscribed': is_subscribed, 
             'videos': videos, 
-            'channel_index_classes': 'active'
+            'channel_index_classes': 'active',
+            'f_video': f_video 
         }
         return render(request, 'channel/index.html', context)
     except Channel.DoesNotExist :
