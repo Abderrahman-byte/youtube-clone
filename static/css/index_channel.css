@@ -75,3 +75,54 @@
     letter-spacing: 2px;
     font-weight: 400;
 }
+
+.favorite_container {
+    padding: 0 1em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.favorite_container .video_container {
+    width: 45%;
+    margin-right: .5em;
+    min-width: 500px;
+}
+
+.favorite_container .info {
+    width: 40%;
+    margin-left: .5em;
+}
+
+.favorite_container .info h6 {
+    font-size: 1.4rem;
+    font-weight: 500;
+    letter-spacing: .1em;
+    color: var(--variant-clr);
+    margin-bottom: .5em;
+}
+
+.favorite_container .info .bottom {
+    font-size: .8rem;
+    color: var(--icons-clr);
+    letter-spacing: .1em;
+}
+
+.favorite_container .info .description {
+    font-size: .9rem;
+    letter-spacing: .1em;
+    color: var(--icons-clr);
+    margin: 1.75em 0;
+}
+
+.favorite_container .info .more_btn {
+    display: table;
+    padding: .3em 1.5em;
+    background-color: var(--variant-clr);
+    color: var(--background-b);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-decoration: none;
+    border-radius: 5px;
+}
