@@ -162,3 +162,20 @@ def aboutChannel(request, id) :
         return render(request, 'channel/about.html', context)
     except Channel.DoesNotExist :
         raise Http404
+
+def subscriptionsChannel(request, id) :
+    try :
+        channel = Channel.objects.get(pk=id)
+
+        if channel.user == request.user :
+            subs = [c.channel.channel for c in channel.user.channels.all()]
+
+            context = {
+                'user_channel': channel,
+                'subs_channels': subs
+            }
+            return render(request, 'channel/subs.html', context)
+        else :
+            raise Http404
+    except Channel.DoesNotExist :
+        raise Http404
