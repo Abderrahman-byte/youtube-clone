@@ -21,4 +21,4 @@ class Channel(models.Model) :
         if (self.favorite_video is not None) and (self.favorite_video.channel.channel.id != self.id) :
             raise Exception('Favorite video of a channel must be from it.')
         else :
-            super(Channel).save(self, *args, **kwargs)
+            super(Channel, self).save(*args, **kwargs)
