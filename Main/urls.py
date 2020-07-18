@@ -19,6 +19,7 @@ urlpatterns = [
     path('api/subscribe', views.SubscribeView.as_view(), name='subscribe'),
     path('api/submitview', views.submitViews, name='submit_view'),
     path('api/comment', views.ApiComments.as_view(), name='comments_api'),
+    path('api/channel', views.ChannelApiView.as_view(), name='channel_api'),
 ]
 
 if settings.DEBUG :
