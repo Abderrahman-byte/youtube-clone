@@ -323,14 +323,13 @@ header {
     padding: 1.25em .75em;
     font-size: 1.1rem;
     letter-spacing: .1em;
+    color: whitesmoke;
 }
 
 .message-error {
     background-color: rgb(255, 30, 30);
-    color: var(--variant-clr);
 }
 
 .message-success {
     background-color: rgb(19, 194, 28);
-    color: var(--variant-clr);
 }
