@@ -402,3 +402,27 @@ def deletePlaylistView(request, id) :
             return HttpResponseForbidden()
     except Playlist.DoesNotExist :
         raise Http404
+
+class ChannelApiView(View) :
+    def put(self, request) :
+        body = json.loads(request.body)
+        channelId = body.get('channelId') 
+        videoId = body.get('videoId')
+
+        try :
+            channel = Channel.objects.get(pk=channelId)
+            if channel.user != request.user :
+                return HttpResponseForbidden()
+
+            if videoId is not None :
+                try :
+                    video = Video.objects.get(pk=videoId)
+                    channel.favorite_video = video
+                except Video.DoesNotExist :
+                    raise Http404
+            else :
+                channel.favorite_video = None
+            channel.save()
+            return HttpResponse(status=201)
+        except Channel.DoesNotExist :
+            raise Http404
