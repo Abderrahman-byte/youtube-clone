@@ -26,8 +26,8 @@
             </a>
         </div>
 
-        <form class="search_form">
-            <input name="query" type="text" placeholder="Search" />
+        <form action="{% url 'main:search' %}" class="search_form">
+            <input name="query" type="text" {% if query %}value='{{query}}'{% endif %} placeholder="Search" />
             <button>
                 <i class="fa fa-search" aria-hidden="true"></i>
             </button>

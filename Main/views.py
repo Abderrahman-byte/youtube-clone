@@ -7,9 +7,10 @@ from django.core.files.storage import FileSystemStorage
 from django.urls import reverse
 from django.middleware.csrf import get_token
 from django.db import utils
+from django.db.models import Q
 from django.contrib import messages
 
-import os, json
+import os, json, random
 from uuid import uuid4
 
 from .utils import *
@@ -431,3 +432,58 @@ class ChannelApiView(View) :
             return HttpResponse(status=201)
         except Channel.DoesNotExist :
             raise Http404
+
+def searchView(request) :
+    query = request.GET.get('query')
+
+    latest_video = None
+    videos_results = Video.objects.filter(Q(title__icontains=query) |  Q(description__icontains=query))
+    channels_results = Channel.objects.filter(Q(title__icontains=query) |  Q(about__icontains=query))
+
+    try :
+        content_type = ContentType.objects.get(name=query)
+    except ContentType.DoesNotExist :
+        content_type = None
+
+    try :
+        channel = Channel.objects.get(title__iexact=query)
+    except Channel.DoesNotExist :
+        try :
+            user = User.objects.get(username__iexact=query)
+            channel = user.channel
+        except User.DoesNotExist :
+            channel = None
+
+    if content_type is not None :
+        videos_results |= videos_results.objects.filter(content_type__iexact=content_type)
+
+    videos_results = videos_results.order_by('-views', '-posted_date')[:10]
+
+    for ch in channels_results :
+        views = 0
+        total = ch.user.video_set.count()
+        for v in ch.user.video_set.all() :
+            views += v.views
+        av_views = views / total
+        latest_video = ch.user.video_set.filter(views__gte=av_views).order_by('-posted_date')[:1]
+        videos_results |= latest_video
+
+    if channel is not None :
+        views = 0
+        total = channel.user.video_set.count()
+        for v in channel.user.video_set.all() :
+            views += v.views
+        av_views = views / total
+        latest_video = channel.user.video_set.filter(views__gte=av_views).order_by('-posted_date')[:2]
+        videos_results |= latest_video
+
+    if channel not in channels_results and channel is not None:
+        channels_results = [*channels_results, channel] 
+    
+    context = {
+        'query': query,
+        'videos_results': videos_results,
+        'channels_results': channels_results
+    }
+
+    return render(request, 'main/search.html', context)

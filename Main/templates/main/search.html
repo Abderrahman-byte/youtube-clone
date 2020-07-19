@@ -1,0 +1,58 @@
+{% extends 'main/main_base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/search.css' %}" >
+{% endblock %}
+
+{% block content %}
+<div class="search-container">
+    {% if videos_results|length > 0 %}
+    <div class="videos">
+    {% for video in videos_results %}
+        <div class="video">
+            <a data-duration="{{ video.get_duration }}" class="poster" href="{% url 'main:watch' %}?v={{video.id}}">
+                <img src="{{ video.thumbnail_url }}">
+            </a>
+            <div class="info">
+                <a class="title" href="{% url 'main:watch' %}?v={{video.id}}">{{video.title}}</a>
+                <p class="bottom"><a class="channel" href="{% url 'channel:index' video.channel.channel.id %}" >{{video.channel.channel.title}}</a>
+                <span>{{ video.views|intword }} view{{ video.views|pluralize }} • Posted on {{ video.posted_date|date:'d b. Y'}}</span>
+                </p>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    {% else %}
+    <div class="message message-error" style="text-align: center;margin: 0 auto;">
+        <p style="font-weight: 900;font-size: 1.7rem; text-transform: capitalize;">No result found</p>
+        <br/>
+        <p>Try other keywords or remove the search filters </p>
+    </div>
+    {% endif %}
+
+    {% if channels_results|length > 0 %}
+    <div class="channels">
+    <div class="header">
+        <h6>Channels :</h6>
+    </div>
+    {% for channel in channels_results %}
+        <div class="channel">
+            <a class="poster" href="{% url 'channel:index' channel.id %}">
+                <img src="{{ channel.profil_img }}">
+            </a>
+            <div class="info">
+                <a class="title" href="{% url 'channel:index' channel.id %}">{{channel.title}}</a>
+                <p class="bottom">{{ channel.user.users.count }} subscriber{{ channel.user.users.count|pluralize }} • {{ channel.user.video_set.count }} video{{ channel.user.video_set.count|pluralize }}
+                </p>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block script %}{% endblock %}

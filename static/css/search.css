@@ -1,0 +1,138 @@
+.search-container {
+    padding: 0 2em;
+    display: flex;
+    justify-content: space-between;
+}
+
+.search-container .videos {
+    width: 60%;
+    min-width: 300px;
+}
+
+
+.search-container .videos .video {
+    display: flex;
+    margin-bottom: .75em;
+}
+
+.search-container .video .poster {
+    position: relative;
+    display: block;
+    width: 40%;
+    margin-right: .5em;
+}
+
+.search-container .video .poster::before {
+    display: block;
+    position: absolute;
+    content: attr(data-duration);
+    bottom: .1em;
+    right: .1em;
+    padding: .4em .75em;
+    font-size: .7rem;
+    color: whitesmoke;
+    letter-spacing: .1em;
+    font-weight: 500;
+    background-color: #121212;
+    z-index: 1;
+    border-radius: 3px;
+    opacity: .7;
+    transition: .4s;
+}
+
+.search-container .video .poster:hover::before {
+    opacity: 1;
+}
+
+.search-container .video .poster img {
+    border-radius: 3px;
+    border: 1px solid var(--borders-clr);
+    opacity: .8;
+    transition: .2s;
+}
+
+.search-container .video .poster img:hover {
+    opacity: 1;
+}
+
+.search-container .video .info {
+    max-width: calc(60% - .5em);
+}
+
+.search-container .video .info .title {
+    font-size: 1.3rem;
+    display: block;
+    color: var(--variant-clr);
+    font-weight: 500;
+    margin-bottom: .5em;
+    text-decoration: none;
+    letter-spacing: .075em;
+}
+
+.search-container .video .info .bottom {
+    font-size: .7rem;
+    color: var(--icons-clr);
+    letter-spacing: .1em;
+    font-weight: 300;
+}
+
+.search-container .video .info .bottom .channel {
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--icons-clr);
+    font-size: .8rem;
+}
+
+.search-container .channels {
+    width: 35%;
+    border-left: 1px solid var(--borders-clr) ;
+    padding: 0 .75em;
+}
+
+.search-container .channels .channel {
+    display: flex;
+    margin-bottom: 1.25em;
+}
+
+.search-container .channel .poster {
+    display: block;
+    margin-right: 10%;
+    width: 30%;
+}
+
+.search-container .channel .poster img {
+    width: 100%;
+    border-radius: 50%;
+    border: 1px solid var(--borders-clr);
+}
+
+.search-container .channel .info {
+    padding: .5em 0;
+}
+
+.search-container .channel .info .title {
+    display: block;
+    margin-bottom: .3em;
+    font-size: 1.2rem;
+    color: var(--variant-clr);
+    font-weight: 500;
+    letter-spacing: .075;
+    text-decoration: none;
+}
+
+.search-container .channel .info .bottom {
+    font-size: .8rem;
+    color: var(--icons-clr);
+    letter-spacing: .075;
+}
+
+.search-container .channels .header {
+    margin-bottom: .75em;
+}
+
+.search-container .channels .header h6 {
+    font-size: 1.5rem;
+    letter-spacing: .1em;
+    font-weight: 300;
+    color: var(--variant-clr);
+}

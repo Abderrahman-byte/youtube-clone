@@ -12,6 +12,7 @@ urlpatterns = [
     path('modifie', views.ModifieView.as_view(), name='modifie'),
     path('delete', views.deleteVideo, name='delete'),
     path('watch', views.watchView, name='watch'),
+    path('search', views.searchView, name='search'),
     path('playlist', views.PlaylistView.as_view(), name='playlist'),
     path('playlist/<str:id>/delete', views.deletePlaylistView, name='delete_playlist'),
     path('api/impression', views.submitImpressionView.as_view(), name='impressions'),
