@@ -90,9 +90,11 @@ const editComment = (e) => {
     editForm.addEventListener('submit', putComment)
     const editField = document.createElement('textarea')
     editField.name = 'content'
-    editField.textContent = currentContent
+    editField.innerHTML = currentContent
     editField.addEventListener('focus', disableShortCuts)
     editField.addEventListener('blur', enableShortCuts)
+    editField.addEventListener('focus', enableScroll)
+    editField.addEventListener('blur', disableScroll)
     const saveBtn = document.createElement('button')
     saveBtn.textContent = 'save'
     editForm.appendChild(editField)

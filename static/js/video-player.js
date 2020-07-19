@@ -45,6 +45,10 @@ const disableScroll = () => {
     window.addEventListener('keydown', preventDefaultForScrollKeys, false);
 }
 
+const enableScroll = () => {
+    window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
+}
+
 const saveVolume = () => {
     const volume = video.volume
     localStorage.setItem('volume', volume)
