@@ -6,7 +6,7 @@
 .videos-container .video {
     width: calc((100% - (.5% * 4 * 2)) / 4) ;
     margin: 1.5em .5%;
-    max-width: ;
+    min-width: 200px;
 }
 
 .videos-container .video .poster {
