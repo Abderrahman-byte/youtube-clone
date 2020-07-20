@@ -1,1 +1,33 @@
 {% extends 'main/main_base.html' %}
+
+{% load humanize %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="videos-container">
+    {% for video in videos %}
+    <div class="video">
+        <a data-duration="{{ video.get_duration }}" class="poster" href="{% url 'main:watch' %}?v={{ video.id }}">
+            <img src="{{ video.thumbnail_url }}">
+        </a>
+        <div class="info">
+            <a class="channel_profil" href="{% url 'channel:index' video.channel.channel.id %}">
+                <img src="{{ video.channel.channel.profil_img }}" />
+            </a>
+
+            <div class="right">
+                <a href="{% url 'main:watch' %}?v={{ video.id }}" class="title">{{ video.title }}</a>
+                <a href="{% url 'channel:index' video.channel.channel.id %}" class="channel">{{ video.channel.channel.title }}</a>
+                <p class="details">{{ video.views|intword }} view{{ video.views|pluralize }} • {{ video.posted_date|naturaltime }}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block script %}{% endblock %}

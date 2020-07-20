@@ -7,10 +7,11 @@ from django.core.files.storage import FileSystemStorage
 from django.urls import reverse
 from django.middleware.csrf import get_token
 from django.db import utils
-from django.db.models import Q
+from django.db.models import Q, QuerySet
 from django.contrib import messages
 
 import os, json, random
+from datetime import datetime, timedelta
 from uuid import uuid4
 
 from .utils import *
@@ -18,7 +19,44 @@ from .models import *
 from channel.models import *
 
 def indexView(request) :
-    return render(request, 'main/index.html')
+    total_views = 0
+    average_views = 0
+
+    for video in Video.objects.all() : total_views += video.views 
+    if total_views > 0 and Video.objects.count() > 0 : average_views = total_views / Video.objects.count()
+    
+    latest_videos_ids = [video.id for video in 
+    Video.objects.filter(views__gte=average_views).filter(posted_date__date__gte=datetime.now() - timedelta(days=7)).order_by('-posted_date')[:30]]
+
+    random.shuffle(latest_videos_ids)
+    latest_videos_ids = latest_videos_ids[:10]
+    random.shuffle(latest_videos_ids)
+
+    if len(latest_videos_ids) < 10 :
+        for v in Video.objects.all().order_by('-views', '-posted_date') :
+            if v.id not in latest_videos_ids :
+                latest_videos_ids.append(v.id)
+            if len(latest_videos_ids) >= 10 :
+                break
+
+    if request.user.is_authenticated :
+        channels = [subs.channel for subs in request.user.channels.all()]
+        for ch in channels :
+            ch_videos = ch.video_set.filter(posted_date__date__gte=datetime.now() - timedelta(days=7))
+            for vd in ch_videos :
+                if vd.id not in latest_videos_ids : latest_videos_ids.append(vd.id)
+
+    random.shuffle(latest_videos_ids)
+    latest_videos_ids = latest_videos_ids[:20]
+    random.shuffle(latest_videos_ids)
+    
+    latests = QuerySet(Video).filter(id__in=latest_videos_ids)
+    
+    context = {
+        'videos': latests
+    }
+
+    return render(request, 'main/index.html', context)
 
 def watchView(request) :
     try :

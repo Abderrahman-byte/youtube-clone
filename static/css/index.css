@@ -1,0 +1,85 @@
+.videos-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.videos-container .video {
+    width: calc((100% - (.5% * 4 * 2)) / 4) ;
+    margin: 1.5em .5%;
+    max-width: ;
+}
+
+.videos-container .video .poster {
+    display: block;
+    position: relative;
+    margin-bottom: .75em;
+}
+
+.videos-container .video .poster::before {
+    position: absolute;
+    right: .1em;
+    bottom: .1em;
+    display: block;
+    content: attr(data-duration);
+    padding: .2em .4em;
+    font-size: .9rem;
+    color: whitesmoke;
+    background-color: #121212;
+    border-radius: 1px;
+    z-index: 1;
+    opacity: .7;
+    transition: .2s;
+}
+
+.videos-container .video .poster:hover::before {
+    opacity: 1;
+}
+
+.videos-container .video .poster img {
+    width: 100%;
+    border-radius: 2px;
+    opacity: .9;
+    transition: .2s;
+}
+
+.videos-container .video .poster img:hover {
+    opacity: 1;
+}
+
+.videos-container .video .info {
+    display: flex;
+}
+
+.videos-container .video .info .channel_profil {
+    display: block;
+    width: 15%;
+    margin-right: 3%;
+}
+
+.videos-container .video .info .channel_profil img {
+    border-radius: 50%;
+    border: 1px solid var(--borders-clr);
+}
+
+.videos-container .video .info .right {
+    width: 82%;
+}
+
+.videos-container .video .info .right .title { 
+    display: block;
+    color: var(--variant-clr);
+    text-decoration: none;
+    font-size: .9rem;
+    letter-spacing: .5;
+    font-weight: 700;
+    margin-bottom: .3em;
+}
+
+.videos-container .video .info .right .channel, .videos-container .video .info .right .details {
+    color: var(--icons-clr);
+    text-decoration: none;
+    font-size: .8rem;
+    letter-spacing: .5;
+    font-weight: 500;
+    letter-spacing: .1em;
+}
