@@ -19,7 +19,7 @@
             <div class="info">
                 <a class="title" href="{% url 'main:watch' %}?v={{video.id}}">{{video.title}}</a>
                 <p class="bottom"><a class="channel" href="{% url 'channel:index' video.channel.channel.id %}" >{{video.channel.channel.title}}</a>
-                <span>{{ video.views|intword }} view{{ video.views|pluralize }} • Posted on {{ video.posted_date|date:'d b. Y'}}</span>
+                <span>{{ video.views|intword }} view{{ video.views|pluralize }} • {{ video.posted_date|naturaltime }}</span>
                 </p>
             </div>
         </div>

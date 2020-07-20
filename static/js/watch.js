@@ -264,7 +264,7 @@ const submitView =  e => {
     const time = video_.currentTime
     const id = e.target.getAttribute('data-id')
 
-    if(time >= 6 ) {
+    if(time >= 6 || time >= video_.duration * 0.2) {
         fetch('/api/submitview', {
             'method': 'POST',
             'body': JSON.stringify({'id': id}),
